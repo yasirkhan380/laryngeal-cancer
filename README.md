@@ -4,6 +4,15 @@
 
 Creation of a specific disease module for Laryngeal Cancer to be used in [Synthea<sup>TM</sup> synthetic patient generator](https://github.com/synthetichealth/synthea)
 
+## Synthetic dataset of laryngeal cancer patients
+
+In the 'datasets' ditionary we give you accesses to the datasets we generated and used to validate our module. If you are intressted in the results you can produce with the module feel free to analyze the datasets yourself.
+
+Dataset C32-1 (Prevalence approach): This dataset contains XXX patients and simulates a realistic prevalence of laryngeal cancer.
+Dataset C32-2 (Enriched approach): The second dataset was designed to let as many patients as possible suffer from laryngeal cancer.
+Dataset C32-3 (Cohort approach):
+
+
 ## Installation Synthea
 
 Testing and using of the module can be achieved after following the installation, described in [https://github.com/synthetichealth/synthea/wiki/Developer-Setup-and-Running](https://github.com/synthetichealth/synthea/wiki/Developer-Setup-and-Running). The module file needs to be pasted into the `modules` directory. Synthea by default uses all of its modules (together with intrinsic population and lifecycle data). 
@@ -45,4 +54,4 @@ NOTE: ``-m`` is not recommended to be used because it can make synthea act in un
 
 ## Sources
 
-Our aim was to base every transition on either a distribution from papers and articels or creat the transition as a logical statement based on guidelines (mainly the german [S3-guidelien](https://www.leitlinienprogramm-onkologie.de/leitlinien/larynxkarzinom/)). The exact source for every transiton can be found in the 'remarks' area of the pervious state.
+Our aim was to base every transition on either a distribution from papers and articels or creat the transition as a logical statement based on guidelines (mainly the german [S3-guideline](https://www.leitlinienprogramm-onkologie.de/leitlinien/larynxkarzinom/)). The exact source for every transiton can be found in the 'remarks' area of the pervious state.
