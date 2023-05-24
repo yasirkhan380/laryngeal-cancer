@@ -1,0 +1,143 @@
+{
+  "name": "laryngeal_cancer_five_year_survival",
+  "remarks": [
+    "A blank module"
+  ],
+  "states": {
+    "Initial": {
+      "type": "Initial",
+      "lookup_table_transition": [
+          {
+            "transition": "Death_1_Year",
+            "default_probability": 0.1173,
+            "lookup_table_name": "laryngeal_cancer_survival_first_year.csv"
+          },
+          {
+            "transition": "No_Death_First_Year",
+            "default_probability": 0.8827,
+            "lookup_table_name": "laryngeal_cancer_survival_first_year.csv"
+          }
+        ],
+      "name": "Initial"
+    },
+    "Death_1_Year": {
+      "type": "Death",
+      "direct_transition": "Terminal",
+      "name": "Death_1_Year",
+      "range": {
+        "low": 0,
+        "high": 1,
+        "unit": "years"
+      }
+    },
+    "No_Death_First_Year": {
+      "type": "Simple",
+      "lookup_table_transition": [
+          {
+            "transition": "Death_1-2_Year",
+            "default_probability": 0.1239,
+            "lookup_table_name": "laryngeal_cancer_survival_second_year.csv"
+          },
+          {
+            "transition": "No_Death_First_Second_Year",
+            "default_probability": 0.8761,
+            "lookup_table_name": "laryngeal_cancer_survival_second_year.csv"
+          }
+        ],
+      "name": "No_Death_First_Year"
+    },
+    "Terminal": {
+      "type": "Terminal",
+      "name": "Terminal"
+    },
+    "No_Death_First_Second_Year": {
+      "type": "Simple",
+      "lookup_table_transition": [
+          {
+            "transition": "Death_2-3_Year",
+            "default_probability": 0.1223,
+            "lookup_table_name": "laryngeal_cancer_survival_third_year.csv"
+          },
+          {
+            "transition": "No_Death_Second_Third_Year",
+            "default_probability": 0.8777,
+            "lookup_table_name": "laryngeal_cancer_survival_third_year.csv"
+          }
+        ],
+      "name": "No_Death_First_Second_Year"
+    },
+    "Death_2-3_Year": {
+      "type": "Death",
+      "name": "Death_2-3_Year",
+      "range": {
+        "low": 2,
+        "high": 3,
+        "unit": "years"
+      },
+      "direct_transition": "Terminal"
+    },
+    "Death_1-2_Year": {
+      "type": "Death",
+      "direct_transition": "Terminal",
+      "name": "Death_1-2_Year",
+      "range": {
+        "low": 1,
+        "high": 2,
+        "unit": "years"
+      }
+    },
+    "No_Death_Second_Third_Year": {
+      "type": "Simple",
+      "lookup_table_transition": [
+          {
+            "transition": "Death_3-4_Year",
+            "default_probability": 0.1240,
+            "lookup_table_name": "laryngeal_cancer_survival_forth_year.csv"
+          },
+          {
+            "transition": "No_Death_Third_Forth_Year",
+            "default_probability": 0.8760,
+            "lookup_table_name": "laryngeal_cancer_survival_forth_year.csv"
+          }
+        ],
+      "name": "No_Death_Second_Third_Year"
+    },
+    "Death_3-4_Year": {
+      "type": "Death",
+      "direct_transition": "Terminal",
+      "name": "Death_3-4_Year",
+      "range": {
+        "low": 3,
+        "high": 4,
+        "unit": "years"
+      }
+    },
+    "No_Death_Third_Forth_Year": {
+      "type": "Simple",
+      "lookup_table_transition": [
+          {
+            "transition": "Death_4-5_Year",
+            "default_probability": 0.1202,
+            "lookup_table_name": "laryngeal_cancer_survival_fifth_year.csv"
+          },
+          {
+            "transition": "Terminal",
+            "default_probability": 0.8798,
+            "lookup_table_name": "laryngeal_cancer_survival_fifth_year.csv"
+          }
+        ],
+      "name": "No_Death_Third_Forth_Year"
+    },
+    "Death_4-5_Year": {
+      "type": "Death",
+      "direct_transition": "Terminal",
+      "name": "Death_4-5_Year",
+      "range": {
+        "low": 4,
+        "high": 5,
+        "unit": "years"
+      }
+    }
+  },
+  "gmf_version": 2
+}

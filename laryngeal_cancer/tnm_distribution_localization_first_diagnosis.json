@@ -1,0 +1,451 @@
+{
+  "name": "tnm_distribution_localization_first_diagnosis",
+  "remarks": [
+    "A blank module"
+  ],
+  "states": {
+    "Initial": {
+      "type": "Initial",
+      "direct_transition": "Localization_Attribute"
+    },
+    "Terminal": {
+      "type": "Terminal"
+    },
+    "T-Classification": {
+      "type": "Simple",
+      "lookup_table_transition": [
+        {
+          "transition": "T1_Attribute",
+          "default_probability": 0.424,
+          "lookup_table_name": "laryngeal_cancer_t_classification.csv"
+        },
+        {
+          "transition": "T2_Attribute",
+          "default_probability": 0.214,
+          "lookup_table_name": "laryngeal_cancer_t_classification.csv"
+        },
+        {
+          "transition": "T3_Attribute",
+          "default_probability": 0.193,
+          "lookup_table_name": "laryngeal_cancer_t_classification.csv"
+        },
+        {
+          "transition": "T4_Attribute",
+          "default_probability": 0.16900000000000004,
+          "lookup_table_name": "laryngeal_cancer_t_classification.csv"
+        }
+      ]
+    },
+    "T2_Attribute": {
+      "type": "SetAttribute",
+      "attribute": "t-classification",
+      "value": 2,
+      "direct_transition": "N-Classification"
+    },
+    "T3_Attribute": {
+      "type": "SetAttribute",
+      "attribute": "t-classification",
+      "value": 3,
+      "direct_transition": "N-Classification"
+    },
+    "N-Classification": {
+      "type": "Simple",
+      "lookup_table_transition": [
+        {
+          "transition": "N0_Attribute",
+          "default_probability": 0.713,
+          "lookup_table_name": "laryngeal_cancer_n_classification.csv"
+        },
+        {
+          "transition": "N1_Attribute",
+          "default_probability": 0.077,
+          "lookup_table_name": "laryngeal_cancer_n_classification.csv"
+        },
+        {
+          "transition": "N2_Attribute",
+          "default_probability": 0.184,
+          "lookup_table_name": "laryngeal_cancer_n_classification.csv"
+        },
+        {
+          "transition": "N3_Attribute",
+          "default_probability": 0.026000000000000134,
+          "lookup_table_name": "laryngeal_cancer_n_classification.csv"
+        }
+      ]
+    },
+    "N0_Attribute": {
+      "type": "SetAttribute",
+      "attribute": "n-classification",
+      "value": 1,
+      "direct_transition": "M-Status"
+    },
+    "M-Status": {
+      "type": "Simple",
+      "lookup_table_transition": [
+        {
+          "transition": "M0",
+          "default_probability": 0.963,
+          "lookup_table_name": "laryngeal_cancer_m_status.csv"
+        },
+        {
+          "transition": "M1",
+          "default_probability": 0.03699999999999992,
+          "lookup_table_name": "laryngeal_cancer_m_status.csv"
+        }
+      ]
+    },
+    "N1_Attribute": {
+      "type": "SetAttribute",
+      "attribute": "n-classification",
+      "value": 2,
+      "direct_transition": "M-Status"
+    },
+    "N2_Attribute": {
+      "type": "SetAttribute",
+      "attribute": "n-classification",
+      "value": 3,
+      "direct_transition": "M-Status"
+    },
+    "N3_Attribute": {
+      "type": "SetAttribute",
+      "attribute": "n-classification",
+      "value": 4,
+      "direct_transition": "M-Status"
+    },
+    "M0": {
+      "type": "SetAttribute",
+      "attribute": "m-status",
+      "value": 1,
+      "direct_transition": "UICC_Stadium"
+    },
+    "M1": {
+      "type": "SetAttribute",
+      "attribute": "m-status",
+      "value": 2,
+      "direct_transition": "UICC_Stadium"
+    },
+    "Localization_Attribute": {
+      "type": "Simple",
+      "remarks": [
+        "Source: german S3-Guideline diagnostics, therapy and follow-up of laryngeal carcinoma (Long version)",
+        "-",
+        "Hyperlink: https://www.leitlinienprogramm-onkologie.de/leitlinien/larynxkarzinom/"
+      ],
+      "distributed_transition": [
+        {
+          "transition": "Glottis_Attribute",
+          "distribution": 0.77
+        },
+        {
+          "transition": "Subglottis_Attribute",
+          "distribution": 0.03
+        },
+        {
+          "transition": "Supraglottis_Attribute",
+          "distribution": 0.19999999999999996
+        }
+      ]
+    },
+    "Supraglottis_Attribute": {
+      "type": "SetAttribute",
+      "attribute": "localization",
+      "value": "supraglottis",
+      "direct_transition": "T-Classification"
+    },
+    "Glottis_Attribute": {
+      "type": "SetAttribute",
+      "attribute": "localization",
+      "value": "glottis",
+      "direct_transition": "T-Classification"
+    },
+    "Subglottis_Attribute": {
+      "type": "SetAttribute",
+      "attribute": "localization",
+      "value": "subglottis",
+      "direct_transition": "T-Classification"
+    },
+    "Glottis_Tumor_T1b_Attribute": {
+      "type": "SetAttribute",
+      "attribute": "t1",
+      "value": "b",
+      "direct_transition": "N-Classification"
+    },
+    "T1_Attribute": {
+      "type": "SetAttribute",
+      "attribute": "t-classification",
+      "complex_transition": [
+        {
+          "condition": {
+            "condition_type": "Attribute",
+            "attribute": "localization",
+            "operator": "==",
+            "value": "glottis"
+          },
+          "distributions": [
+            {
+              "transition": "Glottis_Tumor_T1a_Attribute",
+              "distribution": 0.5
+            },
+            {
+              "transition": "Glottis_Tumor_T1b_Attribute",
+              "distribution": 0.5
+            }
+          ]
+        },
+        {
+          "distributions": [],
+          "transition": "N-Classification"
+        }
+      ],
+      "value": 1
+    },
+    "Glottis_Tumor_T1a_Attribute": {
+      "type": "SetAttribute",
+      "attribute": "t1",
+      "value": "a",
+      "direct_transition": "N-Classification"
+    },
+    "T4a_Attribute": {
+      "type": "SetAttribute",
+      "attribute": "t4",
+      "value": "a",
+      "direct_transition": "N-Classification"
+    },
+    "T4_Attribute": {
+      "type": "SetAttribute",
+      "attribute": "t-classification",
+      "distributed_transition": [
+        {
+          "transition": "T4b_Attribute",
+          "distribution": 0.5
+        },
+        {
+          "transition": "T4a_Attribute",
+          "distribution": 0.5
+        }
+      ],
+      "value": 4
+    },
+    "T4b_Attribute": {
+      "type": "SetAttribute",
+      "attribute": "t4",
+      "value": "b",
+      "direct_transition": "N-Classification"
+    },
+    "UICC_Stadium": {
+      "type": "Simple",
+      "conditional_transition": [
+        {
+          "transition": "UICC_Stadium_I_Attribute",
+          "condition": {
+            "condition_type": "And",
+            "conditions": [
+              {
+                "condition_type": "And",
+                "conditions": [
+                  {
+                    "condition_type": "Attribute",
+                    "attribute": "t-classification",
+                    "operator": "==",
+                    "value": 1
+                  },
+                  {
+                    "condition_type": "Attribute",
+                    "attribute": "n-classification",
+                    "operator": "==",
+                    "value": 1
+                  }
+                ]
+              },
+              {
+                "condition_type": "Attribute",
+                "attribute": "m-status",
+                "operator": "==",
+                "value": 1
+              }
+            ]
+          }
+        },
+        {
+          "transition": "UICC_Stadium_II_Attribute",
+          "condition": {
+            "condition_type": "And",
+            "conditions": [
+              {
+                "condition_type": "And",
+                "conditions": [
+                  {
+                    "condition_type": "Attribute",
+                    "attribute": "t-classification",
+                    "operator": "==",
+                    "value": 2
+                  },
+                  {
+                    "condition_type": "Attribute",
+                    "attribute": "n-classification",
+                    "operator": "==",
+                    "value": 1
+                  }
+                ]
+              },
+              {
+                "condition_type": "Attribute",
+                "attribute": "m-status",
+                "operator": "==",
+                "value": 1
+              }
+            ]
+          }
+        },
+        {
+          "transition": "UICC_Stadium_III_Attribute",
+          "condition": {
+            "condition_type": "And",
+            "conditions": [
+              {
+                "condition_type": "And",
+                "conditions": [
+                  {
+                    "condition_type": "Attribute",
+                    "attribute": "t-classification",
+                    "operator": "<",
+                    "value": 4
+                  },
+                  {
+                    "condition_type": "Attribute",
+                    "attribute": "n-classification",
+                    "operator": "==",
+                    "value": 2
+                  }
+                ]
+              },
+              {
+                "condition_type": "Attribute",
+                "attribute": "m-status",
+                "operator": "==",
+                "value": 1
+              }
+            ]
+          }
+        },
+        {
+          "transition": "UICC_Stadium_III_Attribute",
+          "condition": {
+            "condition_type": "And",
+            "conditions": [
+              {
+                "condition_type": "And",
+                "conditions": [
+                  {
+                    "condition_type": "Attribute",
+                    "attribute": "t-classification",
+                    "operator": "==",
+                    "value": 3
+                  },
+                  {
+                    "condition_type": "Attribute",
+                    "attribute": "n-classification",
+                    "operator": "==",
+                    "value": 1
+                  }
+                ]
+              },
+              {
+                "condition_type": "Attribute",
+                "attribute": "m-status",
+                "operator": "==",
+                "value": 1
+              }
+            ]
+          }
+        },
+        {
+          "transition": "UICC_Stadium_IV",
+          "condition": {
+            "condition_type": "Or",
+            "conditions": [
+              {
+                "condition_type": "Attribute",
+                "attribute": "t-classification",
+                "operator": "==",
+                "value": 4
+              },
+              {
+                "condition_type": "Or",
+                "conditions": [
+                  {
+                    "condition_type": "Attribute",
+                    "attribute": "n-classification",
+                    "operator": ">",
+                    "value": 2
+                  },
+                  {
+                    "condition_type": "Attribute",
+                    "attribute": "m-status",
+                    "operator": "==",
+                    "value": 2
+                  }
+                ]
+              }
+            ]
+          }
+        }
+      ],
+      "remarks": [
+        "The cancer stages are assigned according to the Union Internationale Contre le Cancer's UICC classifications based on the assigned T, N, and M stages.",
+        "-",
+        "Source: TNM Classification of Malignant Tumours, 8th Edition",
+        "-",
+        "Hyperlink: https://www.wiley.com/en-gb/TNM+Classification+of+Malignant+Tumours%2C+8th+Edition-p-9781119263562"
+      ]
+    },
+    "UICC_Stadium_I_Attribute": {
+      "type": "SetAttribute",
+      "attribute": "uicc_stadium",
+      "direct_transition": "Terminal",
+      "value": 1
+    },
+    "UICC_Stadium_II_Attribute": {
+      "type": "SetAttribute",
+      "attribute": "uicc_stadium",
+      "direct_transition": "Terminal",
+      "value": 2
+    },
+    "UICC_Stadium_III_Attribute": {
+      "type": "SetAttribute",
+      "attribute": "uicc_stadium",
+      "direct_transition": "Terminal",
+      "value": 3
+    },
+    "UICC_Stadium_IV": {
+      "type": "Simple",
+      "conditional_transition": [
+        {
+          "transition": "UICC_Stadium_IV_Attribute_M1",
+          "condition": {
+            "condition_type": "Attribute",
+            "attribute": "m-status",
+            "operator": "==",
+            "value": 2
+          }
+        },
+        {
+          "transition": "UICC_Stadium_IV_Attribute_M0"
+        }
+      ]
+    },
+    "UICC_Stadium_IV_Attribute_M1": {
+      "type": "SetAttribute",
+      "attribute": "uicc_stadium",
+      "value": 5,
+      "direct_transition": "Terminal"
+    },
+    "UICC_Stadium_IV_Attribute_M0": {
+      "type": "SetAttribute",
+      "attribute": "uicc_stadium",
+      "value": 4,
+      "direct_transition": "Terminal"
+    }
+  },
+  "gmf_version": 2
+}

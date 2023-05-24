@@ -1,92 +1,46 @@
-# Laryngeal Cancer
+# Laryngeal Cancer Module
+
+## Purpose
+
+Creation of a specific disease module for Laryngeal Cancer to be used in [Synthea<sup>TM</sup> synthetic patient generator](https://github.com/synthetichealth/synthea)
+
+## Installation Synthea
+
+Testing and using of the module can be achieved after following the installation, described in [https://github.com/synthetichealth/synthea/wiki/Developer-Setup-and-Running](https://github.com/synthetichealth/synthea/wiki/Developer-Setup-and-Running). The module file needs to be pasted into the `modules` directory. Synthea by default uses all of its modules (together with intrinsic population and lifecycle data). 
+
+## Installation the laryngeal cancer module
+
+Modules are created using the [Module Builder](https://synthetichealth.github.io/module-builder/). Module files must be copy&pasted into the Module Builder, since it does not provide upload functionality. Files might only be stored locally in the browser cache. Hence, the git repository stores the files for the Larynx model. The respective .json-file contains the module definition.
+
+Copy the laryngeal_cancer.json file and the dictionary laryngeal_cancer (containing the submodules) in your Synthea to:
+
+`` src/main/resources/modules ``
+
+Then copy all csv files from the lookup_tables dictionary in the already exsiting "lookup_tabeles" dictionary in your Synthea, therfore to:
+
+``src/main/resources/modules/lookup_tables``
+
+## Usage 
+
+To generate your own patients it can be useful to first delete every module you don't need to reduce data-trash.
+
+In the laryngeal cancer module you can choose between two modi:
+
+1. This setting is the default and is used to create as many laryngeal cancer patients as possible with a realistic age distribution (which is due to the Synthea mode of operation not completly possible). Also the correct gender distribution is not taken in to account. To chnage to this mode please change in the laryngeal_cancer.json the attribute age_risk_distribution to 1, which can be found in the Config-Area. For the maximal ammount of laryngeal cancer patients to be createt run this code in the terminal:
+
+`` ./run_synthea.bat -p .... -a 40-100 ``
+
+(`-p` giving the number of patients to be created)
+
+2. This version creats a population with a realisitc incidence of round about 4.7 per 100,000. Which means only a fraction of the patients will get laryngeal cancer.  To chnage to this mode please change in the laryngeal_cancer.json the attribute age_risk_distribution to 2, which can be found in the Config-Area. Run this code in the terminal:
+ 
+ `` ./run_synthea.bat -p .... ``
+
+To only use the larynx module, run this code in the terminal:
+NOTE: ``-m`` is not recommended to be used because it can make synthea act in unexpected ways. Use at own risk. Its not necessary to use it, if you delete all module you do not need. 
+
+`` ./run_synthea -m ... -p ...``
+
+(with `-m` giving the name of the module without file extension, e.g., _laryngeal_cancer_, and `-p` giving the number of patients to be created; see [here](https://github.com/synthetichealth/synthea/blob/master/README.md))
 
 
-
-## Getting started
-
-To make it easy for you to get started with GitLab, here's a list of recommended next steps.
-
-Already a pro? Just edit this README.md and make it your own. Want to make it easy? [Use the template at the bottom](#editing-this-readme)!
-
-## Add your files
-
-- [ ] [Create](https://docs.gitlab.com/ee/user/project/repository/web_editor.html#create-a-file) or [upload](https://docs.gitlab.com/ee/user/project/repository/web_editor.html#upload-a-file) files
-- [ ] [Add files using the command line](https://docs.gitlab.com/ee/gitlab-basics/add-file.html#add-a-file-using-the-command-line) or push an existing Git repository with the following command:
-
-```
-cd existing_repo
-git remote add origin https://git.iccas.de/synthea/laryngeal-cancer.git
-git branch -M main
-git push -uf origin main
-```
-
-## Integrate with your tools
-
-- [ ] [Set up project integrations](https://git.iccas.de/synthea/laryngeal-cancer/-/settings/integrations)
-
-## Collaborate with your team
-
-- [ ] [Invite team members and collaborators](https://docs.gitlab.com/ee/user/project/members/)
-- [ ] [Create a new merge request](https://docs.gitlab.com/ee/user/project/merge_requests/creating_merge_requests.html)
-- [ ] [Automatically close issues from merge requests](https://docs.gitlab.com/ee/user/project/issues/managing_issues.html#closing-issues-automatically)
-- [ ] [Enable merge request approvals](https://docs.gitlab.com/ee/user/project/merge_requests/approvals/)
-- [ ] [Automatically merge when pipeline succeeds](https://docs.gitlab.com/ee/user/project/merge_requests/merge_when_pipeline_succeeds.html)
-
-## Test and Deploy
-
-Use the built-in continuous integration in GitLab.
-
-- [ ] [Get started with GitLab CI/CD](https://docs.gitlab.com/ee/ci/quick_start/index.html)
-- [ ] [Analyze your code for known vulnerabilities with Static Application Security Testing(SAST)](https://docs.gitlab.com/ee/user/application_security/sast/)
-- [ ] [Deploy to Kubernetes, Amazon EC2, or Amazon ECS using Auto Deploy](https://docs.gitlab.com/ee/topics/autodevops/requirements.html)
-- [ ] [Use pull-based deployments for improved Kubernetes management](https://docs.gitlab.com/ee/user/clusters/agent/)
-- [ ] [Set up protected environments](https://docs.gitlab.com/ee/ci/environments/protected_environments.html)
-
-***
-
-# Editing this README
-
-When you're ready to make this README your own, just edit this file and use the handy template below (or feel free to structure it however you want - this is just a starting point!). Thank you to [makeareadme.com](https://www.makeareadme.com/) for this template.
-
-## Suggestions for a good README
-Every project is different, so consider which of these sections apply to yours. The sections used in the template are suggestions for most open source projects. Also keep in mind that while a README can be too long and detailed, too long is better than too short. If you think your README is too long, consider utilizing another form of documentation rather than cutting out information.
-
-## Name
-Choose a self-explaining name for your project.
-
-## Description
-Let people know what your project can do specifically. Provide context and add a link to any reference visitors might be unfamiliar with. A list of Features or a Background subsection can also be added here. If there are alternatives to your project, this is a good place to list differentiating factors.
-
-## Badges
-On some READMEs, you may see small images that convey metadata, such as whether or not all the tests are passing for the project. You can use Shields to add some to your README. Many services also have instructions for adding a badge.
-
-## Visuals
-Depending on what you are making, it can be a good idea to include screenshots or even a video (you'll frequently see GIFs rather than actual videos). Tools like ttygif can help, but check out Asciinema for a more sophisticated method.
-
-## Installation
-Within a particular ecosystem, there may be a common way of installing things, such as using Yarn, NuGet, or Homebrew. However, consider the possibility that whoever is reading your README is a novice and would like more guidance. Listing specific steps helps remove ambiguity and gets people to using your project as quickly as possible. If it only runs in a specific context like a particular programming language version or operating system or has dependencies that have to be installed manually, also add a Requirements subsection.
-
-## Usage
-Use examples liberally, and show the expected output if you can. It's helpful to have inline the smallest example of usage that you can demonstrate, while providing links to more sophisticated examples if they are too long to reasonably include in the README.
-
-## Support
-Tell people where they can go to for help. It can be any combination of an issue tracker, a chat room, an email address, etc.
-
-## Roadmap
-If you have ideas for releases in the future, it is a good idea to list them in the README.
-
-## Contributing
-State if you are open to contributions and what your requirements are for accepting them.
-
-For people who want to make changes to your project, it's helpful to have some documentation on how to get started. Perhaps there is a script that they should run or some environment variables that they need to set. Make these steps explicit. These instructions could also be useful to your future self.
-
-You can also document commands to lint the code or run tests. These steps help to ensure high code quality and reduce the likelihood that the changes inadvertently break something. Having instructions for running tests is especially helpful if it requires external setup, such as starting a Selenium server for testing in a browser.
-
-## Authors and acknowledgment
-Show your appreciation to those who have contributed to the project.
-
-## License
-For open source projects, say how it is licensed.
-
-## Project status
-If you have run out of energy or time for your project, put a note at the top of the README saying that development has slowed down or stopped completely. Someone may choose to fork your project or volunteer to step in as a maintainer or owner, allowing your project to keep going. You can also make an explicit request for maintainers.

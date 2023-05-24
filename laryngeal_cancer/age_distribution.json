@@ -1,0 +1,575 @@
+{
+  "name": "age_distribution_new",
+  "remarks": [
+    "A blank module"
+  ],
+  "states": {
+    "Initial": {
+      "type": "Initial",
+      "direct_transition": "Guard_40",
+      "name": "Initial"
+    },
+    "Guard_40": {
+      "type": "Guard",
+      "allow": {
+        "condition_type": "Age",
+        "operator": ">=",
+        "quantity": 40,
+        "unit": "years",
+        "value": 0
+      },
+      "name": "Guard_40",
+      "complex_transition": [
+        {
+          "condition": {
+            "condition_type": "Gender",
+            "gender": "F"
+          },
+          "distributions": [
+            {
+              "transition": "glp_distribution",
+              "distribution": 0.025
+            },
+            {
+              "transition": "Guard_45",
+              "distribution": 0.975
+            }
+          ]
+        },
+        {
+          "condition": {
+            "condition_type": "Gender",
+            "gender": "M"
+          },
+          "distributions": [
+            {
+              "transition": "glp_distribution",
+              "distribution": 0.013
+            },
+            {
+              "transition": "Guard_45",
+              "distribution": 0.987
+            }
+          ]
+        }
+      ]
+    },
+    "Guard_45": {
+      "type": "Guard",
+      "allow": {
+        "condition_type": "Age",
+        "operator": ">=",
+        "quantity": 45,
+        "unit": "years",
+        "value": 0
+      },
+      "name": "Guard_45",
+      "complex_transition": [
+        {
+          "condition": {
+            "condition_type": "Gender",
+            "gender": "F"
+          },
+          "distributions": [
+            {
+              "transition": "glp_distribution",
+              "distribution": 0.04205
+            },
+            {
+              "transition": "Guard_50",
+              "distribution": 0.95795
+            }
+          ]
+        },
+        {
+          "condition": {
+            "condition_type": "Gender",
+            "gender": "M"
+          },
+          "distributions": [
+            {
+              "transition": "glp_distribution",
+              "distribution": 0.035461
+            },
+            {
+              "transition": "Guard_50",
+              "distribution": 0.964539
+            }
+          ]
+        }
+      ]
+    },
+    "Guard_50": {
+      "type": "Guard",
+      "allow": {
+        "condition_type": "Age",
+        "operator": ">=",
+        "quantity": 50,
+        "unit": "years",
+        "value": 0
+      },
+      "name": "Guard_50",
+      "complex_transition": [
+        {
+          "condition": {
+            "condition_type": "Gender",
+            "gender": "F"
+          },
+          "distributions": [
+            {
+              "transition": "glp_distribution",
+              "distribution": 0.1103
+            },
+            {
+              "transition": "Guard_55",
+              "distribution": 0.8897
+            }
+          ]
+        },
+        {
+          "condition": {
+            "condition_type": "Gender",
+            "gender": "M"
+          },
+          "distributions": [
+            {
+              "transition": "glp_distribution",
+              "distribution": 0.09559
+            },
+            {
+              "transition": "Guard_55",
+              "distribution": 0.90441
+            }
+          ]
+        }
+      ]
+    },
+    "Guard_55": {
+      "type": "Guard",
+      "allow": {
+        "condition_type": "Age",
+        "operator": ">=",
+        "quantity": 55,
+        "unit": "years",
+        "value": 0
+      },
+      "name": "Guard_55",
+      "complex_transition": [
+        {
+          "condition": {
+            "condition_type": "Gender",
+            "gender": "F"
+          },
+          "distributions": [
+            {
+              "transition": "glp_distribution",
+              "distribution": 0.1733
+            },
+            {
+              "transition": "Guard_60",
+              "distribution": 0.8267
+            }
+          ]
+        },
+        {
+          "condition": {
+            "condition_type": "Gender",
+            "gender": "M"
+          },
+          "distributions": [
+            {
+              "transition": "glp_distribution",
+              "distribution": 0.1568
+            },
+            {
+              "transition": "Guard_60",
+              "distribution": 0.8432
+            }
+          ]
+        }
+      ]
+    },
+    "Guard_60": {
+      "type": "Guard",
+      "allow": {
+        "condition_type": "Age",
+        "operator": ">=",
+        "quantity": 60,
+        "unit": "years",
+        "value": 0
+      },
+      "name": "Guard_60",
+      "complex_transition": [
+        {
+          "condition": {
+            "condition_type": "Gender",
+            "gender": "F"
+          },
+          "distributions": [
+            {
+              "transition": "glp_distribution",
+              "distribution": 0.2547
+            },
+            {
+              "transition": "Guard_65",
+              "distribution": 0.7453000000000001
+            }
+          ]
+        },
+        {
+          "condition": {
+            "condition_type": "Gender",
+            "gender": "M"
+          },
+          "distributions": [
+            {
+              "transition": "glp_distribution",
+              "distribution": 0.22865
+            },
+            {
+              "transition": "Guard_65",
+              "distribution": 0.7713500000000001
+            }
+          ]
+        }
+      ]
+    },
+    "Guard_65": {
+      "type": "Guard",
+      "allow": {
+        "condition_type": "Age",
+        "operator": ">=",
+        "quantity": 65,
+        "unit": "years",
+        "value": 0
+      },
+      "name": "Guard_65",
+      "complex_transition": [
+        {
+          "condition": {
+            "condition_type": "Gender",
+            "gender": "F"
+          },
+          "distributions": [
+            {
+              "distribution": 0.2968,
+              "transition": "glp_distribution"
+            },
+            {
+              "distribution": 0.7031999999999999,
+              "transition": "Guard_70"
+            }
+          ]
+        },
+        {
+          "condition": {
+            "condition_type": "Gender",
+            "gender": "M"
+          },
+          "distributions": [
+            {
+              "distribution": 0.7232000000000001,
+              "transition": "Guard_70"
+            },
+            {
+              "distribution": 0.2768,
+              "transition": "glp_distribution"
+            }
+          ]
+        }
+      ]
+    },
+    "Guard_70": {
+      "type": "Guard",
+      "allow": {
+        "condition_type": "Age",
+        "operator": ">=",
+        "quantity": 70,
+        "unit": "years",
+        "value": 0
+      },
+      "name": "Guard_70",
+      "complex_transition": [
+        {
+          "condition": {
+            "condition_type": "Gender",
+            "gender": "F"
+          },
+          "distributions": [
+            {
+              "transition": "glp_distribution",
+              "distribution": 0.36667
+            },
+            {
+              "transition": "Guard_75",
+              "distribution": 0.6333300000000001
+            }
+          ]
+        },
+        {
+          "distributions": [
+            {
+              "transition": "glp_distribution",
+              "distribution": 0.3827
+            },
+            {
+              "transition": "Guard_75",
+              "distribution": 0.6173
+            }
+          ],
+          "condition": {
+            "condition_type": "Gender",
+            "gender": "M"
+          }
+        }
+      ]
+    },
+    "Guard_75": {
+      "type": "Guard",
+      "allow": {
+        "condition_type": "Age",
+        "operator": ">=",
+        "quantity": 75,
+        "unit": "years",
+        "value": 0
+      },
+      "name": "Guard_75",
+      "complex_transition": [
+        {
+          "condition": {
+            "condition_type": "Gender",
+            "gender": "F"
+          },
+          "distributions": [
+            {
+              "transition": "glp_distribution",
+              "distribution": 0.51754
+            },
+            {
+              "transition": "Guard_80",
+              "distribution": 0.48246
+            }
+          ]
+        },
+        {
+          "condition": {
+            "condition_type": "Gender",
+            "gender": "M"
+          },
+          "distributions": [
+            {
+              "transition": "glp_distribution",
+              "distribution": 0.524
+            },
+            {
+              "transition": "Guard_80",
+              "distribution": 0.476
+            }
+          ]
+        }
+      ]
+    },
+    "Guard_80": {
+      "type": "Guard",
+      "allow": {
+        "condition_type": "Age",
+        "operator": ">=",
+        "quantity": 80,
+        "unit": "years",
+        "value": 0
+      },
+      "name": "Guard_80",
+      "complex_transition": [
+        {
+          "condition": {
+            "condition_type": "Gender",
+            "gender": "F"
+          },
+          "distributions": [
+            {
+              "transition": "glp_distribution",
+              "distribution": 0.5091
+            },
+            {
+              "transition": "Guard_85",
+              "distribution": 0.4909
+            }
+          ]
+        },
+        {
+          "condition": {
+            "condition_type": "Gender",
+            "gender": "M"
+          },
+          "distributions": [
+            {
+              "transition": "glp_distribution",
+              "distribution": 0.61344
+            },
+            {
+              "transition": "Guard_85",
+              "distribution": 0.3865600000000001
+            }
+          ]
+        }
+      ]
+    },
+    "Guard_85": {
+      "type": "Guard",
+      "allow": {
+        "condition_type": "Age",
+        "operator": ">=",
+        "quantity": 85,
+        "unit": "years",
+        "value": 0
+      },
+      "name": "Guard_85",
+      "direct_transition": "glp_distribution"
+    },
+    "Terminal": {
+      "type": "Terminal",
+      "name": "Terminal"
+    },
+    "Set_Laryngeal_Cancer_Attribute": {
+      "type": "SetAttribute",
+      "attribute": "laryngeal_cancer",
+      "name": "Set_Laryngeal_Cancer_Attribute",
+      "value": true,
+      "direct_transition": "Terminal"
+    },
+    "glp_distribution": {
+      "type": "CallSubmodule",
+      "submodule": "laryngeal_cancer/glp_distribution",
+      "name": "glp_distribution",
+      "conditional_transition": [
+        {
+          "transition": "Mild_GLP_Delay",
+          "condition": {
+            "condition_type": "Attribute",
+            "attribute": "dysplasia",
+            "operator": "==",
+            "value": 1
+          }
+        },
+        {
+          "transition": "Moderate_GLP_Delay",
+          "condition": {
+            "condition_type": "Attribute",
+            "attribute": "dysplasia",
+            "operator": "==",
+            "value": 2
+          }
+        },
+        {
+          "transition": "Severe_GLP_Delay",
+          "condition": {
+            "condition_type": "Attribute",
+            "attribute": "dysplasia",
+            "operator": "==",
+            "value": 3
+          }
+        },
+        {
+          "transition": "NOS_GLP_Delay",
+          "condition": {
+            "condition_type": "Attribute",
+            "attribute": "dysplasia",
+            "operator": "==",
+            "value": 4
+          }
+        },
+        {
+          "transition": "Carcinoma_In_Sito_GLP_Delay",
+          "condition": {
+            "condition_type": "Attribute",
+            "attribute": "dysplasia",
+            "operator": "==",
+            "value": 5
+          }
+        },
+        {
+          "transition": "No_GLP_Delay"
+        }
+      ]
+    },
+    "No_GLP_Delay": {
+      "type": "Delay",
+      "distribution": {
+        "kind": "UNIFORM",
+        "parameters": {
+          "high": 4.5,
+          "low": 0
+        }
+      },
+      "unit": "years",
+      "direct_transition": "Set_Laryngeal_Cancer_Attribute",
+      "name": "No_GLP_Delay"
+    },
+    "Mild_GLP_Delay": {
+      "type": "Delay",
+      "distribution": {
+        "kind": "UNIFORM",
+        "parameters": {
+          "high": 1.67,
+          "low": 0
+        }
+      },
+      "unit": "years",
+      "direct_transition": "Set_Laryngeal_Cancer_Attribute",
+      "name": "Mild_GLP_Delay"
+    },
+    "Moderate_GLP_Delay": {
+      "type": "Delay",
+      "distribution": {
+        "kind": "UNIFORM",
+        "parameters": {
+          "high": 1.67,
+          "low": 0
+        }
+      },
+      "unit": "years",
+      "direct_transition": "Set_Laryngeal_Cancer_Attribute",
+      "name": "Moderate_GLP_Delay"
+    },
+    "Severe_GLP_Delay": {
+      "type": "Delay",
+      "distribution": {
+        "kind": "UNIFORM",
+        "parameters": {
+          "high": 2.4,
+          "low": 0
+        }
+      },
+      "unit": "years",
+      "name": "Severe_GLP_Delay",
+      "direct_transition": "Set_Laryngeal_Cancer_Attribute"
+    },
+    "NOS_GLP_Delay": {
+      "type": "Delay",
+      "distribution": {
+        "kind": "UNIFORM",
+        "parameters": {
+          "high": 1.5,
+          "low": 0
+        }
+      },
+      "unit": "years",
+      "name": "NOS_GLP_Delay",
+      "direct_transition": "Set_Laryngeal_Cancer_Attribute"
+    },
+    "Carcinoma_In_Sito_GLP_Delay": {
+      "type": "Delay",
+      "distribution": {
+        "kind": "UNIFORM",
+        "parameters": {
+          "high": 3.2,
+          "low": 0
+        }
+      },
+      "unit": "years",
+      "name": "Carcinoma_In_Sito_GLP_Delay",
+      "direct_transition": "Set_Laryngeal_Cancer_Attribute"
+    }
+  },
+  "gmf_version": 2
+}
