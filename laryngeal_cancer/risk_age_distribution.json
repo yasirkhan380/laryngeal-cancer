@@ -6,12 +6,10 @@
   "states": {
     "Initial": {
       "type": "Initial",
-      "direct_transition": "Guard_40",
-      "name": "Initial"
+      "direct_transition": "Guard_40"
     },
     "Terminal": {
-      "type": "Terminal",
-      "name": "Terminal"
+      "type": "Terminal"
     },
     "Guard_40": {
       "type": "Guard",
@@ -22,7 +20,6 @@
         "unit": "years",
         "value": 0
       },
-      "name": "Guard_40",
       "complex_transition": [
         {
           "condition": {
@@ -31,7 +28,7 @@
           },
           "distributions": [
             {
-              "transition": "glp_distribution",
+              "transition": "Set_Laryngeal_Cancer_Attribute",
               "distribution": 0.00002
             },
             {
@@ -47,7 +44,7 @@
           },
           "distributions": [
             {
-              "transition": "glp_distribution",
+              "transition": "Set_Laryngeal_Cancer_Attribute",
               "distribution": 0.000105
             },
             {
@@ -67,7 +64,6 @@
         "unit": "years",
         "value": 0
       },
-      "name": "Guard_45",
       "complex_transition": [
         {
           "condition": {
@@ -76,7 +72,7 @@
           },
           "distributions": [
             {
-              "transition": "glp_distribution",
+              "transition": "Set_Laryngeal_Cancer_Attribute",
               "distribution": 0.000045
             },
             {
@@ -92,7 +88,7 @@
           },
           "distributions": [
             {
-              "transition": "glp_distribution",
+              "transition": "Set_Laryngeal_Cancer_Attribute",
               "distribution": 0.000235
             },
             {
@@ -112,7 +108,6 @@
         "unit": "years",
         "value": 0
       },
-      "name": "Guard_50",
       "complex_transition": [
         {
           "condition": {
@@ -121,7 +116,7 @@
           },
           "distributions": [
             {
-              "transition": "glp_distribution",
+              "transition": "Set_Laryngeal_Cancer_Attribute",
               "distribution": 0.00009
             },
             {
@@ -137,7 +132,7 @@
           },
           "distributions": [
             {
-              "transition": "glp_distribution",
+              "transition": "Set_Laryngeal_Cancer_Attribute",
               "distribution": 0.000545
             },
             {
@@ -157,7 +152,6 @@
         "unit": "years",
         "value": 0
       },
-      "name": "Guard_55",
       "complex_transition": [
         {
           "condition": {
@@ -166,7 +160,7 @@
           },
           "distributions": [
             {
-              "transition": "glp_distribution",
+              "transition": "Set_Laryngeal_Cancer_Attribute",
               "distribution": 0.00013
             },
             {
@@ -182,7 +176,7 @@
           },
           "distributions": [
             {
-              "transition": "glp_distribution",
+              "transition": "Set_Laryngeal_Cancer_Attribute",
               "distribution": 0.000865
             },
             {
@@ -202,7 +196,6 @@
         "unit": "years",
         "value": 0
       },
-      "name": "Guard_60",
       "complex_transition": [
         {
           "condition": {
@@ -211,7 +204,7 @@
           },
           "distributions": [
             {
-              "transition": "glp_distribution",
+              "transition": "Set_Laryngeal_Cancer_Attribute",
               "distribution": 0.000175
             },
             {
@@ -227,7 +220,7 @@
           },
           "distributions": [
             {
-              "transition": "glp_distribution",
+              "transition": "Set_Laryngeal_Cancer_Attribute",
               "distribution": 0.00112
             },
             {
@@ -247,7 +240,6 @@
         "unit": "years",
         "value": 0
       },
-      "name": "Guard_65",
       "complex_transition": [
         {
           "condition": {
@@ -256,7 +248,7 @@
           },
           "distributions": [
             {
-              "transition": "glp_distribution",
+              "transition": "Set_Laryngeal_Cancer_Attribute",
               "distribution": 0.00018
             },
             {
@@ -276,7 +268,7 @@
               "distribution": 0.9986750000000001
             },
             {
-              "transition": "glp_distribution",
+              "transition": "Set_Laryngeal_Cancer_Attribute",
               "distribution": 0.001325
             }
           ]
@@ -292,7 +284,6 @@
         "unit": "years",
         "value": 0
       },
-      "name": "Guard_70",
       "complex_transition": [
         {
           "condition": {
@@ -301,7 +292,7 @@
           },
           "distributions": [
             {
-              "transition": "glp_distribution",
+              "transition": "Set_Laryngeal_Cancer_Attribute",
               "distribution": 0.000155
             },
             {
@@ -313,7 +304,7 @@
         {
           "distributions": [
             {
-              "transition": "glp_distribution",
+              "transition": "Set_Laryngeal_Cancer_Attribute",
               "distribution": 0.00136
             },
             {
@@ -337,7 +328,6 @@
         "unit": "years",
         "value": 0
       },
-      "name": "Guard_75",
       "complex_transition": [
         {
           "condition": {
@@ -346,7 +336,7 @@
           },
           "distributions": [
             {
-              "transition": "glp_distribution",
+              "transition": "Set_Laryngeal_Cancer_Attribute",
               "distribution": 0.000135
             },
             {
@@ -362,7 +352,7 @@
           },
           "distributions": [
             {
-              "transition": "glp_distribution",
+              "transition": "Set_Laryngeal_Cancer_Attribute",
               "distribution": 0.001245
             },
             {
@@ -382,7 +372,6 @@
         "unit": "years",
         "value": 0
       },
-      "name": "Guard_80",
       "complex_transition": [
         {
           "condition": {
@@ -391,7 +380,7 @@
           },
           "distributions": [
             {
-              "transition": "glp_distribution",
+              "transition": "Set_Laryngeal_Cancer_Attribute",
               "distribution": 0.00011
             },
             {
@@ -407,7 +396,7 @@
           },
           "distributions": [
             {
-              "transition": "glp_distribution",
+              "transition": "Set_Laryngeal_Cancer_Attribute",
               "distribution": 0.00116
             },
             {
@@ -427,7 +416,6 @@
         "unit": "years",
         "value": 0
       },
-      "name": "Guard_85",
       "complex_transition": [
         {
           "condition": {
@@ -436,7 +424,7 @@
           },
           "distributions": [
             {
-              "transition": "glp_distribution",
+              "transition": "Set_Laryngeal_Cancer_Attribute",
               "distribution": 0.000095
             },
             {
@@ -452,7 +440,7 @@
           },
           "distributions": [
             {
-              "transition": "glp_distribution",
+              "transition": "Set_Laryngeal_Cancer_Attribute",
               "distribution": 0.001105
             },
             {
@@ -467,141 +455,7 @@
       "type": "SetAttribute",
       "attribute": "laryngeal_cancer",
       "direct_transition": "Terminal",
-      "name": "Set_Laryngeal_Cancer_Attribute",
       "value": true
-    },
-    "No_GLP_Delay": {
-      "type": "Delay",
-      "distribution": {
-        "kind": "UNIFORM",
-        "parameters": {
-          "high": 4.5,
-          "low": 0
-        }
-      },
-      "unit": "years",
-      "direct_transition": "Set_Laryngeal_Cancer_Attribute",
-      "name": "No_GLP_Delay"
-    },
-    "Mild_GLP_Delay": {
-      "type": "Delay",
-      "distribution": {
-        "kind": "UNIFORM",
-        "parameters": {
-          "high": 1.67,
-          "low": 0
-        }
-      },
-      "unit": "years",
-      "direct_transition": "Set_Laryngeal_Cancer_Attribute",
-      "name": "Mild_GLP_Delay"
-    },
-    "Moderate_GLP_Delay": {
-      "type": "Delay",
-      "distribution": {
-        "kind": "UNIFORM",
-        "parameters": {
-          "high": 1.67,
-          "low": 0
-        }
-      },
-      "unit": "years",
-      "direct_transition": "Set_Laryngeal_Cancer_Attribute",
-      "name": "Moderate_GLP_Delay"
-    },
-    "Severe_GLP_Delay": {
-      "type": "Delay",
-      "distribution": {
-        "kind": "UNIFORM",
-        "parameters": {
-          "high": 2.4,
-          "low": 0
-        }
-      },
-      "unit": "years",
-      "name": "Severe_GLP_Delay",
-      "direct_transition": "Set_Laryngeal_Cancer_Attribute"
-    },
-    "NOS_GLP_Delay": {
-      "type": "Delay",
-      "distribution": {
-        "kind": "UNIFORM",
-        "parameters": {
-          "high": 1.5,
-          "low": 0
-        }
-      },
-      "unit": "years",
-      "name": "NOS_GLP_Delay",
-      "direct_transition": "Set_Laryngeal_Cancer_Attribute"
-    },
-    "Carcinoma_In_Sito_GLP_Delay": {
-      "type": "Delay",
-      "distribution": {
-        "kind": "UNIFORM",
-        "parameters": {
-          "high": 3.2,
-          "low": 0
-        }
-      },
-      "unit": "years",
-      "name": "Carcinoma_In_Sito_GLP_Delay",
-      "direct_transition": "Set_Laryngeal_Cancer_Attribute"
-    },
-    "glp_distribution": {
-      "type": "CallSubmodule",
-      "submodule": "laryngeal_cancer/glp_distribution",
-      "name": "glp_distribution",
-      "conditional_transition": [
-        {
-          "transition": "Mild_GLP_Delay",
-          "condition": {
-            "condition_type": "Attribute",
-            "attribute": "dysplasia",
-            "operator": "==",
-            "value": 1
-          }
-        },
-        {
-          "transition": "Moderate_GLP_Delay",
-          "condition": {
-            "condition_type": "Attribute",
-            "attribute": "dysplasia",
-            "operator": "==",
-            "value": 2
-          }
-        },
-        {
-          "transition": "Severe_GLP_Delay",
-          "condition": {
-            "condition_type": "Attribute",
-            "attribute": "dysplasia",
-            "operator": "==",
-            "value": 3
-          }
-        },
-        {
-          "transition": "NOS_GLP_Delay",
-          "condition": {
-            "condition_type": "Attribute",
-            "attribute": "dysplasia",
-            "operator": "==",
-            "value": 4
-          }
-        },
-        {
-          "transition": "Carcinoma_In_Sito_GLP_Delay",
-          "condition": {
-            "condition_type": "Attribute",
-            "attribute": "dysplasia",
-            "operator": "==",
-            "value": 5
-          }
-        },
-        {
-          "transition": "No_GLP_Delay"
-        }
-      ]
     }
   },
   "gmf_version": 2

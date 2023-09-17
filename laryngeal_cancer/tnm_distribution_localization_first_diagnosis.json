@@ -217,14 +217,18 @@
       "distributed_transition": [
         {
           "transition": "T4b_Attribute",
-          "distribution": 0.5
+          "distribution": 0.09799999999999986
         },
         {
           "transition": "T4a_Attribute",
-          "distribution": 0.5
+          "distribution": 0.902
         }
       ],
-      "value": 4
+      "value": 4,
+      "remarks": [
+        "Source: Evaluation of the revised TNM classification in advanced laryngeal cancer, 2010",
+        "https://pubmed.ncbi.nlm.nih.gov/19350258/"
+      ]
     },
     "T4b_Attribute": {
       "type": "SetAttribute",

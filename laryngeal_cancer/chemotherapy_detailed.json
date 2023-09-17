@@ -1,0 +1,242 @@
+{
+    "name": "Chemotherapy_Detailed",
+    "remarks": [
+      "A blank module"
+    ],
+    "states": {
+      "Initial": {
+        "type": "Initial",
+        "direct_transition": "Encounter_Chemo_1_Week"
+      },
+      "Terminal": {
+        "type": "Terminal"
+      },
+      "Day_Counter": {
+        "type": "SetAttribute",
+        "attribute": "day_chemo",
+        "direct_transition": "Week_Counter_2",
+        "value": 1
+      },
+      "Increase_Day": {
+        "type": "Counter",
+        "attribute": "day_radiochemo",
+        "action": "increment",
+        "direct_transition": "Delay_1_Day"
+      },
+      "Increase_Week": {
+        "type": "Counter",
+        "attribute": "week_radiochemo",
+        "action": "increment",
+        "direct_transition": "Day_Counter_2"
+      },
+      "End_Therapy": {
+        "type": "Simple",
+        "conditional_transition": [
+          {
+            "transition": "Terminal",
+            "condition": {
+              "condition_type": "Attribute",
+              "attribute": "week_chemo",
+              "operator": ">",
+              "value": 7
+            }
+          },
+          {
+            "transition": "Therapy"
+          }
+        ]
+      },
+      "Delay_1_Day": {
+        "type": "Delay",
+        "distribution": {
+          "kind": "EXACT",
+          "parameters": {
+            "value": 1
+          }
+        },
+        "unit": "days",
+        "direct_transition": "End_Therapy"
+      },
+      "Increase_Counter": {
+        "type": "Simple",
+        "conditional_transition": [
+          {
+            "transition": "Increase_Week",
+            "condition": {
+              "condition_type": "Attribute",
+              "attribute": "day_chemo",
+              "operator": "==",
+              "value": 7
+            }
+          },
+          {
+            "transition": "Increase_Day"
+          }
+        ]
+      },
+      "Day_Counter_2": {
+        "type": "SetAttribute",
+        "attribute": "day_radio",
+        "value": 1,
+        "direct_transition": "Delay_1_Day"
+      },
+      "Week_Counter_2": {
+        "type": "SetAttribute",
+        "attribute": "week_chemo",
+        "value": 1,
+        "direct_transition": "Therapy"
+      },
+      "Therapy": {
+        "type": "Simple",
+        "conditional_transition": [
+          {
+            "transition": "Encounter_Therapy",
+            "condition": {
+              "condition_type": "Attribute",
+              "attribute": "day_chemo",
+              "operator": "<",
+              "value": 6
+            }
+          },
+          {
+            "transition": "Increase_Counter"
+          }
+        ]
+      },
+      "1_Week_Delay": {
+        "type": "Delay",
+        "distribution": {
+          "kind": "EXACT",
+          "parameters": {
+            "value": 1
+          }
+        },
+        "unit": "weeks",
+        "direct_transition": "Day_Counter"
+      },
+      "Chemo_Therapeutics": {
+        "type": "Simple",
+        "conditional_transition": [
+          {
+            "transition": "Cisplatin_And_Cetuximab",
+            "condition": {
+              "condition_type": "Attribute",
+              "attribute": "day_chemo",
+              "operator": "==",
+              "value": 1
+            }
+          },
+          {
+            "transition": "EndEncounter_Therapy"
+          }
+        ]
+      },
+      "Encounter_Therapy": {
+        "type": "Encounter",
+        "encounter_class": "ambulatory",
+        "telemedicine_possibility": "none",
+        "codes": [
+          {
+            "system": "SNOMED-CT",
+            "code": 185345009,
+            "display": "Encounter for symptom"
+          }
+        ],
+        "direct_transition": "Chemo_Therapeutics"
+      },
+      "Simultaneously_Chemotherapy_Procedure": {
+        "type": "Procedure",
+        "codes": [
+          {
+            "system": "SNOMED-CT",
+            "code": 367336001,
+            "display": "Chemotherapy (procedure)"
+          }
+        ],
+        "duration": {
+          "low": 0,
+          "high": 2,
+          "unit": "hours"
+        },
+        "direct_transition": "End_Current_Simultaneously_Chemo_Medication"
+      },
+      "End_Current_Simultaneously_Chemo_Medication": {
+        "type": "MedicationEnd",
+        "referenced_by_attribute": "chemoMedL1",
+        "direct_transition": "EndEncounter_Chemo_1_Week_Before"
+      },
+      "Cisplatin_And_Cetuximab": {
+        "type": "MedicationOrder",
+        "codes": [
+          {
+            "system": "RxNorm",
+            "code": 1736853,
+            "display": "40 mg/m^2 Cisplatin Injection"
+          },
+          {
+            "system": "RxNorm",
+            "code": 318341,
+            "display": "250 mg/m^2 Cetuximab"
+          }
+        ],
+        "direct_transition": "Simultaneously_Chemotherapy_Procedure_2",
+        "assign_to_attribute": "chemoMedL2"
+      },
+      "Simultaneously_Chemotherapy_Procedure_2": {
+        "type": "Procedure",
+        "codes": [
+          {
+            "system": "SNOMED-CT",
+            "code": 367336001,
+            "display": "Chemotherapy (procedure)"
+          }
+        ],
+        "duration": {
+          "low": 0,
+          "high": 2,
+          "unit": "hours"
+        },
+        "direct_transition": "End_Current_Simultaneously_Chemo_Medication_2"
+      },
+      "End_Current_Simultaneously_Chemo_Medication_2": {
+        "type": "MedicationEnd",
+        "referenced_by_attribute": "chemoMedL2",
+        "direct_transition": "EndEncounter_Therapy"
+      },
+      "EndEncounter_Therapy": {
+        "type": "EncounterEnd",
+        "direct_transition": "Increase_Counter"
+      },
+      "EndEncounter_Chemo_1_Week_Before": {
+        "type": "EncounterEnd",
+        "direct_transition": "1_Week_Delay"
+      },
+      "Encounter_Chemo_1_Week": {
+        "type": "Encounter",
+        "encounter_class": "ambulatory",
+        "telemedicine_possibility": "none",
+        "codes": [
+          {
+            "system": "SNOMED-CT",
+            "code": 185345009,
+            "display": "Encounter for symptom"
+          }
+        ],
+        "direct_transition": "Cetuximab_1_Week"
+      },
+      "Cetuximab_1_Week": {
+        "type": "MedicationOrder",
+        "codes": [
+          {
+            "system": "RxNorm",
+            "code": 318341,
+            "display": "400mg Cetuximab"
+          }
+        ],
+        "direct_transition": "Simultaneously_Chemotherapy_Procedure",
+        "administration": true,
+        "assign_to_attribute": "chemoMedL1"
+      }
+    },
+    "gmf_version": 2
+  }

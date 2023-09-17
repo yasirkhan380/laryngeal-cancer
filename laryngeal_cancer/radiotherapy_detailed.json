@@ -1,0 +1,144 @@
+{
+    "name": "Radiotherapy_Detailed",
+    "remarks": [
+      "A blank module"
+    ],
+    "states": {
+      "Initial": {
+        "type": "Initial",
+        "direct_transition": "Day_Counter"
+      },
+      "Terminal": {
+        "type": "Terminal"
+      },
+      "Day_Counter": {
+        "type": "SetAttribute",
+        "attribute": "day_radio",
+        "direct_transition": "Week_Counter_2",
+        "value": 1
+      },
+      "Radiotherapy": {
+        "type": "Procedure",
+        "codes": [
+          {
+            "system": "SNOMED-CT",
+            "code": 428416002,
+            "display": "Radiotherapy to neck (procedure)"
+          }
+        ],
+        "distribution": {
+          "kind": "UNIFORM",
+          "parameters": {
+            "high": 15,
+            "low": 5
+          }
+        },
+        "unit": "minutes",
+        "direct_transition": "EndEncounter_Radiotherapy"
+      },
+      "Encounter_GLP": {
+        "type": "Encounter",
+        "encounter_class": "ambulatory",
+        "telemedicine_possibility": "none",
+        "codes": [
+          {
+            "system": "SNOMED-CT",
+            "code": 185345009,
+            "display": "Encounter for symptom"
+          }
+        ],
+        "direct_transition": "Radiotherapy"
+      },
+      "Increase_Day": {
+        "type": "Counter",
+        "attribute": "day_radio",
+        "action": "increment",
+        "direct_transition": "Delay_1_Day"
+      },
+      "Increase_Week": {
+        "type": "Counter",
+        "attribute": "week_radio",
+        "action": "increment",
+        "direct_transition": "Day_Counter_2"
+      },
+      "End_Therapy": {
+        "type": "Simple",
+        "conditional_transition": [
+          {
+            "transition": "Terminal",
+            "condition": {
+              "condition_type": "Attribute",
+              "attribute": "week_radio",
+              "operator": ">",
+              "value": 7
+            }
+          },
+          {
+            "transition": "Therapy"
+          }
+        ]
+      },
+      "Delay_1_Day": {
+        "type": "Delay",
+        "distribution": {
+          "kind": "EXACT",
+          "parameters": {
+            "value": 1
+          }
+        },
+        "unit": "days",
+        "direct_transition": "End_Therapy"
+      },
+      "Increase_Counter": {
+        "type": "Simple",
+        "conditional_transition": [
+          {
+            "transition": "Increase_Week",
+            "condition": {
+              "condition_type": "Attribute",
+              "attribute": "day_radio",
+              "operator": "==",
+              "value": 7
+            }
+          },
+          {
+            "transition": "Increase_Day"
+          }
+        ]
+      },
+      "EndEncounter_Radiotherapy": {
+        "type": "EncounterEnd",
+        "direct_transition": "Increase_Counter"
+      },
+      "Day_Counter_2": {
+        "type": "SetAttribute",
+        "attribute": "day_radio",
+        "value": 1,
+        "direct_transition": "Delay_1_Day"
+      },
+      "Week_Counter_2": {
+        "type": "SetAttribute",
+        "attribute": "week_radio",
+        "value": 1,
+        "direct_transition": "Therapy"
+      },
+      "Therapy": {
+        "type": "Simple",
+        "conditional_transition": [
+          {
+            "transition": "Encounter_GLP",
+            "condition": {
+              "condition_type": "Attribute",
+              "attribute": "day_radio",
+              "operator": ">",
+              "value": 6
+            }
+          },
+          {
+            "transition": "Increase_Counter"
+          }
+        ]
+      }
+    },
+    "gmf_version": 2
+  }

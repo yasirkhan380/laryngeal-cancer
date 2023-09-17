@@ -1,0 +1,5045 @@
+{
+    "name": "Laryngeal_Cancer_v6.1",
+    "remarks": [
+      "This modules aim is to generate laryngeal cancer patients, with the focus on survival. We tried to provide a sources for every transition, which can be found in the state remarks of the transition of the preceeding state. For some transitions we were not able to find reliable sources and estimated the distributions. In this cases you can find that information in the state remarks. ",
+      "",
+      "For more information on how to use the module and its features please visit our git: https://git.iccas.de/synthea/laryngeal-cancer"
+    ],
+    "states": {
+      "Carzinoma_In_Sito": {
+        "type": "ConditionOnset",
+        "target_encounter": "GPL_Distribution",
+        "codes": [
+          {
+            "system": "SNOMED-CT",
+            "code": 308132000,
+            "display": "carzinoma in sito of larynx",
+            "value_set": "carzinoma in sito"
+          }
+        ],
+        "direct_transition": "Carzinoma_In_Sito_Attribute",
+        "name": "Carzinoma_In_Sito"
+      },
+      "Severe_Dysplasia": {
+        "type": "ConditionOnset",
+        "target_encounter": "GPL_Distribution",
+        "codes": [
+          {
+            "system": "SNOMED-CT",
+            "code": 308132000,
+            "display": "severe dysplasia of larynx",
+            "value_set": "severe"
+          }
+        ],
+        "direct_transition": "Severe_Dysplasia_Attribute",
+        "name": "Severe_Dysplasia"
+      },
+      "Moderate_Dysplasia": {
+        "type": "ConditionOnset",
+        "target_encounter": "GPL_Distribution",
+        "codes": [
+          {
+            "system": "SNOMED-CT",
+            "code": 308132000,
+            "display": "moderat dysplasia of larynx",
+            "value_set": "moderate"
+          }
+        ],
+        "direct_transition": "Moderate_Dysplasia_Attribute",
+        "name": "Moderate_Dysplasia"
+      },
+      "Mild_Dysplasia": {
+        "type": "ConditionOnset",
+        "target_encounter": "GPL_Distribution",
+        "codes": [
+          {
+            "system": "SNOMED-CT",
+            "code": 308132000,
+            "display": "mild dysplasia of larynx",
+            "value_set": "mild"
+          }
+        ],
+        "direct_transition": "Mild_Dysplasia_Attribute",
+        "name": "Mild_Dysplasia"
+      },
+      "Dysplasia_NOS": {
+        "type": "ConditionOnset",
+        "target_encounter": "GPL_Distribution",
+        "codes": [
+          {
+            "system": "SNOMED-CT",
+            "code": 308132000,
+            "display": "NOS dysplasia of larynx",
+            "value_set": "NOS"
+          }
+        ],
+        "direct_transition": "NOS_Dysplasia_Attribute",
+        "name": "Dysplasia_NOS"
+      },
+      "Female_GPL": {
+        "type": "Simple",
+        "distributed_transition": [
+          {
+            "transition": "With_Previous_GLP_F",
+            "distribution": 0.0843
+          },
+          {
+            "transition": "Delay_Age_Distribution_1_No_GPL",
+            "distribution": 0.9157
+          }
+        ],
+        "name": "Female_GPL"
+      },
+      "Male_GPL": {
+        "type": "Simple",
+        "distributed_transition": [
+          {
+            "transition": "With_Previous_GLP_M",
+            "distribution": 0.09475
+          },
+          {
+            "transition": "Delay_Age_Distribution_1_No_GPL",
+            "distribution": 0.90525
+          }
+        ],
+        "name": "Male_GPL"
+      },
+      "With_Previous_GLP_F": {
+        "type": "Simple",
+        "distributed_transition": [
+          {
+            "transition": "Dysplasia_NOS",
+            "distribution": 0.1428
+          },
+          {
+            "transition": "Mild_Dysplasia",
+            "distribution": 0.1428
+          },
+          {
+            "transition": "Moderate_Dysplasia",
+            "distribution": 0.1904
+          },
+          {
+            "transition": "Severe_Dysplasia",
+            "distribution": 0.3809
+          },
+          {
+            "transition": "Carzinoma_In_Sito",
+            "distribution": 0.1431
+          }
+        ],
+        "name": "With_Previous_GLP_F"
+      },
+      "Severe_Dysplasia_Attribute": {
+        "type": "SetAttribute",
+        "attribute": "dysplasia",
+        "direct_transition": "GPL_Delay_1",
+        "value": 3,
+        "name": "Severe_Dysplasia_Attribute"
+      },
+      "Mild_Dysplasia_Attribute": {
+        "type": "SetAttribute",
+        "attribute": "dysplasia",
+        "value": 1,
+        "direct_transition": "GPL_Delay_1",
+        "name": "Mild_Dysplasia_Attribute"
+      },
+      "Moderate_Dysplasia_Attribute": {
+        "type": "SetAttribute",
+        "attribute": "dysplasia",
+        "value": 2,
+        "direct_transition": "GPL_Delay_1",
+        "name": "Moderate_Dysplasia_Attribute"
+      },
+      "NOS_Dysplasia_Attribute": {
+        "type": "SetAttribute",
+        "attribute": "dysplasia",
+        "value": 4,
+        "direct_transition": "GPL_Delay_1",
+        "name": "NOS_Dysplasia_Attribute"
+      },
+      "Initial": {
+        "type": "Initial",
+        "direct_transition": "Config",
+        "name": "Initial"
+      },
+      "Terminal": {
+        "type": "Terminal",
+        "name": "Terminal"
+      },
+      "Encounter_Symptoms_1_Year_Befor": {
+        "type": "Encounter",
+        "encounter_class": "ambulatory",
+        "telemedicine_possibility": "none",
+        "codes": [
+          {
+            "system": "SNOMED-CT",
+            "code": 185345009,
+            "display": "Encounter for symptom",
+            "value_set": ""
+          }
+        ],
+        "direct_transition": "Inflammation_Parameters",
+        "reason": "Development_Of_Laryngeal_Caner",
+        "name": "Encounter_Symptoms_1_Year_Befor"
+      },
+      "Symptoms_1_Year_Before": {
+        "type": "Simple",
+        "remarks": [
+          "Symptoms occurring up to 1 year before diagnosis of laryngeal carcinoma.",
+          "-",
+          "Source: Recognising laryngeal cancer in primary care: a large case–control study using electronic records, Elizabeth A Shephard (2019)",
+          "-",
+          "Hyperlink: https://pubmed.ncbi.nlm.nih.gov/30692092/",
+          ""
+        ],
+        "direct_transition": "Hoarseness",
+        "name": "Symptoms_1_Year_Before"
+      },
+      "Development_Of_Laryngeal_Caner": {
+        "type": "ConditionOnset",
+        "target_encounter": "Encounter_Tumor_Board",
+        "codes": [
+          {
+            "system": "SNOMED-CT",
+            "code": 363429002,
+            "display": "laryngeal cancer",
+            "value_set": ""
+          }
+        ],
+        "direct_transition": "TNM_Distribution_Localization_First_Diagnosis",
+        "remarks": [
+          "The development of  laryngeal cancer will be diagnosed in the Encounter \"Encountor_Tumor_Board\"."
+        ],
+        "name": "Development_Of_Laryngeal_Caner"
+      },
+      "Delay_0_1_Years": {
+        "type": "Delay",
+        "distribution": {
+          "kind": "UNIFORM",
+          "parameters": {
+            "high": 182,
+            "low": 0
+          }
+        },
+        "unit": "days",
+        "direct_transition": "Encounter_Suspecting_Laryngeal_cancer",
+        "name": "Delay_0_1_Years"
+      },
+      "EndEncounter_Symptoms_1_Year_Befor": {
+        "type": "EncounterEnd",
+        "direct_transition": "Delay_0_1_Years",
+        "name": "EndEncounter_Symptoms_1_Year_Befor"
+      },
+      "Former_Smoker_Attribute": {
+        "type": "SetAttribute",
+        "attribute": "smoker_laryngeal",
+        "direct_transition": "Former_Smoker_Observation",
+        "value": "former",
+        "name": "Former_Smoker_Attribute"
+      },
+      "Activ_Smoker_Attribute": {
+        "type": "SetAttribute",
+        "attribute": "smoker_laryngeal",
+        "direct_transition": "Activ_Smoker_Observation",
+        "value": "active",
+        "name": "Activ_Smoker_Attribute"
+      },
+      "Non_Smoker_Attribute": {
+        "type": "SetAttribute",
+        "attribute": "smoker_laryngeal",
+        "direct_transition": "Non_Smoker_Observation",
+        "value": "non",
+        "name": "Non_Smoker_Attribute"
+      },
+      "Former_Smoker_Observation": {
+        "type": "Observation",
+        "category": "social-history",
+        "unit": "pack years",
+        "codes": [
+          {
+            "system": "LOINC",
+            "code": "LA15920-4",
+            "display": "Former smoker",
+            "value_set": ""
+          }
+        ],
+        "direct_transition": "Alcohol_Consumption",
+        "range": {
+          "low": 30,
+          "high": 50
+        },
+        "name": "Former_Smoker_Observation"
+      },
+      "Activ_Smoker_Observation": {
+        "type": "Observation",
+        "category": "social-history",
+        "unit": "pack years",
+        "codes": [
+          {
+            "system": "LOINC",
+            "code": "LA18976-3",
+            "display": "Current every day smoker",
+            "value_set": ""
+          }
+        ],
+        "direct_transition": "Alcohol_Consumption",
+        "range": {
+          "low": 30,
+          "high": 50
+        },
+        "name": "Activ_Smoker_Observation"
+      },
+      "Non_Smoker_Observation": {
+        "type": "Observation",
+        "category": "social-history",
+        "unit": "pack years",
+        "codes": [
+          {
+            "system": "LOINC",
+            "code": "LA18978-9",
+            "display": "Never smoker",
+            "value_set": ""
+          }
+        ],
+        "direct_transition": "Alcohol_Consumption",
+        "exact": {
+          "quantity": 0
+        },
+        "name": "Non_Smoker_Observation"
+      },
+      "No_Alcohol_Attribute": {
+        "type": "SetAttribute",
+        "attribute": "alcohol_consumption",
+        "direct_transition": "No_Alcohol_Observation",
+        "value": 1,
+        "name": "No_Alcohol_Attribute"
+      },
+      "Occasionally_A_Attribute": {
+        "type": "SetAttribute",
+        "attribute": "alcohol_consumption",
+        "direct_transition": "Occasionally_A_Observation",
+        "value": 2,
+        "name": "Occasionally_A_Attribute"
+      },
+      "Regular_A_Attribute": {
+        "type": "SetAttribute",
+        "attribute": "alcohol_consumption",
+        "direct_transition": "Regular_A_Obseravtion",
+        "value": 3,
+        "name": "Regular_A_Attribute"
+      },
+      "Excessive_A_Attribute": {
+        "type": "SetAttribute",
+        "attribute": "alcohol_consumption",
+        "direct_transition": "Excessive_A_Observation",
+        "value": 4,
+        "name": "Excessive_A_Attribute"
+      },
+      "Former_Excessive_A_Attribute": {
+        "type": "SetAttribute",
+        "attribute": "alcohol_consumption",
+        "direct_transition": "Former_Excessive_A_Observation",
+        "value": 5,
+        "name": "Former_Excessive_A_Attribute"
+      },
+      "No_Alcohol_Observation": {
+        "type": "Observation",
+        "category": "social-history",
+        "unit": "g",
+        "codes": [
+          {
+            "system": "LOINC",
+            "code": "LA74013-4",
+            "display": "Alcoholic drinks per day",
+            "value_set": ""
+          }
+        ],
+        "direct_transition": "Performance_Status",
+        "remarks": [
+          "The patient does not consume alcohol. "
+        ],
+        "exact": {
+          "quantity": 0
+        },
+        "name": "No_Alcohol_Observation"
+      },
+      "Occasionally_A_Observation": {
+        "type": "Observation",
+        "category": "social-history",
+        "unit": "g",
+        "codes": [
+          {
+            "system": "LOINC",
+            "code": "LA74013-4",
+            "display": "Alcoholic drinks per day",
+            "value_set": ""
+          }
+        ],
+        "direct_transition": "Performance_Status",
+        "remarks": [
+          "The patient consumes up to 10 standard drinks per week. Equal to up to 120g ethanol per week."
+        ],
+        "range": {
+          "low": 1.7,
+          "high": 17
+        },
+        "name": "Occasionally_A_Observation"
+      },
+      "Regular_A_Obseravtion": {
+        "type": "Observation",
+        "category": "social-history",
+        "unit": "g",
+        "codes": [
+          {
+            "system": "LOINC",
+            "code": "LA74013-4",
+            "display": "Alcoholic drinks per day",
+            "value_set": ""
+          }
+        ],
+        "direct_transition": "Performance_Status",
+        "remarks": [
+          "The patient consumes between 11 and 20 standard drinks per week. Equal to 132 - 240g ethanol per week."
+        ],
+        "range": {
+          "low": 19,
+          "high": 34
+        },
+        "name": "Regular_A_Obseravtion"
+      },
+      "Excessive_A_Observation": {
+        "type": "Observation",
+        "category": "social-history",
+        "unit": "g",
+        "codes": [
+          {
+            "system": "LOINC",
+            "code": "LA74013-4",
+            "display": "Alcoholic drinks per day",
+            "value_set": ""
+          }
+        ],
+        "direct_transition": "Performance_Status",
+        "remarks": [
+          "The patient consumes more than 20 standard drinks per week. Equal to up to 240 - 600 g ethanol per week."
+        ],
+        "range": {
+          "low": 35,
+          "high": 86
+        },
+        "name": "Excessive_A_Observation"
+      },
+      "Former_Excessive_A_Observation": {
+        "type": "Observation",
+        "category": "social-history",
+        "unit": "g ethanol per week",
+        "codes": [
+          {
+            "system": "LOINC",
+            "code": "LA74013-4",
+            "display": "Alcoholic drinks per day",
+            "value_set": ""
+          }
+        ],
+        "direct_transition": "Performance_Status",
+        "remarks": [
+          "The patient uesed to consume more than 20 standard drinks per week. Equal to up to 240 - 600 g ethanol per week."
+        ],
+        "range": {
+          "low": 35,
+          "high": 86
+        },
+        "name": "Former_Excessive_A_Observation"
+      },
+      "Not_HPV-Associated": {
+        "type": "Simple",
+        "direct_transition": "Grading",
+        "name": "Not_HPV-Associated"
+      },
+      "HPV-Associated_E6_E7": {
+        "type": "Observation",
+        "category": "laboratory",
+        "unit": "Test",
+        "codes": [
+          {
+            "system": "LOINC",
+            "code": "94425-6",
+            "display": "HPV E6+E7 mRNA NAA+probe Ql (Specimen)",
+            "value_set": ""
+          }
+        ],
+        "direct_transition": "Grading",
+        "remarks": [
+          "WAS IST NAA?"
+        ],
+        "exact": {
+          "quantity": "positiv"
+        },
+        "name": "HPV-Associated_E6_E7"
+      },
+      "HPV-Associated_DNA": {
+        "type": "Observation",
+        "category": "laboratory",
+        "unit": "Test",
+        "codes": [
+          {
+            "system": "LOINC",
+            "code": "73959-9",
+            "display": "HPV H Risk 12 DNA Tiss Ql Probe",
+            "value_set": ""
+          }
+        ],
+        "direct_transition": "HPV-Associated_E6_E7",
+        "exact": {
+          "quantity": "positiv"
+        },
+        "name": "HPV-Associated_DNA"
+      },
+      "Inflammation_Parameters": {
+        "type": "Simple",
+        "distributed_transition": [
+          {
+            "transition": "Increased_Inflammation_Parameters",
+            "distribution": 0.09
+          },
+          {
+            "transition": "EndEncounter_Symptoms_1_Year_Befor",
+            "distribution": 0.9099999999999999
+          }
+        ],
+        "remarks": [
+          "Source: Recognising laryngeal cancer in primary care: a large case–control study using electronic records, Elizabeth A Shephard (2019)",
+          "-",
+          "Hyperlink: https://pubmed.ncbi.nlm.nih.gov/30692092/",
+          ""
+        ],
+        "name": "Inflammation_Parameters"
+      },
+      "Erythrocyte_Sedimentation_Rate_Raised": {
+        "type": "Observation",
+        "category": "laboratory",
+        "unit": "#",
+        "codes": [
+          {
+            "system": "LOINC",
+            "code": "30341-2",
+            "display": "Erythrocyte sedimentation rate",
+            "value_set": ""
+          }
+        ],
+        "direct_transition": "EndEncounter_Symptoms_1_Year_Befor",
+        "value_code": {
+          "system": "SNOMED-CT",
+          "code": 165468009,
+          "display": "Erythrocyte sedimentation rate raised (finding)"
+        },
+        "name": "Erythrocyte_Sedimentation_Rate_Raised"
+      },
+      "Plasma_Viscosity_Raised": {
+        "type": "Observation",
+        "category": "laboratory",
+        "unit": "",
+        "codes": [
+          {
+            "system": "LOINC",
+            "code": "4691-2",
+            "display": "Viscosity of Plasma",
+            "value_set": ""
+          }
+        ],
+        "direct_transition": "EndEncounter_Symptoms_1_Year_Befor",
+        "value_code": {
+          "system": "SNOMED-CT",
+          "code": 165461003,
+          "display": "Plasma viscosity raised (finding)"
+        },
+        "name": "Plasma_Viscosity_Raised"
+      },
+      "Elevated_C-reactive_Protein": {
+        "type": "Observation",
+        "category": "laboratory",
+        "unit": "#",
+        "codes": [
+          {
+            "system": "LOINC",
+            "code": "1988-5",
+            "display": "C reactive protein [Mass/volume] in Serum or Plasma",
+            "value_set": ""
+          }
+        ],
+        "direct_transition": "EndEncounter_Symptoms_1_Year_Befor",
+        "value_code": {
+          "system": "SNOMED-CT",
+          "code": 119971000119104,
+          "display": "C-reactive protein above reference range"
+        },
+        "name": "Elevated_C-reactive_Protein"
+      },
+      "T2_Diagnosed": {
+        "type": "Observation",
+        "category": "imaging",
+        "unit": "",
+        "codes": [
+          {
+            "system": "LOINC",
+            "code": "21905-5",
+            "display": "Primary tumor.clinical [Class] Cancer",
+            "value_set": ""
+          }
+        ],
+        "value_code": {
+          "system": "SNOMED-CT",
+          "code": 67673008,
+          "display": "T2 category (finding)"
+        },
+        "direct_transition": "N-Classification_Observation",
+        "name": "T2_Diagnosed"
+      },
+      "T3_Diagnosed": {
+        "type": "Observation",
+        "category": "imaging",
+        "unit": "",
+        "codes": [
+          {
+            "system": "LOINC",
+            "code": "21905-5",
+            "display": "Primary tumor.clinical [Class] Cancer",
+            "value_set": ""
+          }
+        ],
+        "value_code": {
+          "system": "SNOMED-CT",
+          "code": 14410001,
+          "display": "T3 category (finding)"
+        },
+        "remarks": [
+          "https://www.cancer.net/cancer-types/breast-cancer/statistics"
+        ],
+        "direct_transition": "N-Classification_Observation",
+        "name": "T3_Diagnosed"
+      },
+      "N-Classification_Observation": {
+        "type": "Simple",
+        "conditional_transition": [
+          {
+            "transition": "N0_Diagnosed",
+            "condition": {
+              "condition_type": "Attribute",
+              "attribute": "n-classification",
+              "operator": "==",
+              "value": 1
+            }
+          },
+          {
+            "transition": "N1_Diagnosed",
+            "condition": {
+              "condition_type": "Attribute",
+              "attribute": "n-classification",
+              "operator": "==",
+              "value": 2
+            }
+          },
+          {
+            "transition": "N2_Diagnosed",
+            "condition": {
+              "condition_type": "Attribute",
+              "attribute": "n-classification",
+              "operator": "==",
+              "value": 3
+            }
+          },
+          {
+            "transition": "N3_Diagnosed",
+            "condition": {
+              "condition_type": "Attribute",
+              "attribute": "n-classification",
+              "operator": "==",
+              "value": 4
+            }
+          }
+        ],
+        "remarks": [
+          "N-classifcation according to the AJCC Cancer Staging Manual (8th edition) American Joint Committee on Cancer",
+          "Springer, 2017",
+          "-",
+          "The sources of the distribution of TNM classification and localisation can be found in the states remarks of the \"tnm_distribution_localization_first_diagnosis\" submodule."
+        ],
+        "name": "N-Classification_Observation"
+      },
+      "M-Classification_Observation": {
+        "type": "Simple",
+        "conditional_transition": [
+          {
+            "transition": "M0_Diagnosed",
+            "condition": {
+              "condition_type": "Attribute",
+              "attribute": "m-status",
+              "operator": "==",
+              "value": 1
+            }
+          },
+          {
+            "transition": "M1_Diagnosed",
+            "condition": {
+              "condition_type": "Attribute",
+              "attribute": "m-status",
+              "operator": "==",
+              "value": 2
+            }
+          }
+        ],
+        "remarks": [
+          "M-classifcation according to the AJCC Cancer Staging Manual (8th edition) American Joint Committee on Cancer",
+          "Springer, 2017",
+          "-",
+          "The sources of the distribution of TNM classification and localisation can be found in the states remarks of the \"tnm_distribution_localization_first_diagnosis\" submodule."
+        ],
+        "name": "M-Classification_Observation"
+      },
+      "N0_Diagnosed": {
+        "type": "Observation",
+        "category": "imaging",
+        "unit": "",
+        "codes": [
+          {
+            "system": "LOINC",
+            "code": "21906-3",
+            "display": "Regional lymph nodes.clinical [Class] Cancer",
+            "value_set": ""
+          }
+        ],
+        "value_code": {
+          "system": "SNOMED-CT",
+          "code": 62455006,
+          "display": "N0 category (finding)"
+        },
+        "direct_transition": "M-Classification_Observation",
+        "name": "N0_Diagnosed"
+      },
+      "N1_Diagnosed": {
+        "type": "Observation",
+        "category": "imaging",
+        "unit": "",
+        "codes": [
+          {
+            "system": "LOINC",
+            "code": "21906-3",
+            "display": "Regional lymph nodes.clinical [Class] Cancer",
+            "value_set": ""
+          }
+        ],
+        "value_code": {
+          "system": "SNOMED-CT",
+          "code": 53623008,
+          "display": "N1 category (finding)"
+        },
+        "direct_transition": "M-Classification_Observation",
+        "name": "N1_Diagnosed"
+      },
+      "N2_Diagnosed": {
+        "type": "Observation",
+        "category": "imaging",
+        "unit": "",
+        "codes": [
+          {
+            "system": "LOINC",
+            "code": "21906-3",
+            "display": "Regional lymph nodes.clinical [Class] Cancer",
+            "value_set": ""
+          }
+        ],
+        "value_code": {
+          "system": "SNOMED-CT",
+          "code": 46059003,
+          "display": "N2 category (finding)"
+        },
+        "direct_transition": "M-Classification_Observation",
+        "name": "N2_Diagnosed"
+      },
+      "N3_Diagnosed": {
+        "type": "Observation",
+        "category": "imaging",
+        "unit": "",
+        "codes": [
+          {
+            "system": "LOINC",
+            "code": "21906-3",
+            "display": "Regional lymph nodes.clinical [Class] Cancer",
+            "value_set": ""
+          }
+        ],
+        "value_code": {
+          "system": "SNOMED-CT",
+          "code": 5856006,
+          "display": "N3 category (finding)"
+        },
+        "direct_transition": "M-Classification_Observation",
+        "name": "N3_Diagnosed"
+      },
+      "M0_Diagnosed": {
+        "type": "Observation",
+        "category": "imaging",
+        "unit": "",
+        "codes": [
+          {
+            "system": "LOINC",
+            "code": "21907-1",
+            "display": "Distant metastases.clinical [Class] Cancer",
+            "value_set": ""
+          }
+        ],
+        "value_code": {
+          "system": "SNOMED-CT",
+          "code": 30893008,
+          "display": "M0 category (finding)"
+        },
+        "remarks": [
+          "If the cancer is located only in the breast, the 5-year survival rate of women with breast cancer is 99%. Sixty-two percent (62%) of cases are diagnosed at this stage:",
+          "https://www.cancer.net/cancer-types/breast-cancer/statistics"
+        ],
+        "direct_transition": "UICC-Stadium",
+        "name": "M0_Diagnosed"
+      },
+      "M1_Diagnosed": {
+        "type": "Observation",
+        "category": "imaging",
+        "unit": "",
+        "codes": [
+          {
+            "system": "LOINC",
+            "code": "21907-1",
+            "display": "Distant metastases.clinical [Class] Cancer",
+            "value_set": ""
+          }
+        ],
+        "value_code": {
+          "system": "SNOMED-CT",
+          "code": 55440008,
+          "display": "M1 category (finding)"
+        },
+        "direct_transition": "UICC-Stadium",
+        "name": "M1_Diagnosed"
+      },
+      "UICC_Stadium_I_Observation": {
+        "type": "Observation",
+        "category": "imaging",
+        "unit": "",
+        "codes": [
+          {
+            "system": "LOINC",
+            "code": "21917-0",
+            "display": "UICC-Stadium",
+            "value_set": ""
+          }
+        ],
+        "direct_transition": "EndEncounter_Tumor_Board",
+        "value_code": {
+          "system": "SNOMED-CT",
+          "code": 260879005,
+          "display": "UICC I"
+        },
+        "name": "UICC_Stadium_I_Observation"
+      },
+      "UICC_Stadium_II_Observation": {
+        "type": "Observation",
+        "category": "imaging",
+        "unit": "",
+        "codes": [
+          {
+            "system": "LOINC",
+            "code": "21917-0",
+            "display": "UICC-Stadium",
+            "value_set": ""
+          }
+        ],
+        "value_code": {
+          "system": "SNOMED-CT",
+          "code": 260879005,
+          "display": "UICC II"
+        },
+        "direct_transition": "EndEncounter_Tumor_Board",
+        "name": "UICC_Stadium_II_Observation"
+      },
+      "UICC_Stadium_III_Observation": {
+        "type": "Observation",
+        "category": "imaging",
+        "unit": "",
+        "codes": [
+          {
+            "system": "LOINC",
+            "code": "21917-0",
+            "display": "UICC-Stadium",
+            "value_set": ""
+          }
+        ],
+        "value_code": {
+          "system": "SNOMED-CT",
+          "code": 260879005,
+          "display": "UICC III"
+        },
+        "direct_transition": "EndEncounter_Tumor_Board",
+        "name": "UICC_Stadium_III_Observation"
+      },
+      "UICC_Stadium_IV_Observation": {
+        "type": "Observation",
+        "category": "imaging",
+        "unit": "",
+        "codes": [
+          {
+            "system": "LOINC",
+            "code": "21917-0",
+            "display": "UICC-Stadium",
+            "value_set": ""
+          }
+        ],
+        "value_code": {
+          "system": "SNOMED-CT",
+          "code": 260879005,
+          "display": "UICC IV"
+        },
+        "direct_transition": "EndEncounter_Tumor_Board",
+        "name": "UICC_Stadium_IV_Observation"
+      },
+      "Age_Distribution": {
+        "type": "CallSubmodule",
+        "submodule": "laryngeal_cancer/age_distribution",
+        "direct_transition": "Larngeal_Cancer_Or_Not",
+        "name": "Age_Distribution"
+      },
+      "Larngeal_Cancer_Or_Not": {
+        "type": "Simple",
+        "conditional_transition": [
+          {
+            "transition": "GPL_Distribution",
+            "condition": {
+              "condition_type": "Attribute",
+              "attribute": "laryngeal_cancer",
+              "operator": "==",
+              "value": true
+            }
+          },
+          {
+            "transition": "Terminal"
+          }
+        ],
+        "name": "Larngeal_Cancer_Or_Not"
+      },
+      "Risk_Age_Distribution": {
+        "type": "CallSubmodule",
+        "submodule": "laryngeal_cancer/risk_age_distribution",
+        "direct_transition": "Larngeal_Cancer_Or_Not",
+        "name": "Risk_Age_Distribution"
+      },
+      "Config": {
+        "type": "Simple",
+        "direct_transition": "Set_Age_And_Risk_Distribution",
+        "remarks": [
+          "In the Config area you can choose between the different the different survival and age distribution modes of the module."
+        ],
+        "name": "Config"
+      },
+      "Set_Age_And_Risk_Distribution": {
+        "type": "SetAttribute",
+        "attribute": "age_risk_distribution",
+        "value": 1,
+        "direct_transition": "Set_Survival_Mode",
+        "remarks": [
+          "With this attribute you can choose between the different types of age and gender distributions. To do this, change the \"age_risk_distribution\" attribute. Available modes: ",
+          "-",
+          "1 - Generates as many laryngeal carcinoma patients as possible. Does not consider prevalence, incidence and sex distribution.",
+          "-",
+          "2 - Generates population with occurrence of laryngeal carcinoma patients based on real age and sex specific disease probability.",
+          "-",
+          "For a more detailed explanation please visit our git: https://git.iccas.de/synthea/laryngeal-cancer"
+        ],
+        "name": "Set_Age_And_Risk_Distribution"
+      },
+      "Encounter_Imaging": {
+        "type": "Encounter",
+        "encounter_class": "ambulatory",
+        "reason": "",
+        "telemedicine_possibility": "none",
+        "codes": [
+          {
+            "system": "SNOMED-CT",
+            "code": 185347001,
+            "display": "Encounter for problem",
+            "value_set": ""
+          }
+        ],
+        "remarks": [
+          "-nach Leitline keine bildgebung außer Laryngoskopie bei kleinen Tumoren",
+          ""
+        ],
+        "direct_transition": "Larynx_MRI_Or_CT",
+        "name": "Encounter_Imaging"
+      },
+      "EndEncounter_Imaging": {
+        "type": "Simple",
+        "direct_transition": "Encounter_Tumor_Board",
+        "name": "EndEncounter_Imaging"
+      },
+      "MRI_Larynx": {
+        "type": "Procedure",
+        "codes": [
+          {
+            "system": "SNOMED-CT",
+            "code": 241612008,
+            "display": "Magnetic resonance imaging of larynx (procedure)",
+            "value_set": ""
+          }
+        ],
+        "distribution": {
+          "kind": "UNIFORM",
+          "parameters": {
+            "high": 60,
+            "low": 30
+          }
+        },
+        "unit": "minutes",
+        "direct_transition": "Panendoskopy with Biopsy",
+        "name": "MRI_Larynx"
+      },
+      "CT_Larynx": {
+        "type": "Procedure",
+        "codes": [
+          {
+            "system": "SNOMED-CT",
+            "code": 241536002,
+            "display": "Computed tomography of larynx (procedure)",
+            "value_set": ""
+          }
+        ],
+        "distribution": {
+          "kind": "UNIFORM",
+          "parameters": {
+            "high": 60,
+            "low": 30
+          }
+        },
+        "unit": "minutes",
+        "direct_transition": "Panendoskopy with Biopsy",
+        "name": "CT_Larynx"
+      },
+      "CT_Thorax_Abdomen": {
+        "type": "Procedure",
+        "codes": [
+          {
+            "system": "SNOMED-CT",
+            "code": 418891003,
+            "display": "Computed tomography of chest and abdomen (procedure)",
+            "value_set": ""
+          }
+        ],
+        "distribution": {
+          "kind": "UNIFORM",
+          "parameters": {
+            "high": 60,
+            "low": 30
+          }
+        },
+        "unit": "minutes",
+        "conditional_transition": [
+          {
+            "transition": "Distant_Metastasis_Found",
+            "condition": {
+              "condition_type": "Attribute",
+              "attribute": "m-status",
+              "operator": "==",
+              "value": 2
+            }
+          },
+          {
+            "transition": "EndEncounter_Imaging"
+          }
+        ],
+        "name": "CT_Thorax_Abdomen"
+      },
+      "MRI_Abdomen": {
+        "type": "Procedure",
+        "codes": [
+          {
+            "system": "SNOMED-CT",
+            "code": 241621009,
+            "display": "Magnetic resonance imaging of abdomen (procedure)",
+            "value_set": ""
+          }
+        ],
+        "distribution": {
+          "kind": "UNIFORM",
+          "parameters": {
+            "high": 60,
+            "low": 30
+          }
+        },
+        "unit": "minutes",
+        "direct_transition": "MRI_Thorax",
+        "name": "MRI_Abdomen"
+      },
+      "MRI_Thorax": {
+        "type": "Procedure",
+        "codes": [
+          {
+            "system": "SNOMED-CT",
+            "code": 6007000,
+            "display": "Magnetic resonance imaging of chest (procedure)",
+            "value_set": ""
+          }
+        ],
+        "distribution": {
+          "kind": "UNIFORM",
+          "parameters": {
+            "high": 60,
+            "low": 30
+          }
+        },
+        "unit": "minutes",
+        "conditional_transition": [
+          {
+            "transition": "Distant_Metastasis_Found",
+            "condition": {
+              "condition_type": "Attribute",
+              "attribute": "m-status",
+              "operator": "==",
+              "value": 2
+            }
+          },
+          {
+            "transition": "EndEncounter_Imaging"
+          }
+        ],
+        "name": "MRI_Thorax"
+      },
+      "Metastasis_Lung_Mediastinum": {
+        "type": "Observation",
+        "category": "imaging",
+        "unit": "",
+        "codes": [
+          {
+            "system": "LOINC",
+            "code": "33733-7",
+            "display": "Sites of distant metastasis",
+            "value_set": ""
+          }
+        ],
+        "direct_transition": "EndEncounter_Imaging",
+        "value_code": {
+          "system": "SNOMED-CT",
+          "code": 105041000119109,
+          "display": "Metastatic squamous cell carcinoma to lung (disorder)"
+        },
+        "name": "Metastasis_Lung_Mediastinum"
+      },
+      "Metastasis_Bone": {
+        "type": "Observation",
+        "category": "imaging",
+        "unit": "",
+        "codes": [
+          {
+            "system": "LOINC",
+            "code": "33733-7",
+            "display": "Sites of distant metastasis",
+            "value_set": ""
+          }
+        ],
+        "direct_transition": "EndEncounter_Imaging",
+        "value_code": {
+          "system": "SNOMED-CT",
+          "code": 91271000119101,
+          "display": "Metastatic squamous cell carcinoma to bone (disorder)"
+        },
+        "name": "Metastasis_Bone"
+      },
+      "Metastasis_Skin": {
+        "type": "Observation",
+        "category": "imaging",
+        "unit": "",
+        "codes": [
+          {
+            "system": "LOINC",
+            "code": "33733-7",
+            "display": "Sites of distant metastasis",
+            "value_set": ""
+          }
+        ],
+        "direct_transition": "EndEncounter_Imaging",
+        "value_code": {
+          "system": "SNOMED-CT",
+          "code": 78461000119105,
+          "display": "Metastatic squamous cell carcinoma to skin (disorder)"
+        },
+        "name": "Metastasis_Skin"
+      },
+      "Metastasis_Central_Nervsystem": {
+        "type": "Observation",
+        "category": "imaging",
+        "unit": "",
+        "codes": [
+          {
+            "system": "LOINC",
+            "code": "33733-7",
+            "display": "Sites of distant metastasis",
+            "value_set": ""
+          }
+        ],
+        "direct_transition": "EndEncounter_Imaging",
+        "value_code": {
+          "system": "SNOMED-CT",
+          "code": 403906006,
+          "display": "Metastatic squamous cell carcinoma to central nervsystem(disorder)"
+        },
+        "name": "Metastasis_Central_Nervsystem"
+      },
+      "Metastasis_Other_Organs": {
+        "type": "Observation",
+        "category": "imaging",
+        "unit": "",
+        "codes": [
+          {
+            "system": "LOINC",
+            "code": "33733-7",
+            "display": "Sites of distant metastasis",
+            "value_set": ""
+          }
+        ],
+        "direct_transition": "EndEncounter_Imaging",
+        "value_code": {
+          "system": "SNOMED-CT",
+          "code": 403906006,
+          "display": "Metastatic squamous cell carcinoma (disorder)"
+        },
+        "name": "Metastasis_Other_Organs"
+      },
+      "EndConfig": {
+        "type": "Simple",
+        "conditional_transition": [
+          {
+            "transition": "Age_Distribution",
+            "condition": {
+              "condition_type": "Attribute",
+              "attribute": "age_risk_distribution",
+              "operator": "==",
+              "value": 1
+            }
+          },
+          {
+            "transition": "Risk_Age_Distribution",
+            "condition": {
+              "condition_type": "Attribute",
+              "attribute": "age_risk_distribution",
+              "operator": "==",
+              "value": 2
+            }
+          }
+        ],
+        "name": "EndConfig"
+      },
+      "End_Of_Grading": {
+        "type": "Simple",
+        "conditional_transition": [
+          {
+            "transition": "Thorax_Abdomen_MRI_Or_CT",
+            "condition": {
+              "condition_type": "Or",
+              "conditions": [
+                {
+                  "condition_type": "Attribute",
+                  "attribute": "n-classification",
+                  "operator": ">",
+                  "value": 2
+                },
+                {
+                  "condition_type": "Attribute",
+                  "attribute": "m-status",
+                  "operator": "==",
+                  "value": 2
+                }
+              ]
+            }
+          },
+          {
+            "transition": "EndEncounter_Imaging"
+          }
+        ],
+        "name": "End_Of_Grading"
+      },
+      "G1": {
+        "type": "Observation",
+        "category": "procedure",
+        "unit": "",
+        "codes": [
+          {
+            "system": "LOINC",
+            "code": "21858-6",
+            "display": "Grade Cancer",
+            "value_set": ""
+          }
+        ],
+        "direct_transition": "G1_Attribute",
+        "value_code": {
+          "system": "SNOMED-CT",
+          "code": 1155706004,
+          "display": "G1: Well differentiated neuroendocrine neoplasm (qualifier value)"
+        },
+        "name": "G1"
+      },
+      "G3": {
+        "type": "Observation",
+        "category": "procedure",
+        "unit": "",
+        "codes": [
+          {
+            "system": "LOINC",
+            "code": "21858-6",
+            "display": "Grade Cancer",
+            "value_set": ""
+          }
+        ],
+        "direct_transition": "G3_Attribute",
+        "value_code": {
+          "system": "SNOMED-CT",
+          "code": 1155704001,
+          "display": "G3: Poorly differentiated histologic grade (qualifier value)"
+        },
+        "name": "G3"
+      },
+      "G2": {
+        "type": "Observation",
+        "category": "procedure",
+        "unit": "",
+        "codes": [
+          {
+            "system": "LOINC",
+            "code": "21858-6",
+            "display": "Grade Cancer",
+            "value_set": ""
+          }
+        ],
+        "direct_transition": "G2_Attribute",
+        "value_code": {
+          "system": "SNOMED-CT",
+          "code": 1155703007,
+          "display": "G2: Moderately differentiated histologic grade (qualifier value)"
+        },
+        "name": "G2"
+      },
+      "Delay_Staging_Initial_Treatment": {
+        "type": "Delay",
+        "distribution": {
+          "kind": "UNIFORM",
+          "parameters": {
+            "high": 2,
+            "low": 0
+          }
+        },
+        "unit": "weeks",
+        "direct_transition": "Encounter_Initial_Treatment",
+        "name": "Delay_Staging_Initial_Treatment"
+      },
+      "Laryngectomy": {
+        "type": "Procedure",
+        "codes": [
+          {
+            "system": "SNOMED-CT",
+            "code": 72791001,
+            "display": "Laryngectomy (procedure)",
+            "value_set": ""
+          }
+        ],
+        "distribution": {
+          "kind": "UNIFORM",
+          "parameters": {
+            "high": 6,
+            "low": 4
+          }
+        },
+        "unit": "hours",
+        "direct_transition": "Laryngectomy_Attribute",
+        "name": "Laryngectomy"
+      },
+      "Open_Partial_Laryngectomy": {
+        "type": "Procedure",
+        "codes": [
+          {
+            "system": "SNOMED-CT",
+            "code": 80513001,
+            "display": "Open partial laryngectomy (procedure)",
+            "value_set": ""
+          }
+        ],
+        "distribution": {
+          "kind": "UNIFORM",
+          "parameters": {
+            "high": 4,
+            "low": 2
+          }
+        },
+        "unit": "hours",
+        "direct_transition": "Open_Partial_Laryngectomy_Attribute",
+        "name": "Open_Partial_Laryngectomy"
+      },
+      "Laser_Surgery/Transoral_Partial_Laryngectomy": {
+        "type": "Procedure",
+        "codes": [
+          {
+            "system": "SNOMED-CT",
+            "code": 80513001,
+            "display": "Transoral partial laryngectomy (procedure)",
+            "value_set": ""
+          }
+        ],
+        "distribution": {
+          "kind": "UNIFORM",
+          "parameters": {
+            "high": 3,
+            "low": 1
+          }
+        },
+        "unit": "hours",
+        "direct_transition": "Laser_Surgery_Transoral_Partial_Laryngectomy_Attribute",
+        "name": "Laser_Surgery/Transoral_Partial_Laryngectomy"
+      },
+      "Radiotherapy": {
+        "type": "SetAttribute",
+        "attribute": "primaryTreatment",
+        "value": "radio",
+        "direct_transition": "EndEncounter_Initial_Treatment",
+        "name": "Radiotherapy"
+      },
+      "Radiochemotherapy": {
+        "type": "SetAttribute",
+        "attribute": "primaryTreatment",
+        "direct_transition": "EndEncounter_Initial_Treatment",
+        "value": "radiochemo",
+        "name": "Radiochemotherapy"
+      },
+      "Encounter_Tumor_Board": {
+        "type": "Encounter",
+        "encounter_class": "ambulatory",
+        "reason": "Development_Of_Laryngeal_Caner",
+        "telemedicine_possibility": "none",
+        "codes": [
+          {
+            "system": "SNOMED-CT",
+            "code": 185347001,
+            "display": "Encounter for problem",
+            "value_set": ""
+          }
+        ],
+        "conditional_transition": [
+          {
+            "transition": "T1a_Diagnosed",
+            "condition": {
+              "condition_type": "And",
+              "conditions": [
+                {
+                  "condition_type": "Attribute",
+                  "attribute": "t-classification",
+                  "operator": "==",
+                  "value": 1
+                },
+                {
+                  "condition_type": "Attribute",
+                  "attribute": "t1",
+                  "operator": "==",
+                  "value": "a"
+                }
+              ]
+            }
+          },
+          {
+            "transition": "T1b_Diagnosed",
+            "condition": {
+              "condition_type": "And",
+              "conditions": [
+                {
+                  "condition_type": "Attribute",
+                  "attribute": "t-classification",
+                  "operator": "==",
+                  "value": 1
+                },
+                {
+                  "condition_type": "Attribute",
+                  "attribute": "t1",
+                  "operator": "==",
+                  "value": "b"
+                }
+              ]
+            }
+          },
+          {
+            "transition": "T2_Diagnosed",
+            "condition": {
+              "condition_type": "Attribute",
+              "attribute": "t-classification",
+              "operator": "==",
+              "value": 2
+            }
+          },
+          {
+            "transition": "T3_Diagnosed",
+            "condition": {
+              "condition_type": "Attribute",
+              "attribute": "t-classification",
+              "operator": "==",
+              "value": 3
+            }
+          },
+          {
+            "transition": "T4a_Diagnosed",
+            "condition": {
+              "condition_type": "And",
+              "conditions": [
+                {
+                  "condition_type": "Attribute",
+                  "attribute": "t-classification",
+                  "operator": "==",
+                  "value": 4
+                },
+                {
+                  "condition_type": "Attribute",
+                  "attribute": "t4",
+                  "operator": "==",
+                  "value": "a"
+                }
+              ]
+            }
+          },
+          {
+            "transition": "T4b_Diagnosed",
+            "condition": {
+              "condition_type": "And",
+              "conditions": [
+                {
+                  "condition_type": "Attribute",
+                  "attribute": "t-classification",
+                  "operator": "==",
+                  "value": 4
+                },
+                {
+                  "condition_type": "Attribute",
+                  "attribute": "t4",
+                  "operator": "==",
+                  "value": "b"
+                }
+              ]
+            }
+          },
+          {
+            "transition": "T1_Diagnosed"
+          }
+        ],
+        "remarks": [
+          "In this encounter the laryngeal cancer will be diagnosed.",
+          "-",
+          "T-classifcation according to the AJCC Cancer Staging Manual (8th edition) American Joint Committee on Cancer",
+          "Springer, 2017",
+          "-",
+          "The sources of the distribution of TNM classification and localisation can be found in the states remarks of the \"tnm_distribution_localization_first_diagnosis\" submodule."
+        ],
+        "name": "Encounter_Tumor_Board"
+      },
+      "EndEncounter_Tumor_Board": {
+        "type": "EncounterEnd",
+        "direct_transition": "Delay_Staging_Initial_Treatment",
+        "name": "EndEncounter_Tumor_Board"
+      },
+      "Suspecting_Laryngeal_Cancer": {
+        "type": "ConditionOnset",
+        "target_encounter": "Encounter_Suspecting_Laryngeal_cancer",
+        "codes": [
+          {
+            "system": "SNOMED-CT",
+            "code": 315277001,
+            "display": "Suspected head and neck cancer (situation)",
+            "value_set": ""
+          }
+        ],
+        "direct_transition": "EndEncounter_First_Diagnose_Laryngeal_cancer",
+        "name": "Suspecting_Laryngeal_Cancer"
+      },
+      "EndEncounter_First_Diagnose_Laryngeal_cancer": {
+        "type": "EncounterEnd",
+        "direct_transition": "Delay_Between_1-2_Doctors_Visit",
+        "name": "EndEncounter_First_Diagnose_Laryngeal_cancer"
+      },
+      "R0_Attribute": {
+        "type": "SetAttribute",
+        "attribute": "r-status",
+        "direct_transition": "EndEncounter_Initial_Treatment",
+        "value": 1,
+        "name": "R0_Attribute"
+      },
+      "R1_Observation": {
+        "type": "Observation",
+        "category": "procedure",
+        "unit": "",
+        "codes": [
+          {
+            "system": "LOINC",
+            "code": "84892-9",
+            "display": "Residual tumor classification [Type] in Cancer specimen",
+            "value_set": ""
+          }
+        ],
+        "direct_transition": "R1_Attribute",
+        "value_code": {
+          "system": "SNOMED-CT",
+          "code": 277062004,
+          "display": "Residual tumor status R1"
+        },
+        "name": "R1_Observation"
+      },
+      "R2_Observation": {
+        "type": "Observation",
+        "category": "procedure",
+        "unit": "",
+        "codes": [
+          {
+            "system": "LOINC",
+            "code": "84892-9",
+            "display": "Residual tumor classification [Type] in Cancer specimen",
+            "value_set": ""
+          }
+        ],
+        "direct_transition": "R2_Attribute",
+        "value_code": {
+          "system": "SNOMED-CT",
+          "code": 277062004,
+          "display": "Residual tumor status R2"
+        },
+        "name": "R2_Observation"
+      },
+      "R1_Attribute": {
+        "type": "SetAttribute",
+        "attribute": "r-status",
+        "value": 2,
+        "direct_transition": "EndEncounter_Initial_Treatment",
+        "name": "R1_Attribute"
+      },
+      "R2_Attribute": {
+        "type": "SetAttribute",
+        "attribute": "r-status",
+        "value": 3,
+        "direct_transition": "EndEncounter_Initial_Treatment",
+        "name": "R2_Attribute"
+      },
+      "Curative_Neck_Dissection": {
+        "type": "Procedure",
+        "codes": [
+          {
+            "system": "SNOMED-CT",
+            "code": 178283002,
+            "display": "curative block dissection of cervical lymph nodes (procedure)",
+            "value_set": ""
+          }
+        ],
+        "distribution": {
+          "kind": "UNIFORM",
+          "parameters": {
+            "high": 60,
+            "low": 30
+          }
+        },
+        "unit": "minutes",
+        "direct_transition": "Curative_Neck_Dissection_Attribute",
+        "name": "Curative_Neck_Dissection"
+      },
+      "Elective_Neck_Dissection": {
+        "type": "Procedure",
+        "codes": [
+          {
+            "system": "SNOMED-CT",
+            "code": 178283002,
+            "display": "elective block dissection of cervical lymph nodes (procedure)",
+            "value_set": ""
+          }
+        ],
+        "distribution": {
+          "kind": "UNIFORM",
+          "parameters": {
+            "high": 60,
+            "low": 30
+          }
+        },
+        "unit": "minutes",
+        "direct_transition": "Elective_Neck_Dissection_Attribute",
+        "name": "Elective_Neck_Dissection"
+      },
+      "Delay_PET-CT": {
+        "type": "Delay",
+        "distribution": {
+          "kind": "UNIFORM",
+          "parameters": {
+            "high": 12,
+            "low": 10
+          }
+        },
+        "unit": "weeks",
+        "direct_transition": "Encounter_PET-CT",
+        "name": "Delay_PET-CT"
+      },
+      "PET_Positive": {
+        "type": "Observation",
+        "category": "imaging",
+        "unit": "PET CT",
+        "codes": [
+          {
+            "system": "LOINC",
+            "code": "18782-3",
+            "display": "Radiology Study observation",
+            "value_set": ""
+          }
+        ],
+        "direct_transition": "Attribute_PET_Positive",
+        "exact": {
+          "quantity": "positiv finding"
+        },
+        "name": "PET_Positive"
+      },
+      "PET_Negative": {
+        "type": "Observation",
+        "category": "imaging",
+        "unit": "PET CT",
+        "codes": [
+          {
+            "system": "LOINC",
+            "code": "18782-3",
+            "display": "Radiology Study observation",
+            "value_set": ""
+          }
+        ],
+        "direct_transition": "EndEncounter_PET-CT",
+        "exact": {
+          "quantity": "negativ finding"
+        },
+        "name": "PET_Negative"
+      },
+      "Increased_Inflammation_Parameters": {
+        "type": "Simple",
+        "distributed_transition": [
+          {
+            "transition": "Erythrocyte_Sedimentation_Rate_Raised",
+            "distribution": 0.3333
+          },
+          {
+            "transition": "Elevated_C-reactive_Protein",
+            "distribution": 0.3333
+          },
+          {
+            "transition": "Plasma_Viscosity_Raised",
+            "distribution": 0.3333999999999999
+          }
+        ],
+        "name": "Increased_Inflammation_Parameters"
+      },
+      "First_Diagnose_Laryngoscopy": {
+        "type": "Procedure",
+        "codes": [
+          {
+            "system": "SNOMED-CT",
+            "code": 78121007,
+            "display": "Direct laryngoscopy (procedure)",
+            "value_set": ""
+          }
+        ],
+        "distribution": {
+          "kind": "UNIFORM",
+          "parameters": {
+            "high": 30,
+            "low": 15
+          }
+        },
+        "unit": "minutes",
+        "conditional_transition": [
+          {
+            "transition": "Tumor_Size_Supraglottis",
+            "condition": {
+              "condition_type": "Attribute",
+              "attribute": "localization",
+              "operator": "==",
+              "value": "supraglottis"
+            }
+          },
+          {
+            "condition": {
+              "condition_type": "Attribute",
+              "attribute": "localization",
+              "operator": "==",
+              "value": "glottis"
+            },
+            "transition": "Tumor_Size_Glottis"
+          },
+          {
+            "condition": {
+              "condition_type": "Attribute",
+              "attribute": "localization",
+              "operator": "==",
+              "value": "subglottis"
+            },
+            "transition": "Tumor_Size_Subglottis"
+          }
+        ],
+        "reason": "Development_Of_Laryngeal_Caner",
+        "name": "First_Diagnose_Laryngoscopy"
+      },
+      "R-Classification_Negativ": {
+        "type": "Observation",
+        "category": "procedure",
+        "unit": "",
+        "codes": [
+          {
+            "system": "LOINC",
+            "code": "84892-9",
+            "display": "Residual tumor classification [Type] in Cancer specimen",
+            "value_set": ""
+          }
+        ],
+        "direct_transition": "R0_Attribute",
+        "value_code": {
+          "system": "SNOMED-CT",
+          "code": 277062004,
+          "display": "Residual tumor status R0"
+        },
+        "name": "R-Classification_Negativ"
+      },
+      "No_Regional_Lymph_Node_Metastasis": {
+        "type": "Observation",
+        "category": "imaging",
+        "unit": "cm",
+        "codes": [
+          {
+            "system": "LOINC",
+            "code": "32450-9",
+            "display": "Physical findings of Lymph node",
+            "value_set": ""
+          }
+        ],
+        "exact": {
+          "quantity": "no regional node metastases"
+        },
+        "direct_transition": "Suspecting_Laryngeal_Cancer",
+        "remarks": [
+          "N-classifcation according to the AJCC Cancer Staging Manual (8th edition) American Joint Committee on Cancer",
+          "Springer, 2017",
+          "-",
+          "The sources of the distribution of TNM classification and localisation can be found in the states remarks of the \"tnm_distribution_localization_first_diagnosis\" submodule."
+        ],
+        "name": "No_Regional_Lymph_Node_Metastasis"
+      },
+      "Encounter_Neck_Dissection": {
+        "type": "Encounter",
+        "encounter_class": "ambulatory",
+        "reason": "Development_Of_Laryngeal_Caner",
+        "telemedicine_possibility": "none",
+        "codes": [
+          {
+            "system": "SNOMED-CT",
+            "code": 185347001,
+            "display": "Encounter for problem",
+            "value_set": ""
+          }
+        ],
+        "conditional_transition": [
+          {
+            "transition": "Elective_Neck_Dissection",
+            "condition": {
+              "condition_type": "Attribute",
+              "attribute": "n-classification",
+              "operator": "==",
+              "value": 1
+            }
+          },
+          {
+            "transition": "Curative_Neck_Dissection"
+          }
+        ],
+        "name": "Encounter_Neck_Dissection"
+      },
+      "Larynx_MRI_Or_CT": {
+        "type": "Simple",
+        "distributed_transition": [
+          {
+            "transition": "CT_Larynx",
+            "distribution": 0.1
+          },
+          {
+            "transition": "MRI_Larynx",
+            "distribution": 0.9
+          }
+        ],
+        "remarks": [
+          "Note: This transition is an estimated distribution of the two imaging techniques  for diagnosis. According to the German S3 guideline, MRI is the method of first choice, whereas CT is used only in individual cases. Therefor, a distribution of 9:1 was estimated.",
+          "-",
+          "Source: german S3-Guideline diagnostics, therapy and follow-up of laryngeal carcinoma (Long version)",
+          "-",
+          "Hyperlink: https://www.leitlinienprogramm-onkologie.de/leitlinien/larynxkarzinom/"
+        ],
+        "name": "Larynx_MRI_Or_CT"
+      },
+      "Thorax_Abdomen_MRI_Or_CT": {
+        "type": "Simple",
+        "remarks": [
+          "According to the German S3 guideline, only patients with an N classification > N1 should receive a sonography of the abdomen and MRI or CT of the thorax and abdomen.",
+          "-",
+          "Source: german S3-Guideline diagnostics, therapy and follow-up of laryngeal carcinoma (Long version)",
+          "-",
+          "Hyperlink: https://www.leitlinienprogramm-onkologie.de/leitlinien/larynxkarzinom/"
+        ],
+        "direct_transition": "Sonography_Abdomen",
+        "name": "Thorax_Abdomen_MRI_Or_CT"
+      },
+      "HPV": {
+        "type": "Simple",
+        "distributed_transition": [
+          {
+            "transition": "HPV-Associated_DNA",
+            "distribution": 0.031
+          },
+          {
+            "transition": "Not_HPV-Associated",
+            "distribution": 0.9690000000000001
+          }
+        ],
+        "remarks": [
+          "Source: HPV Involvement in Head and Neck Cancers: Comprehensive Assessment of Biomarkers in 3680 Patients, Xavier Castellsagué (2016)",
+          "-",
+          "Hyperlink: https://pubmed.ncbi.nlm.nih.gov/26823521/"
+        ],
+        "name": "HPV"
+      },
+      "Encounter_Suspecting_Laryngeal_cancer": {
+        "type": "Encounter",
+        "encounter_class": "ambulatory",
+        "reason": "Development_Of_Laryngeal_Caner",
+        "telemedicine_possibility": "none",
+        "codes": [
+          {
+            "system": "SNOMED-CT",
+            "code": "185347001_1",
+            "display": "Encounter for problem",
+            "value_set": ""
+          }
+        ],
+        "direct_transition": "Nicotine_Consumption",
+        "name": "Encounter_Suspecting_Laryngeal_cancer"
+      },
+      "Palpation_Of_Neck": {
+        "type": "Procedure",
+        "codes": [
+          {
+            "system": "SNOMED-CT",
+            "code": 113011001,
+            "display": "Palpation of Neck (procedure)",
+            "value_set": ""
+          }
+        ],
+        "distribution": {
+          "kind": "UNIFORM",
+          "parameters": {
+            "high": 60,
+            "low": 30
+          }
+        },
+        "unit": "minutes",
+        "direct_transition": "Ultrasound_Scan_Of_Neck",
+        "name": "Palpation_Of_Neck"
+      },
+      "Subglottis_Obseravtion": {
+        "type": "Observation",
+        "category": "imaging",
+        "unit": "",
+        "codes": [
+          {
+            "system": "LOINC",
+            "code": "33725-3",
+            "display": "Tumor site",
+            "value_set": ""
+          }
+        ],
+        "direct_transition": "Palpation_Of_Neck",
+        "value_code": {
+          "system": "SNOMED-CT",
+          "code": 126696001,
+          "display": "Neoplasm of subglottis (disorder)"
+        },
+        "name": "Subglottis_Obseravtion"
+      },
+      "Glottis_Obseravtion": {
+        "type": "Observation",
+        "category": "imaging",
+        "unit": "",
+        "codes": [
+          {
+            "system": "LOINC",
+            "code": "33725-3",
+            "display": "Tumor site",
+            "value_set": ""
+          }
+        ],
+        "direct_transition": "Palpation_Of_Neck",
+        "value_code": {
+          "system": "SNOMED-CT",
+          "code": 126693009,
+          "display": "Neoplasm of glottis (disorder)"
+        },
+        "name": "Glottis_Obseravtion"
+      },
+      "Sonography_Abdomen": {
+        "type": "Procedure",
+        "codes": [
+          {
+            "system": "SNOMED-CT",
+            "code": 45036003,
+            "display": "Ultrasonography of abdomen (procedure)",
+            "value_set": ""
+          }
+        ],
+        "distribution": {
+          "kind": "UNIFORM",
+          "parameters": {
+            "high": 60,
+            "low": 30
+          }
+        },
+        "unit": "minutes",
+        "distributed_transition": [
+          {
+            "transition": "CT_Thorax_Abdomen",
+            "distribution": 0.5
+          },
+          {
+            "transition": "MRI_Abdomen",
+            "distribution": 0.5
+          }
+        ],
+        "remarks": [
+          "The distribution of the usage of CT and MRT abdomen is estimated."
+        ],
+        "name": "Sonography_Abdomen"
+      },
+      "Nicotine_Consumption": {
+        "type": "Simple",
+        "distributed_transition": [
+          {
+            "transition": "Activ_Smoker_Attribute",
+            "distribution": 0.46
+          },
+          {
+            "transition": "Former_Smoker_Attribute",
+            "distribution": 0.42
+          },
+          {
+            "transition": "Non_Smoker_Attribute",
+            "distribution": 0.1200000000000001
+          }
+        ],
+        "remarks": [
+          "Source: The treatment of laryngeal / hypopharyngeal carcinoma ",
+          "and laryngectomy through the ages, Patrick Engel (2018)",
+          "-",
+          "Hyperlink: https://oparu.uni-ulm.de/xmlui/bitstream/handle/123456789/25351/Dissertation.pdf?sequence=5&isAllowed=y"
+        ],
+        "name": "Nicotine_Consumption"
+      },
+      "Alcohol_Consumption": {
+        "type": "Simple",
+        "distributed_transition": [
+          {
+            "transition": "No_Alcohol_Attribute",
+            "distribution": 0.1882
+          },
+          {
+            "transition": "Occasionally_A_Attribute",
+            "distribution": 0.1924
+          },
+          {
+            "transition": "Regular_A_Attribute",
+            "distribution": 0.1755
+          },
+          {
+            "transition": "Excessive_A_Attribute",
+            "distribution": 0.2368
+          },
+          {
+            "transition": "Former_Excessive_A_Attribute",
+            "distribution": 0.20710000000000006
+          }
+        ],
+        "remarks": [
+          "The weekly intake of alcohol was determined on the basis of the number of standard drinks consumed per week, as defined by the Robert Koch Institute. One standard drink corresponds to approx. 12g ethanol.",
+          "-",
+          "Source: The treatment of laryngeal / hypopharyngeal carcinoma ",
+          "and laryngectomy through the ages, Patrick Engel (2018)",
+          "-",
+          "Hyperlink: https://oparu.uni-ulm.de/xmlui/bitstream/handle/123456789/25351/Dissertation.pdf?sequence=5&isAllowed=y"
+        ],
+        "name": "Alcohol_Consumption"
+      },
+      "Delay_Between_1-2_Doctors_Visit": {
+        "type": "Delay",
+        "distribution": {
+          "kind": "UNIFORM",
+          "parameters": {
+            "high": 5,
+            "low": 1
+          }
+        },
+        "unit": "days",
+        "direct_transition": "Encounter_Imaging",
+        "name": "Delay_Between_1-2_Doctors_Visit"
+      },
+      "Distant_Metastasis_Found": {
+        "type": "Simple",
+        "distributed_transition": [
+          {
+            "transition": "Metastasis_Lung_Mediastinum",
+            "distribution": 0.53
+          },
+          {
+            "transition": "Metastasis_Bone",
+            "distribution": 0.15
+          },
+          {
+            "transition": "Metastasis_Skin",
+            "distribution": 0.07
+          },
+          {
+            "transition": "Metastasis_Central_Nervsystem",
+            "distribution": 0.03
+          },
+          {
+            "transition": "Metastasis_Other_Organs",
+            "distribution": 0.22
+          }
+        ],
+        "remarks": [
+          "Source: Delayed regional metastases, distant metastases, and second primary malignancies in squamous cell carcinomas of the larynx and hypopharynx, J G Spector (2001)",
+          "-",
+          "Hyperlink: https://pubmed.ncbi.nlm.nih.gov/11404625/"
+        ],
+        "name": "Distant_Metastasis_Found"
+      },
+      "Grading": {
+        "type": "Simple",
+        "distributed_transition": [
+          {
+            "transition": "G1",
+            "distribution": 0.068
+          },
+          {
+            "transition": "G2",
+            "distribution": 0.693
+          },
+          {
+            "transition": "G3",
+            "distribution": 0.2390000000000001
+          }
+        ],
+        "remarks": [
+          "Source: Surgical nodal management in hypopharyngeal and laryngeal cancer, M. C. Ketterer (2020)",
+          "-",
+          "Hyperlink: https://www.ncbi.nlm.nih.gov/pmc/articles/PMC7160213/pdf/405_2020_Article_5838.pdf"
+        ],
+        "name": "Grading"
+      },
+      "Supraglottis_Obseravtion": {
+        "type": "Observation",
+        "category": "imaging",
+        "unit": "",
+        "codes": [
+          {
+            "system": "LOINC",
+            "code": "33725-3",
+            "display": "Tumor site",
+            "value_set": ""
+          }
+        ],
+        "direct_transition": "Palpation_Of_Neck",
+        "value_code": {
+          "system": "SNOMED-CT",
+          "code": 126697005,
+          "display": "Neoplasm of supraglottis (disorder)"
+        },
+        "name": "Supraglottis_Obseravtion"
+      },
+      "UICC-Stadium": {
+        "type": "Simple",
+        "conditional_transition": [
+          {
+            "transition": "UICC_Stadium_I_Observation",
+            "condition": {
+              "condition_type": "Attribute",
+              "attribute": "uicc_stadium",
+              "operator": "==",
+              "value": 1
+            }
+          },
+          {
+            "transition": "UICC_Stadium_II_Observation",
+            "condition": {
+              "condition_type": "Attribute",
+              "attribute": "uicc_stadium",
+              "operator": "==",
+              "value": 2
+            }
+          },
+          {
+            "transition": "UICC_Stadium_III_Observation",
+            "condition": {
+              "condition_type": "Attribute",
+              "attribute": "uicc_stadium",
+              "operator": "==",
+              "value": 3
+            }
+          },
+          {
+            "transition": "UICC_Stadium_IV_Observation",
+            "condition": {
+              "condition_type": "Attribute",
+              "attribute": "uicc_stadium",
+              "operator": "==",
+              "value": 4
+            }
+          }
+        ],
+        "remarks": [
+          "The cancer stages are assigned according to the Union Internationale Contre le Cancer's UICC classifications based on the assigned T, N, and M stages.",
+          "-",
+          "Source: TNM Classification of Malignant Tumours, 8th Edition",
+          "-",
+          "Hyperlink: https://www.wiley.com/en-gb/TNM+Classification+of+Malignant+Tumours%2C+8th+Edition-p-9781119263562"
+        ],
+        "name": "UICC-Stadium"
+      },
+      "PET-CT": {
+        "type": "Procedure",
+        "codes": [
+          {
+            "system": "SNOMED-CT",
+            "code": 480621000119104,
+            "display": "Positron emission tomography with computed tomography of whole body (procedure)",
+            "value_set": ""
+          }
+        ],
+        "distribution": {
+          "kind": "UNIFORM",
+          "parameters": {
+            "high": 60,
+            "low": 30
+          }
+        },
+        "unit": "minutes",
+        "distributed_transition": [
+          {
+            "transition": "PET_Positive",
+            "distribution": 0.2
+          },
+          {
+            "transition": "PET_Negative",
+            "distribution": 0.8
+          }
+        ],
+        "remarks": [
+          "According to the linked article, in the 270-patient group, only 54 patients underwent neck dissection after 12 weeks of monitoring with PET-CT scans.",
+          "-",
+          "Source: PET-CT Surveillance versus Neck Dissection ",
+          "in Advanced Head and Neck Cancer, Hisham Mehanna (2016)",
+          "-",
+          "Hyperlink: https://pubmed.ncbi.nlm.nih.gov/27007578/"
+        ],
+        "name": "PET-CT"
+      },
+      "Ultrasound_Scan_Of_Neck": {
+        "type": "Procedure",
+        "codes": [
+          {
+            "system": "SNOMED-CT",
+            "code": 241453007,
+            "display": "Ultrasound scan of neck (procedure)",
+            "value_set": ""
+          }
+        ],
+        "distribution": {
+          "kind": "UNIFORM",
+          "parameters": {
+            "high": 60,
+            "low": 30
+          }
+        },
+        "unit": "minutes",
+        "conditional_transition": [
+          {
+            "transition": "No_Regional_Lymph_Node_Metastasis",
+            "condition": {
+              "condition_type": "Attribute",
+              "attribute": "n-classification",
+              "operator": "==",
+              "value": 1
+            }
+          },
+          {
+            "transition": "N1_Finding",
+            "condition": {
+              "condition_type": "Attribute",
+              "attribute": "n-classification",
+              "operator": "==",
+              "value": 2
+            }
+          },
+          {
+            "transition": "N2_Finding",
+            "condition": {
+              "condition_type": "Attribute",
+              "attribute": "n-classification",
+              "operator": "==",
+              "value": 3
+            }
+          },
+          {
+            "transition": "N3_Findings",
+            "condition": {
+              "condition_type": "Attribute",
+              "attribute": "n-classification",
+              "operator": "==",
+              "value": 4
+            }
+          }
+        ],
+        "name": "Ultrasound_Scan_Of_Neck"
+      },
+      "Partial_Resection": {
+        "type": "Simple",
+        "distributed_transition": [
+          {
+            "transition": "Open_Partial_Laryngectomy",
+            "distribution": 0.22
+          },
+          {
+            "transition": "Laser_Surgery/Transoral_Partial_Laryngectomy",
+            "distribution": 0.78
+          }
+        ],
+        "name": "Partial_Resection"
+      },
+      "Hoarseness": {
+        "type": "Symptom",
+        "symptom": "Hoarseness",
+        "cause": "laryngeal_cancer",
+        "probability": 0.5222,
+        "range": {
+          "low": 10,
+          "high": 90
+        },
+        "direct_transition": "Otalgia",
+        "name": "Hoarseness"
+      },
+      "Insommnia": {
+        "type": "Symptom",
+        "symptom": "Insommnia",
+        "cause": "laryngeal_cancer",
+        "probability": 0.0347,
+        "range": {
+          "low": 10,
+          "high": 90
+        },
+        "direct_transition": "Mouth_Symptoms",
+        "name": "Insommnia"
+      },
+      "Mouth_Symptoms": {
+        "type": "Symptom",
+        "symptom": "Mouth Symptoms",
+        "cause": "laryngeal_cancer",
+        "probability": 0.026,
+        "range": {
+          "low": 10,
+          "high": 90
+        },
+        "direct_transition": "Chest_Infection",
+        "name": "Mouth_Symptoms"
+      },
+      "Chest_Infection": {
+        "type": "Symptom",
+        "symptom": "Chest Infection",
+        "cause": "laryngeal_cancer",
+        "probability": 0.0781,
+        "range": {
+          "low": 10,
+          "high": 90
+        },
+        "direct_transition": "Sore_Throat",
+        "name": "Chest_Infection"
+      },
+      "Sore_Throat": {
+        "type": "Symptom",
+        "symptom": "Sore Throat",
+        "cause": "laryngeal_cancer",
+        "probability": 0.3362,
+        "range": {
+          "low": 10,
+          "high": 90
+        },
+        "direct_transition": "Dysphonia",
+        "name": "Sore_Throat"
+      },
+      "Panendoskopy with Biopsy": {
+        "type": "Procedure",
+        "codes": [
+          {
+            "system": "SNOMED-CT",
+            "code": 433014002,
+            "display": "Biopsy of larynx (procedure)",
+            "value_set": ""
+          }
+        ],
+        "distribution": {
+          "kind": "UNIFORM",
+          "parameters": {
+            "high": 30,
+            "low": 15
+          }
+        },
+        "unit": "minutes",
+        "reason": "Development_Of_Laryngeal_Caner",
+        "direct_transition": "HPV",
+        "name": "Panendoskopy with Biopsy"
+      },
+      "TNM_Distribution_Localization_First_Diagnosis": {
+        "type": "CallSubmodule",
+        "submodule": "laryngeal_cancer/tnm_distribution_localization_first_diagnosis",
+        "direct_transition": "Symptoms_1_Year_Before",
+        "name": "TNM_Distribution_Localization_First_Diagnosis"
+      },
+      "T1_Diagnosed": {
+        "type": "Observation",
+        "category": "imaging",
+        "unit": "",
+        "codes": [
+          {
+            "system": "LOINC",
+            "code": "21905-5",
+            "display": "Primary tumor.clinical [Class] Cancer",
+            "value_set": ""
+          }
+        ],
+        "value_code": {
+          "system": "SNOMED-CT",
+          "code": 23351008,
+          "display": "T1 category (finding)"
+        },
+        "direct_transition": "N-Classification_Observation",
+        "name": "T1_Diagnosed"
+      },
+      "Supraglottis_Surgical_Therapy": {
+        "type": "Simple",
+        "complex_transition": [
+          {
+            "condition": {
+              "condition_type": "Attribute",
+              "attribute": "t-classification",
+              "operator": "==",
+              "value": 1
+            },
+            "distributions": [],
+            "transition": "Partial_Resection"
+          },
+          {
+            "condition": {
+              "condition_type": "Attribute",
+              "attribute": "t-classification",
+              "operator": "==",
+              "value": 2
+            },
+            "distributions": [
+              {
+                "transition": "Partial_Resection",
+                "distribution": 0.95
+              },
+              {
+                "transition": "Laryngectomy",
+                "distribution": 0.05
+              }
+            ]
+          },
+          {
+            "condition": {
+              "condition_type": "Attribute",
+              "attribute": "t-classification",
+              "operator": "==",
+              "value": 3
+            },
+            "distributions": [
+              {
+                "transition": "Partial_Resection",
+                "distribution": 0.5
+              },
+              {
+                "transition": "Laryngectomy",
+                "distribution": 0.5
+              }
+            ]
+          }
+        ],
+        "name": "Supraglottis_Surgical_Therapy"
+      },
+      "Glottis_Surgical_Therapy": {
+        "type": "Simple",
+        "complex_transition": [
+          {
+            "condition": {
+              "condition_type": "Attribute",
+              "attribute": "t-classification",
+              "operator": "==",
+              "value": 1
+            },
+            "distributions": [],
+            "transition": "Partial_Resection"
+          },
+          {
+            "condition": {
+              "condition_type": "Attribute",
+              "attribute": "t-classification",
+              "operator": "==",
+              "value": 2
+            },
+            "distributions": [],
+            "transition": "Partial_Resection"
+          },
+          {
+            "condition": {
+              "condition_type": "Attribute",
+              "attribute": "t-classification",
+              "operator": "==",
+              "value": 3
+            },
+            "distributions": [
+              {
+                "transition": "Partial_Resection",
+                "distribution": 0.5
+              },
+              {
+                "transition": "Laryngectomy",
+                "distribution": 0.5
+              }
+            ]
+          }
+        ],
+        "name": "Glottis_Surgical_Therapy"
+      },
+      "Supglottis_Surgical_Therapy": {
+        "type": "Simple",
+        "complex_transition": [
+          {
+            "condition": {
+              "condition_type": "Attribute",
+              "attribute": "t-classification",
+              "operator": "==",
+              "value": 1
+            },
+            "distributions": [
+              {
+                "transition": "Partial_Resection",
+                "distribution": 0.05
+              },
+              {
+                "transition": "Laryngectomy",
+                "distribution": 0.95
+              }
+            ]
+          },
+          {
+            "distributions": [],
+            "transition": "Laryngectomy"
+          }
+        ],
+        "name": "Supglottis_Surgical_Therapy"
+      },
+      "Encounter_Initial_Treatment": {
+        "type": "Encounter",
+        "encounter_class": "ambulatory",
+        "reason": "Development_Of_Laryngeal_Caner",
+        "telemedicine_possibility": "none",
+        "codes": [
+          {
+            "system": "SNOMED-CT",
+            "code": 185347001,
+            "display": "Encounter for problem",
+            "value_set": ""
+          }
+        ],
+        "remarks": [
+          "The treatment of laryngeal / hypopharyngeal carcinoma ",
+          "and laryngectomy through the ages, Patrick Engel (2018)",
+          "-",
+          "Hyperlink: https://oparu.uni-ulm.de/xmlui/bitstream/handle/123456789/25351/Dissertation.pdf?sequence=5&isAllowed=y"
+        ],
+        "complex_transition": [
+          {
+            "condition": {
+              "condition_type": "Attribute",
+              "attribute": "uicc_stadium",
+              "operator": "<=",
+              "value": 2
+            },
+            "distributions": [
+              {
+                "transition": "Curative_Therapy",
+                "distribution": 0.99
+              },
+              {
+                "transition": "Paliative_Therapy",
+                "distribution": 0.010000000000000009
+              }
+            ]
+          },
+          {
+            "condition": {
+              "condition_type": "Attribute",
+              "attribute": "uicc_stadium",
+              "operator": ">=",
+              "value": 3
+            },
+            "distributions": [
+              {
+                "transition": "Curative_Therapy",
+                "distribution": 0.9750000000000001
+              },
+              {
+                "transition": "Paliative_Therapy",
+                "distribution": 0.025
+              }
+            ]
+          }
+        ],
+        "name": "Encounter_Initial_Treatment"
+      },
+      "R-Classification_Positiv": {
+        "type": "Simple",
+        "distributed_transition": [
+          {
+            "transition": "R1_Observation",
+            "distribution": 0.958
+          },
+          {
+            "transition": "R2_Observation",
+            "distribution": 0.04200000000000004
+          }
+        ],
+        "name": "R-Classification_Positiv"
+      },
+      "Primary_Surgical_Therapy": {
+        "type": "Simple",
+        "conditional_transition": [
+          {
+            "transition": "Supraglottis_Surgical_Therapy",
+            "condition": {
+              "condition_type": "Attribute",
+              "attribute": "localization",
+              "operator": "==",
+              "value": "supraglottis"
+            }
+          },
+          {
+            "transition": "Glottis_Surgical_Therapy",
+            "condition": {
+              "condition_type": "Attribute",
+              "attribute": "localization",
+              "operator": "==",
+              "value": "glottis"
+            }
+          },
+          {
+            "transition": "Supglottis_Surgical_Therapy",
+            "condition": {
+              "condition_type": "Attribute",
+              "attribute": "localization",
+              "operator": "==",
+              "value": "supglottis"
+            }
+          }
+        ],
+        "name": "Primary_Surgical_Therapy"
+      },
+      "Primary_Conservative_Therapy": {
+        "type": "Simple",
+        "complex_transition": [
+          {
+            "condition": {
+              "condition_type": "Attribute",
+              "attribute": "t-classification",
+              "operator": "<=",
+              "value": 2
+            },
+            "distributions": [],
+            "transition": "Radiotherapy"
+          },
+          {
+            "condition": {
+              "condition_type": "Attribute",
+              "attribute": "t-classification",
+              "operator": ">=",
+              "value": 3
+            },
+            "distributions": [
+              {
+                "transition": "Radiochemotherapy",
+                "distribution": 0.9
+              },
+              {
+                "transition": "Radiotherapy",
+                "distribution": 0.05
+              },
+              {
+                "transition": "Chemotherapy_Attribute",
+                "distribution": 0.05
+              }
+            ]
+          }
+        ],
+        "name": "Primary_Conservative_Therapy"
+      },
+      "Encounter_PET-CT": {
+        "type": "Encounter",
+        "encounter_class": "ambulatory",
+        "reason": "Development_Of_Laryngeal_Caner",
+        "telemedicine_possibility": "none",
+        "codes": [
+          {
+            "system": "SNOMED-CT",
+            "code": 185347001,
+            "display": "Encounter for problem",
+            "value_set": ""
+          }
+        ],
+        "direct_transition": "PET-CT",
+        "name": "Encounter_PET-CT"
+      },
+      "EndEncounter_PET-CT": {
+        "type": "EncounterEnd",
+        "conditional_transition": [
+          {
+            "transition": "Encounter_Neck_Dissection",
+            "condition": {
+              "condition_type": "Attribute",
+              "attribute": "pet-ct",
+              "operator": "==",
+              "value": "positive"
+            }
+          },
+          {
+            "transition": "Adjuvant_Therapy"
+          }
+        ],
+        "name": "EndEncounter_PET-CT"
+      },
+      "Attribute_PET_Positive": {
+        "type": "SetAttribute",
+        "attribute": "pet-ct",
+        "direct_transition": "EndEncounter_PET-CT",
+        "value": "positive",
+        "name": "Attribute_PET_Positive"
+      },
+      "Encounter_Adjuvant_Therapy": {
+        "type": "Encounter",
+        "encounter_class": "ambulatory",
+        "reason": "Development_Of_Laryngeal_Caner",
+        "telemedicine_possibility": "none",
+        "codes": [
+          {
+            "system": "SNOMED-CT",
+            "code": 185347001,
+            "display": "Encounter for problem",
+            "value_set": ""
+          }
+        ],
+        "conditional_transition": [
+          {
+            "transition": "Adjuvant_Radiochemotherapy",
+            "condition": {
+              "condition_type": "Attribute",
+              "attribute": "r-status",
+              "operator": ">=",
+              "value": 2
+            }
+          },
+          {
+            "transition": "No_Adjuvant_Radiochemotherapy"
+          }
+        ],
+        "name": "Encounter_Adjuvant_Therapy"
+      },
+      "EndEncounter_Adjuvant_Therapy": {
+        "type": "EncounterEnd",
+        "direct_transition": "Terminal",
+        "name": "EndEncounter_Adjuvant_Therapy"
+      },
+      "Adjuvant_Radiochemotherapy_Attribute": {
+        "type": "SetAttribute",
+        "attribute": "adjuvantTherapy",
+        "value": "radiochemo",
+        "direct_transition": "EndEncounter_Adjuvant_Therapy",
+        "name": "Adjuvant_Radiochemotherapy_Attribute"
+      },
+      "Adjuvant_Radiotherapy_Attribute": {
+        "type": "SetAttribute",
+        "attribute": "adjuvantTherapy",
+        "value": "radio",
+        "direct_transition": "EndEncounter_Adjuvant_Therapy",
+        "name": "Adjuvant_Radiotherapy_Attribute"
+      },
+      "No_Adjuvant_Radiochemotherapy": {
+        "type": "Simple",
+        "conditional_transition": [
+          {
+            "transition": "Adjuvant_Radiotherapy",
+            "condition": {
+              "condition_type": "Attribute",
+              "attribute": "n-classification",
+              "operator": ">=",
+              "value": 2
+            }
+          },
+          {
+            "transition": "Adjuvant_Radiotherapy",
+            "condition": {
+              "condition_type": "And",
+              "conditions": [
+                {
+                  "condition_type": "Attribute",
+                  "attribute": "localization",
+                  "operator": "==",
+                  "value": "supglottis"
+                },
+                {
+                  "condition_type": "Attribute",
+                  "attribute": "t-classification",
+                  "operator": ">=",
+                  "value": 3
+                }
+              ]
+            }
+          },
+          {
+            "transition": "Adjuvant_Radiotherapy",
+            "condition": {
+              "condition_type": "Attribute",
+              "attribute": "t-classification",
+              "operator": ">=",
+              "value": 4
+            }
+          },
+          {
+            "transition": "EndEncounter_Adjuvant_Therapy"
+          }
+        ],
+        "name": "No_Adjuvant_Radiochemotherapy"
+      },
+      "N1_Finding": {
+        "type": "Observation",
+        "category": "imaging",
+        "unit": "cm",
+        "codes": [
+          {
+            "system": "LOINC",
+            "code": "32450-9",
+            "display": "Physical findings of Lymph node",
+            "value_set": ""
+          }
+        ],
+        "direct_transition": "Suspecting_Laryngeal_Cancer",
+        "exact": {
+          "quantity": "metastasis in single ipsilateral node, ≤3 cm, and no extranodal extension (ENE(−))"
+        },
+        "remarks": [
+          "N-classifcation according to the AJCC Cancer Staging Manual (8th edition) American Joint Committee on Cancer",
+          "Springer, 2017",
+          "-",
+          "The sources of the distribution of TNM classification and localisation can be found in the states remarks of the \"tnm_distribution_localization_first_diagnosis\" submodule."
+        ],
+        "name": "N1_Finding"
+      },
+      "N2_Finding": {
+        "type": "Simple",
+        "distributed_transition": [
+          {
+            "transition": "N2b_Finding",
+            "distribution": 0.33
+          },
+          {
+            "transition": "N2c_Finding",
+            "distribution": 0.33
+          },
+          {
+            "transition": "N2a_Finding",
+            "distribution": 0.33999999999999997
+          }
+        ],
+        "remarks": [
+          "The distribution of N2a, N2b and N2c is estimated.",
+          "-",
+          "N-classifcation according to the AJCC Cancer Staging Manual (8th edition) American Joint Committee on Cancer",
+          "Springer, 2017",
+          "-",
+          "The sources of the distribution of TNM classification and localisation can be found in the states remarks of the \"tnm_distribution_localization_first_diagnosis\" submodule."
+        ],
+        "name": "N2_Finding"
+      },
+      "N2a_Finding": {
+        "type": "Observation",
+        "category": "imaging",
+        "unit": "cm",
+        "codes": [
+          {
+            "system": "LOINC",
+            "code": "32450-9",
+            "display": "Physical findings of Lymph node",
+            "value_set": ""
+          }
+        ],
+        "direct_transition": "Suspecting_Laryngeal_Cancer",
+        "exact": {
+          "quantity": "metastasis in single ipsilateral node, >3 cm and ≤6 cm, and ENE(−)"
+        },
+        "name": "N2a_Finding"
+      },
+      "N2b_Finding": {
+        "type": "Observation",
+        "category": "imaging",
+        "unit": "cm",
+        "codes": [
+          {
+            "system": "LOINC",
+            "code": "32450-9",
+            "display": "Physical findings of Lymph node",
+            "value_set": ""
+          }
+        ],
+        "direct_transition": "Suspecting_Laryngeal_Cancer",
+        "exact": {
+          "quantity": "metastasis in multiple ipsilateral nodes, all ≤6 cm, and ENE(−)"
+        },
+        "name": "N2b_Finding"
+      },
+      "N2c_Finding": {
+        "type": "Observation",
+        "category": "imaging",
+        "unit": "cm",
+        "codes": [
+          {
+            "system": "LOINC",
+            "code": "32450-9",
+            "display": "Physical findings of Lymph node",
+            "value_set": ""
+          }
+        ],
+        "direct_transition": "Suspecting_Laryngeal_Cancer",
+        "exact": {
+          "quantity": "metastasis in bilateral or contralateral nodes, all ≤6 cm, and ENE(−)"
+        },
+        "name": "N2c_Finding"
+      },
+      "N3_Findings": {
+        "type": "Simple",
+        "distributed_transition": [
+          {
+            "transition": "N3a_Findings",
+            "distribution": 0.5
+          },
+          {
+            "transition": "N3b_Findings",
+            "distribution": 0.5
+          }
+        ],
+        "remarks": [
+          "The distribution of N3a and N3b is estimated.",
+          "-",
+          "N-classifcation according to the AJCC Cancer Staging Manual (8th edition) American Joint Committee on Cancer",
+          "Springer, 2017",
+          "-",
+          "The sources of the distribution of TNM classification and localisation can be found in the states remarks of the \"tnm_distribution_localization_first_diagnosis\" submodule."
+        ],
+        "name": "N3_Findings"
+      },
+      "N3a_Findings": {
+        "type": "Observation",
+        "category": "imaging",
+        "unit": "cm",
+        "codes": [
+          {
+            "system": "LOINC",
+            "code": "32450-9",
+            "display": "Physical findings of Lymph node",
+            "value_set": ""
+          }
+        ],
+        "direct_transition": "Suspecting_Laryngeal_Cancer",
+        "exact": {
+          "quantity": "metastasis in a node, >6 cm, and ENE(−)"
+        },
+        "name": "N3a_Findings"
+      },
+      "N3b_Findings": {
+        "type": "Observation",
+        "category": "imaging",
+        "unit": "cm",
+        "codes": [
+          {
+            "system": "LOINC",
+            "code": "32450-9",
+            "display": "Physical findings of Lymph node",
+            "value_set": ""
+          }
+        ],
+        "direct_transition": "Suspecting_Laryngeal_Cancer",
+        "exact": {
+          "quantity": "metastasis in a node with clinically overt ENE(+) (ENEc)"
+        },
+        "name": "N3b_Findings"
+      },
+      "Tumor_Size_T1_Supraglottis": {
+        "type": "Observation",
+        "category": "imaging",
+        "unit": "cm",
+        "codes": [
+          {
+            "system": "LOINC",
+            "code": "21889-1",
+            "display": "Size Tumor",
+            "value_set": ""
+          }
+        ],
+        "direct_transition": "Tumor_Localization",
+        "exact": {
+          "quantity": "tumor limited to one subsite of supraglottis, with normal vocal cord mobility"
+        },
+        "name": "Tumor_Size_T1_Supraglottis"
+      },
+      "Tumor_Size_Supraglottis": {
+        "type": "Simple",
+        "conditional_transition": [
+          {
+            "transition": "Tumor_Size_T1_Supraglottis",
+            "condition": {
+              "condition_type": "Attribute",
+              "attribute": "t-classification",
+              "operator": "==",
+              "value": 1
+            }
+          },
+          {
+            "transition": "Tumor_Size_T2_Supraglottis",
+            "condition": {
+              "condition_type": "Attribute",
+              "attribute": "t-classification",
+              "operator": "==",
+              "value": 2
+            }
+          },
+          {
+            "transition": "Tumor_Size_T3_Supraglottis",
+            "condition": {
+              "condition_type": "Attribute",
+              "attribute": "t-classification",
+              "operator": "==",
+              "value": 3
+            }
+          },
+          {
+            "transition": "Tumor_Size_T4a",
+            "condition": {
+              "condition_type": "And",
+              "conditions": [
+                {
+                  "condition_type": "Attribute",
+                  "attribute": "t-classification",
+                  "operator": "==",
+                  "value": 4
+                },
+                {
+                  "condition_type": "Attribute",
+                  "attribute": "t4",
+                  "operator": "==",
+                  "value": "a"
+                }
+              ]
+            }
+          },
+          {
+            "transition": "Tumor_Size_T4b",
+            "condition": {
+              "condition_type": "And",
+              "conditions": [
+                {
+                  "condition_type": "Attribute",
+                  "attribute": "t-classification",
+                  "operator": "==",
+                  "value": 4
+                },
+                {
+                  "condition_type": "Attribute",
+                  "attribute": "t4",
+                  "operator": "==",
+                  "value": "b"
+                }
+              ]
+            }
+          }
+        ],
+        "remarks": [
+          "T-classifcation according to the AJCC Cancer Staging Manual (8th edition) American Joint Committee on Cancer",
+          "Springer, 2017",
+          "-",
+          "The sources of the distribution of TNM classification and localisation can be found in the states remarks of the \"tnm_distribution_localization_first_diagnosis\" submodule."
+        ],
+        "name": "Tumor_Size_Supraglottis"
+      },
+      "Tumor_Size_T3_Supraglottis": {
+        "type": "Observation",
+        "category": "imaging",
+        "unit": "cm",
+        "codes": [
+          {
+            "system": "LOINC",
+            "code": "21889-1",
+            "display": "Size Tumor",
+            "value_set": ""
+          }
+        ],
+        "exact": {
+          "quantity": "tumor limited to larynx with vocal cord fixation and/or invasion of any of the following: inner cortex of thyroid cartilage, paraglottic space, preepiglottic space, postcricoid area"
+        },
+        "direct_transition": "Tumor_Localization",
+        "name": "Tumor_Size_T3_Supraglottis"
+      },
+      "Tumor_Size_T2_Supraglottis": {
+        "type": "Observation",
+        "category": "imaging",
+        "unit": "cm",
+        "codes": [
+          {
+            "system": "LOINC",
+            "code": "21889-1",
+            "display": "Size Tumor",
+            "value_set": ""
+          }
+        ],
+        "exact": {
+          "quantity": "tumor invades mucosa of more than one adjacent area, with normal vocal cord mobility"
+        },
+        "direct_transition": "Tumor_Localization",
+        "name": "Tumor_Size_T2_Supraglottis"
+      },
+      "Tumor_Size_Subglottis": {
+        "type": "Simple",
+        "conditional_transition": [
+          {
+            "transition": "Tumor_Size_T1_Subglottis",
+            "condition": {
+              "condition_type": "Attribute",
+              "attribute": "t-classification",
+              "operator": "==",
+              "value": 1
+            }
+          },
+          {
+            "transition": "Tumor_Size_T2_Subglottis",
+            "condition": {
+              "condition_type": "Attribute",
+              "attribute": "t-classification",
+              "operator": "==",
+              "value": 2
+            }
+          },
+          {
+            "transition": "Tumor_Size_T3_Subglottis",
+            "condition": {
+              "condition_type": "Attribute",
+              "attribute": "t-classification",
+              "operator": "==",
+              "value": 3
+            }
+          },
+          {
+            "transition": "Tumor_Size_T4a",
+            "condition": {
+              "condition_type": "And",
+              "conditions": [
+                {
+                  "condition_type": "Attribute",
+                  "attribute": "t-classification",
+                  "operator": "==",
+                  "value": 4
+                },
+                {
+                  "condition_type": "Attribute",
+                  "attribute": "t4",
+                  "operator": "==",
+                  "value": "a"
+                }
+              ]
+            }
+          },
+          {
+            "transition": "Tumor_Size_T4b",
+            "condition": {
+              "condition_type": "And",
+              "conditions": [
+                {
+                  "condition_type": "Attribute",
+                  "attribute": "t-classification",
+                  "operator": "==",
+                  "value": 4
+                },
+                {
+                  "condition_type": "Attribute",
+                  "attribute": "t4",
+                  "operator": "==",
+                  "value": "b"
+                }
+              ]
+            }
+          }
+        ],
+        "remarks": [
+          "T-classifcation according to the AJCC Cancer Staging Manual (8th edition) American Joint Committee on Cancer",
+          "Springer, 2017",
+          "-",
+          "The sources of the distribution of TNM classification and localisation can be found in the states remarks of the \"tnm_distribution_localization_first_diagnosis\" submodule."
+        ],
+        "name": "Tumor_Size_Subglottis"
+      },
+      "Tumor_Size_T4a": {
+        "type": "Observation",
+        "category": "imaging",
+        "unit": "cm",
+        "codes": [
+          {
+            "system": "LOINC",
+            "code": "21889-1",
+            "display": "Size Tumor",
+            "value_set": ""
+          }
+        ],
+        "direct_transition": "Tumor_Localization",
+        "exact": {
+          "quantity": "moderately advanced local disease: invades through outer cortex of thyroid cartilage, cricoid cartilage or tissues beyond the larynx"
+        },
+        "name": "Tumor_Size_T4a"
+      },
+      "Tumor_Size_T4b": {
+        "type": "Observation",
+        "category": "imaging",
+        "unit": "cm",
+        "codes": [
+          {
+            "system": "LOINC",
+            "code": "21889-1",
+            "display": "Size Tumor",
+            "value_set": ""
+          }
+        ],
+        "direct_transition": "Tumor_Localization",
+        "exact": {
+          "quantity": "very advanced local disease: invades the mediastinum, the prevertebral space or encases the carotid artery"
+        },
+        "name": "Tumor_Size_T4b"
+      },
+      "Tumor_Size_Glottis": {
+        "type": "Simple",
+        "conditional_transition": [
+          {
+            "transition": "Tumor_Size_T1a_Glottis",
+            "condition": {
+              "condition_type": "And",
+              "conditions": [
+                {
+                  "condition_type": "Attribute",
+                  "attribute": "t-classification",
+                  "operator": "==",
+                  "value": 1
+                },
+                {
+                  "condition_type": "Attribute",
+                  "attribute": "t1",
+                  "operator": "==",
+                  "value": "a"
+                }
+              ]
+            }
+          },
+          {
+            "transition": "Tumor_Size_T1b_Glottis",
+            "condition": {
+              "condition_type": "And",
+              "conditions": [
+                {
+                  "condition_type": "Attribute",
+                  "attribute": "t-classification",
+                  "operator": "==",
+                  "value": 1
+                },
+                {
+                  "condition_type": "Attribute",
+                  "attribute": "t1",
+                  "operator": "==",
+                  "value": "b"
+                }
+              ]
+            }
+          },
+          {
+            "transition": "Tumor_Size_T2_Glottis",
+            "condition": {
+              "condition_type": "Attribute",
+              "attribute": "t-classification",
+              "operator": "==",
+              "value": 2
+            }
+          },
+          {
+            "transition": "Tumor_Size_T3_Glottis",
+            "condition": {
+              "condition_type": "Attribute",
+              "attribute": "t-classification",
+              "operator": "==",
+              "value": 3
+            }
+          },
+          {
+            "transition": "Tumor_Size_T4a",
+            "condition": {
+              "condition_type": "And",
+              "conditions": [
+                {
+                  "condition_type": "Attribute",
+                  "attribute": "t-classification",
+                  "operator": "==",
+                  "value": 4
+                },
+                {
+                  "condition_type": "Attribute",
+                  "attribute": "t4",
+                  "operator": "==",
+                  "value": "a"
+                }
+              ]
+            }
+          },
+          {
+            "transition": "Tumor_Size_T4b",
+            "condition": {
+              "condition_type": "And",
+              "conditions": [
+                {
+                  "condition_type": "Attribute",
+                  "attribute": "t-classification",
+                  "operator": "==",
+                  "value": 4
+                },
+                {
+                  "condition_type": "Attribute",
+                  "attribute": "t4",
+                  "operator": "==",
+                  "value": "b"
+                }
+              ]
+            }
+          }
+        ],
+        "remarks": [
+          "T-classifcation according to the AJCC Cancer Staging Manual (8th edition) American Joint Committee on Cancer",
+          "Springer, 2017",
+          "-",
+          "The sources of the distribution of TNM classification and localisation can be found in the states remarks of the \"tnm_distribution_localization_first_diagnosis\" submodule."
+        ],
+        "name": "Tumor_Size_Glottis"
+      },
+      "Tumor_Size_T3_Glottis": {
+        "type": "Observation",
+        "category": "imaging",
+        "unit": "cm",
+        "codes": [
+          {
+            "system": "LOINC",
+            "code": "21889-1",
+            "display": "Size Tumor",
+            "value_set": ""
+          }
+        ],
+        "exact": {
+          "quantity": "Tumor limited to larynx with vocal cord fixation and/or invasion of paraglottic space and/or inner cortex of thyroid cartilage"
+        },
+        "direct_transition": "Tumor_Localization",
+        "name": "Tumor_Size_T3_Glottis"
+      },
+      "Tumor_Size_T2_Glottis": {
+        "type": "Observation",
+        "category": "imaging",
+        "unit": "cm",
+        "codes": [
+          {
+            "system": "LOINC",
+            "code": "21889-1",
+            "display": "Size Tumor",
+            "value_set": ""
+          }
+        ],
+        "exact": {
+          "quantity": "extends to supraglottis and/or subglottis, and/or with impaired vocal cord mobility"
+        },
+        "direct_transition": "Tumor_Localization",
+        "name": "Tumor_Size_T2_Glottis"
+      },
+      "Tumor_Size_T1a_Glottis": {
+        "type": "Observation",
+        "category": "imaging",
+        "unit": "cm",
+        "codes": [
+          {
+            "system": "LOINC",
+            "code": "21889-1",
+            "display": "Size Tumor",
+            "value_set": ""
+          }
+        ],
+        "exact": {
+          "quantity": "limited to vocal cord(s) with normal vocal cord mobility (limited to one vocal cord)"
+        },
+        "direct_transition": "Tumor_Localization",
+        "name": "Tumor_Size_T1a_Glottis"
+      },
+      "Tumor_Size_T1b_Glottis": {
+        "type": "Observation",
+        "category": "imaging",
+        "unit": "cm",
+        "codes": [
+          {
+            "system": "LOINC",
+            "code": "21889-1",
+            "display": "Size Tumor",
+            "value_set": ""
+          }
+        ],
+        "exact": {
+          "quantity": "limited to vocal cord(s) with normal vocal cord mobility (involves both vocal cords)"
+        },
+        "direct_transition": "Tumor_Localization",
+        "name": "Tumor_Size_T1b_Glottis"
+      },
+      "Tumor_Size_T1_Subglottis": {
+        "type": "Observation",
+        "category": "imaging",
+        "unit": "",
+        "codes": [
+          {
+            "system": "LOINC",
+            "code": "21889-1",
+            "display": "Size Tumor",
+            "value_set": ""
+          }
+        ],
+        "direct_transition": "Tumor_Localization",
+        "vital_sign": "tumor limited to subglottis",
+        "name": "Tumor_Size_T1_Subglottis"
+      },
+      "Tumor_Size_T2_Subglottis": {
+        "type": "Observation",
+        "category": "imaging",
+        "unit": "cm",
+        "codes": [
+          {
+            "system": "LOINC",
+            "code": "21889-1",
+            "display": "Size Tumor",
+            "value_set": ""
+          }
+        ],
+        "exact": {
+          "quantity": "tumor extends to vocal cord(s) with normal or impaired vocal cord mobility (no cord fixation)"
+        },
+        "direct_transition": "Tumor_Localization",
+        "name": "Tumor_Size_T2_Subglottis"
+      },
+      "Tumor_Size_T3_Subglottis": {
+        "type": "Observation",
+        "category": "imaging",
+        "unit": "cm",
+        "codes": [
+          {
+            "system": "LOINC",
+            "code": "21889-1",
+            "display": "Size Tumor",
+            "value_set": ""
+          }
+        ],
+        "exact": {
+          "quantity": "tumor limited to larynx with vocal cord fixation and/or invasion of paraglottic space and/or inner cortex of thyroid cartilage"
+        },
+        "direct_transition": "Tumor_Localization",
+        "name": "Tumor_Size_T3_Subglottis"
+      },
+      "T1a_Diagnosed": {
+        "type": "Observation",
+        "category": "imaging",
+        "unit": "",
+        "codes": [
+          {
+            "system": "LOINC",
+            "code": "21905-5",
+            "display": "Primary tumor.clinical [Class] Cancer",
+            "value_set": ""
+          }
+        ],
+        "value_code": {
+          "system": "SNOMED-CT",
+          "code": 261646003,
+          "display": "Tumor stage T1a (finding)"
+        },
+        "direct_transition": "N-Classification_Observation",
+        "remarks": [
+          "SNOMED-CT Code",
+          ""
+        ],
+        "name": "T1a_Diagnosed"
+      },
+      "T1b_Diagnosed": {
+        "type": "Observation",
+        "category": "imaging",
+        "unit": "",
+        "codes": [
+          {
+            "system": "LOINC",
+            "code": "21905-5",
+            "display": "Primary tumor.clinical [Class] Cancer",
+            "value_set": ""
+          }
+        ],
+        "value_code": {
+          "system": "SNOMED-CT",
+          "code": 261649005,
+          "display": "Tumor stage T1b (finding)"
+        },
+        "direct_transition": "N-Classification_Observation",
+        "remarks": [
+          "SNOMED-CT Code",
+          ""
+        ],
+        "name": "T1b_Diagnosed"
+      },
+      "T4a_Diagnosed": {
+        "type": "Observation",
+        "category": "imaging",
+        "unit": "",
+        "codes": [
+          {
+            "system": "LOINC",
+            "code": "21905-5",
+            "display": "Primary tumor.clinical [Class] Cancer",
+            "value_set": ""
+          }
+        ],
+        "value_code": {
+          "system": "SNOMED-CT",
+          "code": 261659006,
+          "display": "Tumor stage T4a (finding)"
+        },
+        "direct_transition": "N-Classification_Observation",
+        "remarks": [
+          "SNOMED-CT Code",
+          ""
+        ],
+        "name": "T4a_Diagnosed"
+      },
+      "T4b_Diagnosed": {
+        "type": "Observation",
+        "category": "imaging",
+        "unit": "",
+        "codes": [
+          {
+            "system": "LOINC",
+            "code": "21905-5",
+            "display": "Primary tumor.clinical [Class] Cancer",
+            "value_set": ""
+          }
+        ],
+        "value_code": {
+          "system": "SNOMED-CT",
+          "code": 261660001,
+          "display": "Tumor stage T4b (finding)"
+        },
+        "direct_transition": "N-Classification_Observation",
+        "remarks": [
+          "SNOMED-CT Code",
+          ""
+        ],
+        "name": "T4b_Diagnosed"
+      },
+      "Laryngectomy_Attribute": {
+        "type": "SetAttribute",
+        "attribute": "primaryTreatment",
+        "complex_transition": [
+          {
+            "condition": {
+              "condition_type": "Attribute",
+              "attribute": "uicc_stadium",
+              "operator": "<=",
+              "value": 2
+            },
+            "distributions": [
+              {
+                "transition": "R-Classification_Negativ",
+                "distribution": 0.964
+              },
+              {
+                "transition": "R-Classification_Positiv",
+                "distribution": 0.03600000000000003
+              }
+            ]
+          },
+          {
+            "condition": {
+              "condition_type": "Attribute",
+              "attribute": "uicc_stadium",
+              "operator": ">=",
+              "value": 3
+            },
+            "distributions": [
+              {
+                "transition": "R-Classification_Negativ",
+                "distribution": 0.919
+              },
+              {
+                "transition": "R-Classification_Positiv",
+                "distribution": 0.08099999999999996
+              }
+            ]
+          }
+        ],
+        "value": "laryngectomy",
+        "name": "Laryngectomy_Attribute"
+      },
+      "Laser_Surgery_Transoral_Partial_Laryngectomy_Attribute": {
+        "type": "SetAttribute",
+        "attribute": "primaryTreatment",
+        "complex_transition": [
+          {
+            "condition": {
+              "condition_type": "Attribute",
+              "attribute": "uicc_stadium",
+              "operator": "<=",
+              "value": 2
+            },
+            "distributions": [
+              {
+                "transition": "R-Classification_Negativ",
+                "distribution": 0.964
+              },
+              {
+                "transition": "R-Classification_Positiv",
+                "distribution": 0.03600000000000003
+              }
+            ]
+          },
+          {
+            "condition": {
+              "condition_type": "Attribute",
+              "attribute": "uicc_stadium",
+              "operator": ">=",
+              "value": 3
+            },
+            "distributions": [
+              {
+                "transition": "R-Classification_Negativ",
+                "distribution": 0.846
+              },
+              {
+                "transition": "R-Classification_Positiv",
+                "distribution": 0.15400000000000003
+              }
+            ]
+          }
+        ],
+        "value": "laser",
+        "name": "Laser_Surgery_Transoral_Partial_Laryngectomy_Attribute"
+      },
+      "Open_Partial_Laryngectomy_Attribute": {
+        "type": "SetAttribute",
+        "attribute": "primaryTreatment",
+        "complex_transition": [
+          {
+            "condition": {
+              "condition_type": "Attribute",
+              "attribute": "uicc_stadium",
+              "operator": "<=",
+              "value": 2
+            },
+            "distributions": [
+              {
+                "transition": "R-Classification_Negativ",
+                "distribution": 0.964
+              },
+              {
+                "transition": "R-Classification_Positiv",
+                "distribution": 0.03600000000000003
+              }
+            ]
+          },
+          {
+            "condition": {
+              "condition_type": "Attribute",
+              "attribute": "uicc_stadium",
+              "operator": ">=",
+              "value": 3
+            },
+            "distributions": [
+              {
+                "transition": "R-Classification_Negativ",
+                "distribution": 0.833
+              },
+              {
+                "transition": "R-Classification_Positiv",
+                "distribution": 0.16700000000000004
+              }
+            ]
+          }
+        ],
+        "value": "partial",
+        "name": "Open_Partial_Laryngectomy_Attribute"
+      },
+      "Adjuvant_Radiochemotherapy": {
+        "type": "Procedure",
+        "codes": [
+          {
+            "system": "SNOMED-CT",
+            "code": 394935005,
+            "display": "Combined post-operative chemotherapy and radiotherapy (procedure)",
+            "value_set": ""
+          }
+        ],
+        "distribution": {
+          "kind": "UNIFORM",
+          "parameters": {
+            "high": 60,
+            "low": 30
+          }
+        },
+        "unit": "minutes",
+        "direct_transition": "Adjuvant_Radiochemotherapy_Attribute",
+        "name": "Adjuvant_Radiochemotherapy"
+      },
+      "Adjuvant_Radiotherapy": {
+        "type": "Procedure",
+        "codes": [
+          {
+            "system": "SNOMED-CT",
+            "code": 168525009,
+            "display": "Postoperative course of radiotherapy (procedure)",
+            "value_set": ""
+          }
+        ],
+        "distribution": {
+          "kind": "UNIFORM",
+          "parameters": {
+            "high": 60,
+            "low": 30
+          }
+        },
+        "unit": "minutes",
+        "remarks": [
+          "Radiation of lymphatic drenage gebiet included"
+        ],
+        "direct_transition": "Adjuvant_Radiotherapy_Attribute",
+        "name": "Adjuvant_Radiotherapy"
+      },
+      "Delay_Wound_Healing": {
+        "type": "Delay",
+        "distribution": {
+          "kind": "UNIFORM",
+          "parameters": {
+            "high": 11,
+            "low": 3
+          }
+        },
+        "unit": "weeks",
+        "direct_transition": "Encounter_Adjuvant_Therapy",
+        "remarks": [
+          "Postoperative radiotherapy should be started as early as possible after completion of the wound healing and should be completed within a maximum period of 11 weeks after weeks after surgery.",
+          "-",
+          "Source: https://www.leitlinienprogramm-onkologie.de/fileadmin/user_upload/Downloads/Leitlinien/Larynxkarzinom/Version1.1/LL_Larynxkarzinom_Langversion_1.1.pdf"
+        ],
+        "name": "Delay_Wound_Healing"
+      },
+      "Otalgia": {
+        "type": "Symptom",
+        "symptom": "Otalgia",
+        "cause": "laryngeal_cancer",
+        "probability": 0.04,
+        "range": {
+          "low": 10,
+          "high": 90
+        },
+        "direct_transition": "Dysphagia",
+        "name": "Otalgia"
+      },
+      "Dysphagia": {
+        "type": "Symptom",
+        "symptom": "Dysphagia",
+        "cause": "laryngeal_cancer",
+        "probability": 0.0459,
+        "range": {
+          "low": 10,
+          "high": 90
+        },
+        "direct_transition": "Insommnia",
+        "name": "Dysphagia"
+      },
+      "Dysphonia": {
+        "type": "Symptom",
+        "symptom": "Dysponea",
+        "cause": "laryngeal_cancer",
+        "probability": 0.0384,
+        "range": {
+          "low": 10,
+          "high": 90
+        },
+        "direct_transition": "Encounter_Symptoms_1_Year_Befor",
+        "name": "Dysphonia"
+      },
+      "Survival": {
+        "type": "Simple",
+        "conditional_transition": [
+          {
+            "transition": "5_Year_Survival_Basic",
+            "condition": {
+              "condition_type": "Attribute",
+              "attribute": "survival_mode",
+              "operator": "==",
+              "value": 1
+            }
+          },
+          {
+            "transition": "5_Year_Survival_Treatment_Specific",
+            "condition": {
+              "condition_type": "Attribute",
+              "attribute": "survival_mode",
+              "operator": "==",
+              "value": 2
+            }
+          }
+        ],
+        "name": "Survival"
+      },
+      "Set_Survival_Mode": {
+        "type": "SetAttribute",
+        "attribute": "survival_mode",
+        "value": 2,
+        "direct_transition": "EndConfig",
+        "remarks": [
+          "With this attribute you can choose between the different types of survival calculation. To do this, change the \"survival_mode",
+          "\" attribute. Available modes: ",
+          "-",
+          "1 - The survival is calculated in dependency of age, sex and UICC staging.",
+          "-",
+          "2 - ATTENTION: This mode is not finished in this version. It uses a lot of estimated dependencies and therefore can produce unrealistic data. The survival is calculated in dependency of age, sex, UICC staging, smoking status, drinking status, grading, performance status and therapy.",
+          "-",
+          "For a more detailed explanation please visit our git: https://git.iccas.de/synthea/laryngeal-cancer"
+        ],
+        "name": "Set_Survival_Mode"
+      },
+      "5_Year_Survival_Basic": {
+        "type": "CallSubmodule",
+        "submodule": "laryngeal_cancer/laryngeal_cancer_five_year_survival",
+        "direct_transition": "Detailed_Conservative_Therapy",
+        "name": "5_Year_Survival_Basic"
+      },
+      "5_Year_Survival_Treatment_Specific": {
+        "type": "CallSubmodule",
+        "submodule": "laryngeal_cancer/laryngeal_cancer_five_year_survival_treatment",
+        "direct_transition": "Detailed_Conservative_Therapy",
+        "name": "5_Year_Survival_Treatment_Specific"
+      },
+      "Adjuvant_Therapy": {
+        "type": "EncounterEnd",
+        "conditional_transition": [
+          {
+            "transition": "Delay_Wound_Healing",
+            "condition": {
+              "condition_type": "Or",
+              "conditions": [
+                {
+                  "condition_type": "Or",
+                  "conditions": [
+                    {
+                      "condition_type": "Attribute",
+                      "attribute": "primaryTreatment",
+                      "operator": "==",
+                      "value": "laryngectomy"
+                    },
+                    {
+                      "condition_type": "Attribute",
+                      "attribute": "primaryTreatment",
+                      "operator": "==",
+                      "value": "laser"
+                    }
+                  ]
+                },
+                {
+                  "condition_type": "Attribute",
+                  "attribute": "primaryTreatment",
+                  "operator": "==",
+                  "value": "partial"
+                }
+              ]
+            }
+          },
+          {
+            "transition": "Terminal"
+          }
+        ],
+        "name": "Adjuvant_Therapy"
+      },
+      "Neck_Dissection_Simple": {
+        "type": "Simple",
+        "conditional_transition": [
+          {
+            "transition": "Adjuvant_Therapy",
+            "condition": {
+              "condition_type": "And",
+              "conditions": [
+                {
+                  "condition_type": "And",
+                  "conditions": [
+                    {
+                      "condition_type": "Attribute",
+                      "attribute": "localization",
+                      "operator": "==",
+                      "value": "glottis"
+                    },
+                    {
+                      "condition_type": "Attribute",
+                      "attribute": "t-classification",
+                      "operator": "==",
+                      "value": 1
+                    }
+                  ]
+                },
+                {
+                  "condition_type": "Attribute",
+                  "attribute": "n-classification",
+                  "operator": "==",
+                  "value": 1
+                }
+              ]
+            }
+          },
+          {
+            "transition": "Adjuvant_Therapy",
+            "condition": {
+              "condition_type": "And",
+              "conditions": [
+                {
+                  "condition_type": "And",
+                  "conditions": [
+                    {
+                      "condition_type": "Attribute",
+                      "attribute": "localization",
+                      "operator": "==",
+                      "value": "glottis"
+                    },
+                    {
+                      "condition_type": "Attribute",
+                      "attribute": "t-classification",
+                      "operator": "==",
+                      "value": 2
+                    }
+                  ]
+                },
+                {
+                  "condition_type": "Attribute",
+                  "attribute": "n-classification",
+                  "operator": "==",
+                  "value": 1
+                }
+              ]
+            }
+          },
+          {
+            "transition": "Adjuvant_Therapy",
+            "condition": {
+              "condition_type": "And",
+              "conditions": [
+                {
+                  "condition_type": "And",
+                  "conditions": [
+                    {
+                      "condition_type": "Attribute",
+                      "attribute": "localization",
+                      "operator": "==",
+                      "value": "supraglottis"
+                    },
+                    {
+                      "condition_type": "Attribute",
+                      "attribute": "t-classification",
+                      "operator": "==",
+                      "value": 1
+                    }
+                  ]
+                },
+                {
+                  "condition_type": "Attribute",
+                  "attribute": "n-classification",
+                  "operator": "==",
+                  "value": 1
+                }
+              ]
+            }
+          },
+          {
+            "transition": "Adjuvant_Therapy",
+            "condition": {
+              "condition_type": "And",
+              "conditions": [
+                {
+                  "condition_type": "Attribute",
+                  "attribute": "n-classification",
+                  "operator": "==",
+                  "value": 1
+                },
+                {
+                  "condition_type": "Or",
+                  "conditions": [
+                    {
+                      "condition_type": "Attribute",
+                      "attribute": "primaryTreatment",
+                      "operator": "==",
+                      "value": "radiochemo"
+                    },
+                    {
+                      "condition_type": "Attribute",
+                      "attribute": "primaryTreatment",
+                      "operator": "==",
+                      "value": "radio"
+                    }
+                  ]
+                }
+              ]
+            }
+          },
+          {
+            "transition": "Delay_PET-CT",
+            "condition": {
+              "condition_type": "And",
+              "conditions": [
+                {
+                  "condition_type": "Attribute",
+                  "attribute": "n-classification",
+                  "operator": ">=",
+                  "value": 2
+                },
+                {
+                  "condition_type": "Or",
+                  "conditions": [
+                    {
+                      "condition_type": "Attribute",
+                      "attribute": "primaryTreatment",
+                      "operator": "==",
+                      "value": "radiochemo"
+                    },
+                    {
+                      "condition_type": "Attribute",
+                      "attribute": "primaryTreatment",
+                      "operator": "==",
+                      "value": "radio"
+                    }
+                  ]
+                }
+              ]
+            }
+          },
+          {
+            "transition": "Neck_Dissection_Surgical"
+          }
+        ],
+        "name": "Neck_Dissection_Simple"
+      },
+      "Neck_Dissection_Surgical": {
+        "type": "Simple",
+        "conditional_transition": [
+          {
+            "transition": "Elective_Neck_Dissection",
+            "condition": {
+              "condition_type": "Attribute",
+              "attribute": "n-classification",
+              "operator": "==",
+              "value": 1
+            }
+          },
+          {
+            "transition": "Curative_Neck_Dissection"
+          }
+        ],
+        "name": "Neck_Dissection_Surgical"
+      },
+      "EndEncounter_Neck_Dissection_Initial_Treatment": {
+        "type": "EncounterEnd",
+        "direct_transition": "Adjuvant_Therapy",
+        "name": "EndEncounter_Neck_Dissection_Initial_Treatment"
+      },
+      "Treatment_T4a": {
+        "type": "Simple",
+        "distributed_transition": [
+          {
+            "transition": "Laryngectomy",
+            "distribution": 0.58
+          },
+          {
+            "transition": "Radiochemotherapy",
+            "distribution": 0.42
+          }
+        ],
+        "remarks": [
+          "Source: https://pubmed.ncbi.nlm.nih.gov/34609937/"
+        ],
+        "name": "Treatment_T4a"
+      },
+      "Therapy": {
+        "type": "Simple",
+        "complex_transition": [
+          {
+            "condition": {
+              "condition_type": "Attribute",
+              "attribute": "uicc_stadium",
+              "operator": "<=",
+              "value": 2
+            },
+            "distributions": [
+              {
+                "transition": "Primary_Surgical_Therapy",
+                "distribution": 0.751
+              },
+              {
+                "transition": "Primary_Conservative_Therapy",
+                "distribution": 0.2490000000000001
+              }
+            ]
+          },
+          {
+            "condition": {
+              "condition_type": "Attribute",
+              "attribute": "uicc_stadium",
+              "operator": ">=",
+              "value": 3
+            },
+            "distributions": [
+              {
+                "transition": "Primary_Surgical_Therapy",
+                "distribution": 0.55
+              },
+              {
+                "transition": "Primary_Conservative_Therapy",
+                "distribution": 0.44999999999999996
+              }
+            ]
+          }
+        ],
+        "name": "Therapy"
+      },
+      "Paliative_Therapy": {
+        "type": "Simple",
+        "direct_transition": "Paliative_Care",
+        "remarks": [
+          "Source: https://pubmed.ncbi.nlm.nih.gov/33151575/"
+        ],
+        "name": "Paliative_Therapy"
+      },
+      "Curative_Therapy": {
+        "type": "Simple",
+        "conditional_transition": [
+          {
+            "transition": "Radiochemotherapy",
+            "condition": {
+              "condition_type": "Or",
+              "conditions": [
+                {
+                  "condition_type": "Attribute",
+                  "attribute": "t4",
+                  "operator": "==",
+                  "value": "b"
+                },
+                {
+                  "condition_type": "Attribute",
+                  "attribute": "m-status",
+                  "operator": "==",
+                  "value": 2
+                }
+              ]
+            }
+          },
+          {
+            "transition": "Treatment_T4a",
+            "condition": {
+              "condition_type": "Attribute",
+              "attribute": "t4",
+              "operator": "==",
+              "value": "a"
+            }
+          },
+          {
+            "transition": "Therapy"
+          }
+        ],
+        "name": "Curative_Therapy"
+      },
+      "Detailed_Conservative_Therapy": {
+        "type": "Simple",
+        "conditional_transition": [
+          {
+            "transition": "Detailed_Radiochemotherapy",
+            "condition": {
+              "condition_type": "Attribute",
+              "attribute": "primaryTreatment",
+              "operator": "==",
+              "value": "radiochemo"
+            }
+          },
+          {
+            "transition": "Detailed_Radiotherapy",
+            "condition": {
+              "condition_type": "Attribute",
+              "attribute": "primaryTreatment",
+              "operator": "==",
+              "value": "radio"
+            }
+          },
+          {
+            "transition": "Detailed_Chemotherapy",
+            "condition": {
+              "condition_type": "Attribute",
+              "attribute": "primaryTreatment",
+              "operator": "==",
+              "value": "chemo"
+            }
+          },
+          {
+            "transition": "Neck_Dissection_Simple"
+          }
+        ],
+        "name": "Detailed_Conservative_Therapy"
+      },
+      "Detailed_Radiochemotherapy": {
+        "type": "CallSubmodule",
+        "submodule": "laryngeal_cancer/radiochemotherapy_detailed",
+        "direct_transition": "Neck_Dissection_Simple",
+        "name": "Detailed_Radiochemotherapy"
+      },
+      "Detailed_Chemotherapy": {
+        "type": "CallSubmodule",
+        "submodule": "laryngeal_cancer/chemotherapy_detailed",
+        "direct_transition": "Neck_Dissection_Simple",
+        "name": "Detailed_Chemotherapy"
+      },
+      "Detailed_Radiotherapy": {
+        "type": "CallSubmodule",
+        "submodule": "laryngeal_cancer/radiotherapy_detailed",
+        "direct_transition": "Neck_Dissection_Simple",
+        "name": "Detailed_Radiotherapy"
+      },
+      "Chemotherapy_Attribute": {
+        "type": "SetAttribute",
+        "attribute": "primaryTreatment",
+        "value": "chemo",
+        "direct_transition": "EndEncounter_Initial_Treatment",
+        "name": "Chemotherapy_Attribute"
+      },
+      "G2_Attribute": {
+        "type": "SetAttribute",
+        "attribute": "grading",
+        "direct_transition": "End_Of_Grading",
+        "value": "g2",
+        "name": "G2_Attribute"
+      },
+      "G1_Attribute": {
+        "type": "SetAttribute",
+        "attribute": "grading",
+        "value": "g1",
+        "direct_transition": "End_Of_Grading",
+        "name": "G1_Attribute"
+      },
+      "G3_Attribute": {
+        "type": "SetAttribute",
+        "attribute": "grading",
+        "value": "g3",
+        "direct_transition": "End_Of_Grading",
+        "name": "G3_Attribute"
+      },
+      "Curative_Neck_Dissection_Attribute": {
+        "type": "SetAttribute",
+        "attribute": "neck_d",
+        "direct_transition": "EndEncounter_Neck_Dissection_Initial_Treatment",
+        "value": "curative",
+        "name": "Curative_Neck_Dissection_Attribute"
+      },
+      "Elective_Neck_Dissection_Attribute": {
+        "type": "SetAttribute",
+        "attribute": "neck_d",
+        "value": "elective",
+        "direct_transition": "EndEncounter_Neck_Dissection_Initial_Treatment",
+        "name": "Elective_Neck_Dissection_Attribute"
+      },
+      "Paliative_Care": {
+        "type": "Procedure",
+        "codes": [
+          {
+            "system": "SNOMED-CT",
+            "code": 103735009,
+            "display": "Palliative care (regime/therapy)",
+            "value_set": ""
+          }
+        ],
+        "unit": "minutes",
+        "direct_transition": "EndEncounter_Initial_Treatment",
+        "reason": "Select Condition/Enter Attribute",
+        "name": "Paliative_Care"
+      },
+      "ECOG_2_Observation": {
+        "type": "Observation",
+        "category": "survey",
+        "unit": "{score}",
+        "codes": [
+          {
+            "system": "LOINC",
+            "code": "89247-1",
+            "display": "ECOG Performance Status score",
+            "value_set": ""
+          }
+        ],
+        "distribution": {
+          "kind": "EXACT",
+          "round": false,
+          "parameters": {
+            "value": 2
+          }
+        },
+        "direct_transition": "ECOG_2_Attribute",
+        "name": "ECOG_2_Observation"
+      },
+      "ECOG_4_Observation": {
+        "type": "Observation",
+        "category": "survey",
+        "unit": "{score}",
+        "codes": [
+          {
+            "system": "LOINC",
+            "code": "89247-1",
+            "display": "ECOG Performance Status score",
+            "value_set": ""
+          }
+        ],
+        "distribution": {
+          "kind": "EXACT",
+          "round": false,
+          "parameters": {
+            "value": 4
+          }
+        },
+        "direct_transition": "ECOG_4_Attribute",
+        "name": "ECOG_4_Observation"
+      },
+      "ECOG_1_Observation": {
+        "type": "Observation",
+        "category": "survey",
+        "unit": "{score}",
+        "codes": [
+          {
+            "system": "LOINC",
+            "code": "89247-1",
+            "display": "ECOG Performance Status score",
+            "value_set": ""
+          }
+        ],
+        "distribution": {
+          "kind": "EXACT",
+          "round": false,
+          "parameters": {
+            "value": 1
+          }
+        },
+        "direct_transition": "ECOG_1_Attribute",
+        "name": "ECOG_1_Observation"
+      },
+      "ECOG_3_Observation": {
+        "type": "Observation",
+        "category": "survey",
+        "unit": "{score}",
+        "codes": [
+          {
+            "system": "LOINC",
+            "code": "89247-1",
+            "display": "ECOG Performance Status score",
+            "value_set": ""
+          }
+        ],
+        "distribution": {
+          "kind": "EXACT",
+          "round": false,
+          "parameters": {
+            "value": 3
+          }
+        },
+        "direct_transition": "ECOG_3_Attribute",
+        "name": "ECOG_3_Observation"
+      },
+      "ECOG_0_Attribute": {
+        "type": "SetAttribute",
+        "attribute": "ecog",
+        "direct_transition": "First_Diagnose_Laryngoscopy",
+        "value": 1,
+        "name": "ECOG_0_Attribute"
+      },
+      "ECOG_1_Attribute": {
+        "type": "SetAttribute",
+        "attribute": "ecog",
+        "value": 2,
+        "direct_transition": "First_Diagnose_Laryngoscopy",
+        "name": "ECOG_1_Attribute"
+      },
+      "ECOG_2_Attribute": {
+        "type": "SetAttribute",
+        "attribute": "ecog",
+        "value": 3,
+        "direct_transition": "First_Diagnose_Laryngoscopy",
+        "name": "ECOG_2_Attribute"
+      },
+      "ECOG_4_Attribute": {
+        "type": "SetAttribute",
+        "attribute": "ecog",
+        "value": 5,
+        "direct_transition": "First_Diagnose_Laryngoscopy",
+        "name": "ECOG_4_Attribute"
+      },
+      "ECOG_3_Attribute": {
+        "type": "SetAttribute",
+        "attribute": "ecog",
+        "value": 4,
+        "direct_transition": "First_Diagnose_Laryngoscopy",
+        "name": "ECOG_3_Attribute"
+      },
+      "ECOG_0_Observation": {
+        "type": "Observation",
+        "category": "survey",
+        "unit": "{score}",
+        "codes": [
+          {
+            "system": "LOINC",
+            "code": "89247-1",
+            "display": "ECOG Performance Status score",
+            "value_set": ""
+          }
+        ],
+        "distribution": {
+          "kind": "EXACT",
+          "round": false,
+          "parameters": {
+            "value": 0
+          }
+        },
+        "direct_transition": "ECOG_0_Attribute",
+        "name": "ECOG_0_Observation"
+      },
+      "Performance_Status": {
+        "type": "Simple",
+        "conditional_transition": [
+          {
+            "transition": "Performence_Status_UICC_I",
+            "condition": {
+              "condition_type": "Attribute",
+              "attribute": "uicc_stadium",
+              "operator": "==",
+              "value": 1
+            }
+          },
+          {
+            "transition": "Performence_Status_UICC_II",
+            "condition": {
+              "condition_type": "Attribute",
+              "attribute": "uicc_stadium",
+              "operator": "==",
+              "value": 2
+            }
+          },
+          {
+            "transition": "Performence_Status_UICC_III",
+            "condition": {
+              "condition_type": "Attribute",
+              "attribute": "uicc_stadium",
+              "operator": "==",
+              "value": 3
+            }
+          },
+          {
+            "transition": "Performence_Status_UICC_IV",
+            "condition": {
+              "condition_type": "Or",
+              "conditions": [
+                {
+                  "condition_type": "Attribute",
+                  "attribute": "uicc_stadium",
+                  "operator": "==",
+                  "value": 4
+                },
+                {
+                  "condition_type": "Attribute",
+                  "attribute": "uicc_stadium",
+                  "operator": "==",
+                  "value": 5
+                }
+              ]
+            }
+          }
+        ],
+        "remarks": [
+          "Performance Status according to the WHO (ECOG):",
+          " 0 = Fully active, able to carry on all pre-disease performance without restriction",
+          "-",
+          " 1 = Restricted in physically strenuous activity but ambulatory and able to carry out work of a light or sedentary nature, e.g.,",
+          "light house work, office work",
+          "-",
+          "2 = Ambulatory and capable of all self care but unable to carry out any work activities. Up and about more than 50% of waking hours.",
+          "-",
+          "3 = Capable of only limited self care, confined to bed or chair more than 50% of waking hours.",
+          "-",
+          " 4 = Completely disabled. Cannot carry on any self care. Totally confined to bed or chair.",
+          "-",
+          "5 = Death"
+        ],
+        "name": "Performance_Status"
+      },
+      "Performence_Status_UICC_I": {
+        "type": "Simple",
+        "remarks": [
+          "Pre-Treatment Performance Status and Stage at Diagnosis in Patients with Head and Neck Cancers",
+          "Source: https://pubmed.ncbi.nlm.nih.gov/25339050/"
+        ],
+        "distributed_transition": [
+          {
+            "transition": "ECOG_0_Observation",
+            "distribution": 0.731
+          },
+          {
+            "transition": "ECOG_1_Observation",
+            "distribution": 0.247
+          },
+          {
+            "transition": "ECOG_2_Observation",
+            "distribution": 0.02200000000000002
+          }
+        ],
+        "name": "Performence_Status_UICC_I"
+      },
+      "Performence_Status_UICC_II": {
+        "type": "Simple",
+        "remarks": [
+          "Pre-Treatment Performance Status and Stage at Diagnosis in Patients with Head and Neck Cancers",
+          "Source: https://pubmed.ncbi.nlm.nih.gov/25339050/"
+        ],
+        "distributed_transition": [
+          {
+            "transition": "ECOG_0_Observation",
+            "distribution": 0.675
+          },
+          {
+            "transition": "ECOG_1_Observation",
+            "distribution": 0.289
+          },
+          {
+            "transition": "ECOG_2_Observation",
+            "distribution": 0.030000000000000027
+          },
+          {
+            "transition": "ECOG_3_Observation",
+            "distribution": 0.004
+          },
+          {
+            "transition": "ECOG_4_Observation",
+            "distribution": 0.002
+          }
+        ],
+        "name": "Performence_Status_UICC_II"
+      },
+      "Performence_Status_UICC_III": {
+        "type": "Simple",
+        "remarks": [
+          "Pre-Treatment Performance Status and Stage at Diagnosis in Patients with Head and Neck Cancers",
+          "Source: https://pubmed.ncbi.nlm.nih.gov/25339050/"
+        ],
+        "distributed_transition": [
+          {
+            "transition": "ECOG_0_Observation",
+            "distribution": 0.611
+          },
+          {
+            "transition": "ECOG_1_Observation",
+            "distribution": 0.334
+          },
+          {
+            "transition": "ECOG_2_Observation",
+            "distribution": 0.038999999999999924
+          },
+          {
+            "transition": "ECOG_3_Observation",
+            "distribution": 0.015
+          },
+          {
+            "transition": "ECOG_4_Observation",
+            "distribution": 0.001
+          }
+        ],
+        "name": "Performence_Status_UICC_III"
+      },
+      "Performence_Status_UICC_IV": {
+        "type": "Simple",
+        "remarks": [
+          "Pre-Treatment Performance Status and Stage at Diagnosis in Patients with Head and Neck Cancers",
+          "Source: https://pubmed.ncbi.nlm.nih.gov/25339050/"
+        ],
+        "distributed_transition": [
+          {
+            "transition": "ECOG_0_Observation",
+            "distribution": 0.515
+          },
+          {
+            "transition": "ECOG_1_Observation",
+            "distribution": 0.405
+          },
+          {
+            "transition": "ECOG_2_Observation",
+            "distribution": 0.053
+          },
+          {
+            "transition": "ECOG_3_Observation",
+            "distribution": 0.017
+          },
+          {
+            "transition": "ECOG_4_Observation",
+            "distribution": 0.007
+          }
+        ],
+        "name": "Performence_Status_UICC_IV"
+      },
+      "EndEncounter_Initial_Treatment": {
+        "type": "EncounterEnd",
+        "direct_transition": "Survival",
+        "name": "EndEncounter_Initial_Treatment"
+      },
+      "Tumor_Localization": {
+        "type": "Procedure",
+        "codes": [
+          {
+            "system": "SNOMED-CT",
+            "code": 113011001,
+            "display": "Palpation of Neck (procedure)",
+            "value_set": ""
+          }
+        ],
+        "distribution": {
+          "kind": "UNIFORM",
+          "parameters": {
+            "high": 60,
+            "low": 30
+          }
+        },
+        "unit": "minutes",
+        "conditional_transition": [
+          {
+            "transition": "Subglottis_Obseravtion",
+            "condition": {
+              "condition_type": "Attribute",
+              "attribute": "localization",
+              "operator": "==",
+              "value": "subglottis"
+            }
+          },
+          {
+            "transition": "Supraglottis_Obseravtion",
+            "condition": {
+              "condition_type": "Attribute",
+              "attribute": "localization",
+              "operator": "==",
+              "value": "supraglottis"
+            }
+          },
+          {
+            "transition": "Glottis_Obseravtion",
+            "condition": {
+              "condition_type": "Attribute",
+              "attribute": "localization",
+              "operator": "==",
+              "value": "glottis"
+            }
+          }
+        ],
+        "remarks": [
+          "The sources of the distribution of TNM classification and localisation can be found in the states remarks of the \"tnm_distribution_localization_first_diagnosis\" submodule."
+        ],
+        "name": "Tumor_Localization"
+      },
+      "EndEncounter_GLP": {
+        "type": "EncounterEnd",
+        "conditional_transition": [
+          {
+            "transition": "Delay_Age_Distribution_2_Mild_GPL",
+            "condition": {
+              "condition_type": "Attribute",
+              "attribute": "dysplasia",
+              "operator": "==",
+              "value": 1
+            }
+          },
+          {
+            "transition": "Delay_Age_Distribution_2_Moderate_GPL",
+            "condition": {
+              "condition_type": "Attribute",
+              "attribute": "dysplasia",
+              "operator": "==",
+              "value": 2
+            }
+          },
+          {
+            "transition": "Delay_Age_Distribution_2_Severe_GPL",
+            "condition": {
+              "condition_type": "Attribute",
+              "attribute": "dysplasia",
+              "operator": "==",
+              "value": 3
+            }
+          },
+          {
+            "transition": "Delay_Age_Distribution_2_NOS_GPL",
+            "condition": {
+              "condition_type": "Attribute",
+              "attribute": "dysplasia",
+              "operator": "==",
+              "value": 4
+            }
+          },
+          {
+            "transition": "Delay_Age_Distribution_2_Carzinoma_In_Sito_GPL",
+            "condition": {
+              "condition_type": "Attribute",
+              "attribute": "dysplasia",
+              "operator": "==",
+              "value": 5
+            }
+          }
+        ],
+        "name": "EndEncounter_GLP"
+      },
+      "GPL_Distribution": {
+        "type": "Simple",
+        "conditional_transition": [
+          {
+            "transition": "Female_GPL",
+            "condition": {
+              "condition_type": "Gender",
+              "gender": "F"
+            }
+          },
+          {
+            "transition": "Male_GPL",
+            "condition": {
+              "condition_type": "Gender",
+              "gender": "M"
+            }
+          }
+        ],
+        "remarks": [
+          "Wahrschilichkeit muss noch berechnet werden, bis jetzt zum testen 50:50",
+          "-",
+          "SNOMED Code ist eig nur \"dysplasia of larynx\" passt das trotzdem?",
+          "https://www.ncbi.nlm.nih.gov/medgen/108444",
+          "-",
+          "Soll Delay zwischen GPL und LC abhängig von Stärke der Dysplasie sein? -> würde in Tab.4 stehen"
+        ],
+        "name": "GPL_Distribution"
+      },
+      "Encounter_GLP": {
+        "type": "Encounter",
+        "encounter_class": "ambulatory",
+        "reason": "",
+        "telemedicine_possibility": "none",
+        "codes": [
+          {
+            "system": "SNOMED-CT",
+            "code": 185347001,
+            "display": "Encounter for problem",
+            "value_set": ""
+          }
+        ],
+        "remarks": [
+          "Wahrschilichkeit muss noch berechnet werden, bis jetzt zum testen 50:50",
+          "-",
+          "SNOMED Code ist eig nur \"dysplasia of larynx\" passt das trotzdem?",
+          "https://www.ncbi.nlm.nih.gov/medgen/108444",
+          "-",
+          "Soll Delay zwischen GPL und LC abhängig von Stärke der Dysplasie sein? -> würde in Tab.4 stehen"
+        ],
+        "direct_transition": "EndEncounter_GLP",
+        "name": "Encounter_GLP"
+      },
+      "With_Previous_GLP_M": {
+        "type": "Simple",
+        "distributed_transition": [
+          {
+            "transition": "Dysplasia_NOS",
+            "distribution": 0.1217
+          },
+          {
+            "transition": "Mild_Dysplasia",
+            "distribution": 0.16025
+          },
+          {
+            "transition": "Moderate_Dysplasia",
+            "distribution": 0.2756
+          },
+          {
+            "transition": "Severe_Dysplasia",
+            "distribution": 0.2628
+          },
+          {
+            "transition": "Carzinoma_In_Sito",
+            "distribution": 0.1796500000000001
+          }
+        ],
+        "name": "With_Previous_GLP_M"
+      },
+      "GPL_Delay_1": {
+        "type": "Simple",
+        "conditional_transition": [
+          {
+            "transition": "Delay_Age_Distribution_1_Mild_GPL_Delay",
+            "condition": {
+              "condition_type": "Attribute",
+              "attribute": "dysplasia",
+              "operator": "==",
+              "value": 1
+            }
+          },
+          {
+            "transition": "Delay_Age_Distribution_1_Moderate_GPL",
+            "condition": {
+              "condition_type": "Attribute",
+              "attribute": "dysplasia",
+              "operator": "==",
+              "value": 2
+            }
+          },
+          {
+            "transition": "Delay_Age_Distribution_1_Severe_GLP",
+            "condition": {
+              "condition_type": "Attribute",
+              "attribute": "dysplasia",
+              "operator": "==",
+              "value": 3
+            }
+          },
+          {
+            "transition": "Delay_Age_Distribution_1_NOS_GPL",
+            "condition": {
+              "condition_type": "Attribute",
+              "attribute": "dysplasia",
+              "operator": "==",
+              "value": 4
+            }
+          },
+          {
+            "transition": "Delay_Age_Distribution_1_Carcinoma_In_Sito_GPL",
+            "condition": {
+              "condition_type": "Attribute",
+              "attribute": "dysplasia",
+              "operator": "==",
+              "value": 5
+            }
+          }
+        ],
+        "name": "GPL_Delay_1"
+      },
+      "Delay_Age_Distribution_1_No_GPL": {
+        "type": "Delay",
+        "distribution": {
+          "kind": "UNIFORM",
+          "parameters": {
+            "high": 1825,
+            "low": 0
+          }
+        },
+        "unit": "days",
+        "direct_transition": "Development_Of_Laryngeal_Caner",
+        "name": "Delay_Age_Distribution_1_No_GPL"
+      },
+      "Delay_Age_Distribution_1_Severe_GLP": {
+        "type": "Delay",
+        "distribution": {
+          "kind": "UNIFORM",
+          "parameters": {
+            "high": 580,
+            "low": 0
+          }
+        },
+        "unit": "days",
+        "direct_transition": "Encounter_GLP",
+        "name": "Delay_Age_Distribution_1_Severe_GLP"
+      },
+      "Delay_Age_Distribution_1_Moderate_GPL": {
+        "type": "Delay",
+        "distribution": {
+          "kind": "UNIFORM",
+          "parameters": {
+            "high": 335,
+            "low": 0
+          }
+        },
+        "unit": "days",
+        "direct_transition": "Encounter_GLP",
+        "name": "Delay_Age_Distribution_1_Moderate_GPL"
+      },
+      "Delay_Age_Distribution_1_Mild_GPL_Delay": {
+        "type": "Delay",
+        "distribution": {
+          "kind": "UNIFORM",
+          "parameters": {
+            "high": 335,
+            "low": 0
+          }
+        },
+        "unit": "days",
+        "direct_transition": "Encounter_GLP",
+        "name": "Delay_Age_Distribution_1_Mild_GPL_Delay"
+      },
+      "Delay_Age_Distribution_1_Carcinoma_In_Sito_GPL": {
+        "type": "Delay",
+        "distribution": {
+          "kind": "UNIFORM",
+          "parameters": {
+            "high": 885,
+            "low": 0
+          }
+        },
+        "unit": "days",
+        "direct_transition": "Encounter_GLP",
+        "name": "Delay_Age_Distribution_1_Carcinoma_In_Sito_GPL"
+      },
+      "Delay_Age_Distribution_1_NOS_GPL": {
+        "type": "Delay",
+        "distribution": {
+          "kind": "UNIFORM",
+          "parameters": {
+            "high": 275,
+            "low": 0
+          }
+        },
+        "unit": "days",
+        "direct_transition": "Encounter_GLP",
+        "name": "Delay_Age_Distribution_1_NOS_GPL"
+      },
+      "Delay_Age_Distribution_2_Severe_GPL": {
+        "type": "Delay",
+        "distribution": {
+          "kind": "UNIFORM",
+          "parameters": {
+            "high": 885,
+            "low": 702
+          }
+        },
+        "unit": "days",
+        "remarks": [
+          "Source: Incidence and malignant transformation of glottic precursor lesions in Denmark, Nina J. B. Sanninoa(2020)",
+          "-",
+          "Hyperlink: https://pubmed.ncbi.nlm.nih.gov/32098535/",
+          ""
+        ],
+        "direct_transition": "Development_Of_Laryngeal_Caner",
+        "name": "Delay_Age_Distribution_2_Severe_GPL"
+      },
+      "Delay_Age_Distribution_2_NOS_GPL": {
+        "type": "Delay",
+        "distribution": {
+          "kind": "UNIFORM",
+          "parameters": {
+            "high": 1190,
+            "low": 1007
+          }
+        },
+        "unit": "days",
+        "remarks": [
+          "Source: Incidence and malignant transformation of glottic precursor lesions in Denmark, Nina J. B. Sanninoa(2020)",
+          "-",
+          "Hyperlink: https://pubmed.ncbi.nlm.nih.gov/32098535/"
+        ],
+        "direct_transition": "Development_Of_Laryngeal_Caner",
+        "name": "Delay_Age_Distribution_2_NOS_GPL"
+      },
+      "Delay_Age_Distribution_2_Mild_GPL": {
+        "type": "Delay",
+        "distribution": {
+          "kind": "UNIFORM",
+          "parameters": {
+            "high": 1129,
+            "low": 946
+          }
+        },
+        "unit": "days",
+        "remarks": [
+          "Source: Incidence and malignant transformation of glottic precursor lesions in Denmark, Nina J. B. Sanninoa(2020)",
+          "-",
+          "Hyperlink: https://pubmed.ncbi.nlm.nih.gov/32098535/"
+        ],
+        "direct_transition": "Development_Of_Laryngeal_Caner",
+        "name": "Delay_Age_Distribution_2_Mild_GPL"
+      },
+      "Delay_Age_Distribution_2_Carzinoma_In_Sito_GPL": {
+        "type": "Delay",
+        "distribution": {
+          "kind": "UNIFORM",
+          "parameters": {
+            "high": 580,
+            "low": 397
+          }
+        },
+        "unit": "days",
+        "remarks": [
+          "Source: Incidence and malignant transformation of glottic precursor lesions in Denmark, Nina J. B. Sanninoa(2020)",
+          "-",
+          "Hyperlink: https://pubmed.ncbi.nlm.nih.gov/32098535/"
+        ],
+        "direct_transition": "Development_Of_Laryngeal_Caner",
+        "name": "Delay_Age_Distribution_2_Carzinoma_In_Sito_GPL"
+      },
+      "Delay_Age_Distribution_2_Moderate_GPL": {
+        "type": "Delay",
+        "distribution": {
+          "kind": "UNIFORM",
+          "parameters": {
+            "high": 1129,
+            "low": 946
+          }
+        },
+        "unit": "days",
+        "remarks": [
+          "Source: Incidence and malignant transformation of glottic precursor lesions in Denmark, Nina J. B. Sanninoa(2020)",
+          "-",
+          "Hyperlink: https://pubmed.ncbi.nlm.nih.gov/32098535/"
+        ],
+        "direct_transition": "Development_Of_Laryngeal_Caner",
+        "name": "Delay_Age_Distribution_2_Moderate_GPL"
+      },
+      "Carzinoma_In_Sito_Attribute": {
+        "type": "SetAttribute",
+        "attribute": "dysplasia",
+        "value": 5,
+        "direct_transition": "GPL_Delay_1",
+        "name": "Carzinoma_In_Sito_Attribute"
+      }
+    },
+    "gmf_version": 2
+  }

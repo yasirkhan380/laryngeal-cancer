@@ -1,0 +1,1402 @@
+{
+    "name": "Survival_Calculator",
+    "remarks": [
+      "A blank module"
+    ],
+    "states": {
+      "Initial": {
+        "type": "Initial",
+        "direct_transition": "Survival_Multiplication_Factor_First_Year",
+        "remarks": [
+          "je kleiner der survival facto wird desto weniger patienten überleben",
+          ""
+        ]
+      },
+      "Terminal": {
+        "type": "Terminal"
+      },
+      "Survival_Multiplication_Factor_First_Year": {
+        "type": "SetAttribute",
+        "attribute": "survivale_factor_year_1",
+        "direct_transition": "Survival_Multiplication_Factor_Second_Year",
+        "value": 100
+      },
+      "Survival_Multiplication_Factor_Second_Year": {
+        "type": "SetAttribute",
+        "attribute": "survivale_factor_year_2",
+        "value": 100,
+        "direct_transition": "Survival_Multiplication_Factor_Third_Year"
+      },
+      "Survival_Multiplication_Factor_Third_Year": {
+        "type": "SetAttribute",
+        "attribute": "survivale_factor_year_3",
+        "value": 100,
+        "direct_transition": "Survival_Multiplication_Factor_Fourth_Year"
+      },
+      "Survival_Multiplication_Factor_Fourth_Year": {
+        "type": "SetAttribute",
+        "attribute": "survivale_factor_year_4",
+        "value": 100,
+        "direct_transition": "Survival_Multiplication_Factor_Fifth_Year"
+      },
+      "Survival_Multiplication_Factor_Fifth_Year": {
+        "type": "SetAttribute",
+        "attribute": "survivale_factor_year_5",
+        "value": 100,
+        "direct_transition": "Treatment"
+      },
+      "Radiochemo_Year_1": {
+        "type": "Counter",
+        "attribute": "survivale_factor_1",
+        "action": "increment",
+        "amount": 4,
+        "direct_transition": "Radiochemo_Year_2"
+      },
+      "Radiochemo_Year_2": {
+        "type": "Counter",
+        "attribute": "survivale_factor_2",
+        "action": "increment",
+        "amount": 3,
+        "direct_transition": "Radiochemo_Year_3"
+      },
+      "Radiochemo_Year_3": {
+        "type": "Counter",
+        "attribute": "survivale_factor_3",
+        "action": "increment",
+        "amount": 3,
+        "direct_transition": "Radiochemo_Year_4"
+      },
+      "Radiochemo_Year_4": {
+        "type": "Counter",
+        "attribute": "survivale_factor_4",
+        "action": "increment",
+        "amount": 4,
+        "direct_transition": "Radiochemo_Year_5"
+      },
+      "Radiochemo_Year_5": {
+        "type": "Counter",
+        "attribute": "survivale_factor_5",
+        "action": "increment",
+        "amount": 2,
+        "direct_transition": "Neck_Dissection"
+      },
+      "Treatment_Radio": {
+        "type": "Simple",
+        "direct_transition": "Radio_Year_1"
+      },
+      "Radio_Year_1": {
+        "type": "Counter",
+        "attribute": "survivale_factor_1",
+        "action": "decrement",
+        "amount": 2,
+        "direct_transition": "Radio_Year_2"
+      },
+      "Radio_Year_2": {
+        "type": "Counter",
+        "attribute": "survivale_factor_2",
+        "action": "decrement",
+        "amount": 1,
+        "direct_transition": "Radio_Year_3"
+      },
+      "Radio_Year_3": {
+        "type": "Counter",
+        "attribute": "survivale_factor_3",
+        "action": "decrement",
+        "amount": 2,
+        "direct_transition": "Radio_Year_4"
+      },
+      "Radio_Year_4": {
+        "type": "Counter",
+        "attribute": "survivale_factor_4",
+        "action": "decrement",
+        "amount": 1,
+        "direct_transition": "Radio_Year_5"
+      },
+      "Radio_Year_5": {
+        "type": "Counter",
+        "attribute": "survivale_factor_5",
+        "action": "decrement",
+        "amount": 2,
+        "direct_transition": "Neck_Dissection"
+      },
+      "Chemo_Year_1": {
+        "type": "Counter",
+        "attribute": "survivale_factor_1",
+        "action": "decrement",
+        "amount": 1,
+        "direct_transition": "Chemo_Year_2"
+      },
+      "Chemo_Year_2": {
+        "type": "Counter",
+        "attribute": "survivale_factor_2",
+        "action": "decrement",
+        "amount": 2,
+        "direct_transition": "Chemo_Year_3"
+      },
+      "Chemo_Year_3": {
+        "type": "Counter",
+        "attribute": "survivale_factor_3",
+        "action": "decrement",
+        "amount": 1,
+        "direct_transition": "Chemo_Year_4"
+      },
+      "Chemo_Year_4": {
+        "type": "Counter",
+        "attribute": "survivale_factor_4",
+        "action": "decrement",
+        "amount": 2,
+        "direct_transition": "Chemo_Year_5"
+      },
+      "Chemo_Year_5": {
+        "type": "Counter",
+        "attribute": "survivale_factor_5",
+        "action": "decrement",
+        "amount": 3,
+        "direct_transition": "Neck_Dissection"
+      },
+      "Treatment_Laryngectomy": {
+        "type": "Simple",
+        "direct_transition": "Laryngectomy_Year_1"
+      },
+      "Treatment_Laser": {
+        "type": "Simple",
+        "direct_transition": "Laser_Year_1"
+      },
+      "Treatment_Chemo": {
+        "type": "Simple",
+        "direct_transition": "Chemo_Year_1"
+      },
+      "Treatment_Radiochemo": {
+        "type": "Simple",
+        "direct_transition": "Radiochemo_Year_1"
+      },
+      "Laryngectomy_Year_1": {
+        "type": "Counter",
+        "attribute": "survivale_factor_1",
+        "action": "increment",
+        "amount": 3,
+        "direct_transition": "Laryngectomy_Year_2"
+      },
+      "Laryngectomy_Year_2": {
+        "type": "Counter",
+        "attribute": "survivale_factor_2",
+        "action": "increment",
+        "amount": 2,
+        "direct_transition": "Laryngectomy_Year_3"
+      },
+      "Laryngectomy_Year_3": {
+        "type": "Counter",
+        "attribute": "survivale_factor_3",
+        "action": "increment",
+        "amount": 4,
+        "direct_transition": "Laryngectomy_Year_4"
+      },
+      "Laryngectomy_Year_4": {
+        "type": "Counter",
+        "attribute": "survivale_factor_4",
+        "action": "increment",
+        "amount": 3,
+        "direct_transition": "Laryngectomy_Year_5"
+      },
+      "Laryngectomy_Year_5": {
+        "type": "Counter",
+        "attribute": "survivale_factor_5",
+        "action": "increment",
+        "amount": 1,
+        "direct_transition": "Neck_Dissection"
+      },
+      "Treatment_Partial": {
+        "type": "Simple",
+        "direct_transition": "Partial_Year_1"
+      },
+      "Laser_Year_1": {
+        "type": "Counter",
+        "attribute": "survivale_factor_1",
+        "action": "decrement",
+        "amount": 2,
+        "direct_transition": "Laser_Year_2"
+      },
+      "Laser_Year_2": {
+        "type": "Counter",
+        "attribute": "survivale_factor_2",
+        "action": "decrement",
+        "amount": 2,
+        "direct_transition": "Laser_Year_3"
+      },
+      "Laser_Year_3": {
+        "type": "Counter",
+        "attribute": "survivale_factor_3",
+        "action": "decrement",
+        "amount": 1,
+        "direct_transition": "Laser_Year_4"
+      },
+      "Laser_Year_4": {
+        "type": "Counter",
+        "attribute": "survivale_factor_4",
+        "action": "decrement",
+        "amount": 2,
+        "direct_transition": "Laser_Year_5"
+      },
+      "Laser_Year_5": {
+        "type": "Counter",
+        "attribute": "survivale_factor_5",
+        "action": "decrement",
+        "amount": 2,
+        "direct_transition": "Neck_Dissection"
+      },
+      "ECOG": {
+        "type": "Simple",
+        "conditional_transition": [
+          {
+            "transition": "ECOG_4_And_Chemo",
+            "condition": {
+              "condition_type": "And",
+              "conditions": [
+                {
+                  "condition_type": "Attribute",
+                  "attribute": "ecog",
+                  "operator": "==",
+                  "value": 5
+                },
+                {
+                  "condition_type": "Or",
+                  "conditions": [
+                    {
+                      "condition_type": "Attribute",
+                      "attribute": "primaryTreatment",
+                      "operator": "==",
+                      "value": "chemo"
+                    },
+                    {
+                      "condition_type": "Attribute",
+                      "attribute": "primaryTreatment",
+                      "operator": "==",
+                      "value": "radiochemo"
+                    }
+                  ]
+                }
+              ]
+            }
+          },
+          {
+            "transition": "ECOG_0-2",
+            "condition": {
+              "condition_type": "Attribute",
+              "attribute": "ecog",
+              "operator": "<=",
+              "value": 3
+            }
+          },
+          {
+            "transition": "ECOG_3",
+            "condition": {
+              "condition_type": "Attribute",
+              "attribute": "ecog",
+              "operator": "==",
+              "value": 4
+            }
+          },
+          {
+            "transition": "ECOG_4",
+            "condition": {
+              "condition_type": "Attribute",
+              "attribute": "ecog",
+              "operator": "==",
+              "value": 5
+            }
+          }
+        ]
+      },
+      "Grading": {
+        "type": "Simple",
+        "conditional_transition": [
+          {
+            "transition": "G1",
+            "condition": {
+              "condition_type": "Attribute",
+              "attribute": "grading",
+              "operator": "==",
+              "value": "g1"
+            }
+          },
+          {
+            "transition": "G2",
+            "condition": {
+              "condition_type": "Attribute",
+              "attribute": "grading",
+              "operator": "==",
+              "value": "g2"
+            }
+          },
+          {
+            "transition": "G3",
+            "condition": {
+              "condition_type": "Attribute",
+              "attribute": "grading",
+              "operator": "==",
+              "value": "g3"
+            }
+          }
+        ]
+      },
+      "Alcohol_Consumption": {
+        "type": "Simple",
+        "conditional_transition": [
+          {
+            "transition": "No_And_Occasionally_A",
+            "condition": {
+              "condition_type": "Attribute",
+              "attribute": "alcohol_consumption",
+              "operator": "<=",
+              "value": 2
+            }
+          },
+          {
+            "transition": "Regular_A",
+            "condition": {
+              "condition_type": "Attribute",
+              "attribute": "alcohol_consumption",
+              "operator": "==",
+              "value": 3
+            }
+          },
+          {
+            "transition": "Excessive_A",
+            "condition": {
+              "condition_type": "Attribute",
+              "attribute": "alcohol_consumption",
+              "operator": "==",
+              "value": 4
+            }
+          },
+          {
+            "transition": "Former_Excessive_A",
+            "condition": {
+              "condition_type": "Attribute",
+              "attribute": "alcohol_consumption",
+              "operator": "==",
+              "value": 5
+            }
+          }
+        ]
+      },
+      "Nicotine_Consumption": {
+        "type": "Simple",
+        "conditional_transition": [
+          {
+            "transition": "Active_Somker_And_Exsessive_Alcohol",
+            "condition": {
+              "condition_type": "And",
+              "conditions": [
+                {
+                  "condition_type": "Attribute",
+                  "attribute": "smoker_laryngeal",
+                  "operator": "==",
+                  "value": "active"
+                },
+                {
+                  "condition_type": "Attribute",
+                  "attribute": "alcohol_consumption",
+                  "operator": "==",
+                  "value": 4
+                }
+              ]
+            }
+          },
+          {
+            "transition": "Non_Smoker",
+            "condition": {
+              "condition_type": "Attribute",
+              "attribute": "smoker_laryngeal",
+              "operator": "==",
+              "value": "non"
+            }
+          },
+          {
+            "transition": "Active_Smoker",
+            "condition": {
+              "condition_type": "Attribute",
+              "attribute": "smoker_laryngeal",
+              "operator": "==",
+              "value": "active"
+            }
+          },
+          {
+            "transition": "Former_Smoker",
+            "condition": {
+              "condition_type": "Attribute",
+              "attribute": "smoker_laryngeal",
+              "operator": "==",
+              "value": "former"
+            }
+          }
+        ]
+      },
+      "Partial_Year_1": {
+        "type": "Counter",
+        "attribute": "survivale_factor_1",
+        "action": "decrement",
+        "amount": 1,
+        "direct_transition": "Partial_Year_2"
+      },
+      "Partial_Year_2": {
+        "type": "Counter",
+        "attribute": "survivale_factor_2",
+        "action": "decrement",
+        "amount": 1,
+        "direct_transition": "Partial_Year_3"
+      },
+      "Partial_Year_3": {
+        "type": "Counter",
+        "attribute": "survivale_factor_3",
+        "action": "decrement",
+        "amount": 1,
+        "direct_transition": "Partial_Year_4"
+      },
+      "Partial_Year_4": {
+        "type": "Counter",
+        "attribute": "survivale_factor_4",
+        "action": "decrement",
+        "amount": 1,
+        "direct_transition": "Partial_Year_5"
+      },
+      "Partial_Year_5": {
+        "type": "Counter",
+        "attribute": "survivale_factor_5",
+        "action": "decrement",
+        "amount": 1,
+        "direct_transition": "Neck_Dissection"
+      },
+      "G1": {
+        "type": "Simple",
+        "direct_transition": "G1_Year_1"
+      },
+      "G2": {
+        "type": "Simple",
+        "direct_transition": "G2_Year_1"
+      },
+      "G3": {
+        "type": "Simple",
+        "direct_transition": "G3_Year_1"
+      },
+      "G1_Year_2": {
+        "type": "Counter",
+        "attribute": "survivale_factor_2",
+        "action": "increment",
+        "amount": 3,
+        "direct_transition": "G1_Year_3"
+      },
+      "G1_Year_3": {
+        "type": "Counter",
+        "attribute": "survivale_factor_3",
+        "action": "increment",
+        "amount": 4,
+        "direct_transition": "G1_Year_4"
+      },
+      "G1_Year_4": {
+        "type": "Counter",
+        "attribute": "survivale_factor_4",
+        "action": "increment",
+        "amount": 4,
+        "direct_transition": "G1_Year_5"
+      },
+      "G1_Year_5": {
+        "type": "Counter",
+        "attribute": "survivale_factor_5",
+        "action": "increment",
+        "amount": 3,
+        "direct_transition": "ECOG"
+      },
+      "G2_Year_1": {
+        "type": "Counter",
+        "attribute": "survivale_factor_1",
+        "action": "increment",
+        "amount": 1,
+        "direct_transition": "G2_Year_2"
+      },
+      "G2_Year_2": {
+        "type": "Counter",
+        "attribute": "survivale_factor_2",
+        "action": "decrement",
+        "amount": 1,
+        "direct_transition": "G2_Year_3"
+      },
+      "G2_Year_3": {
+        "type": "Counter",
+        "attribute": "survivale_factor_3",
+        "action": "increment",
+        "amount": 2,
+        "direct_transition": "G2_Year_4"
+      },
+      "G2_Year_4": {
+        "type": "Counter",
+        "attribute": "survivale_factor_4",
+        "action": "decrement",
+        "amount": 1,
+        "direct_transition": "G2_Year_5"
+      },
+      "G2_Year_5": {
+        "type": "Counter",
+        "attribute": "survivale_factor_5",
+        "action": "increment",
+        "amount": 1,
+        "direct_transition": "ECOG"
+      },
+      "G3_Year_1": {
+        "type": "Counter",
+        "attribute": "survivale_factor_1",
+        "action": "decrement",
+        "amount": 3,
+        "direct_transition": "G3_Year_2"
+      },
+      "G3_Year_2": {
+        "type": "Counter",
+        "attribute": "survivale_factor_2",
+        "action": "decrement",
+        "amount": 4,
+        "direct_transition": "G3_Year_3"
+      },
+      "G3_Year_3": {
+        "type": "Counter",
+        "attribute": "survivale_factor_3",
+        "action": "decrement",
+        "amount": 3,
+        "direct_transition": "G3_Year_4"
+      },
+      "G3_Year_4": {
+        "type": "Counter",
+        "attribute": "survivale_factor_4",
+        "action": "decrement",
+        "amount": 4,
+        "direct_transition": "G3_Year_5"
+      },
+      "G3_Year_5": {
+        "type": "Counter",
+        "attribute": "survivale_factor_5",
+        "action": "decrement",
+        "amount": 3,
+        "direct_transition": "ECOG"
+      },
+      "ECOG_0-2": {
+        "type": "Simple",
+        "direct_transition": "ECOG_0-2_Year_1"
+      },
+      "ECOG_3": {
+        "type": "Simple",
+        "direct_transition": "ECOG_3_Year_1"
+      },
+      "ECOG_4": {
+        "type": "Simple",
+        "direct_transition": "ECOG_4_Year_1"
+      },
+      "ECOG_0-2_Year_2": {
+        "type": "Counter",
+        "attribute": "survivale_factor_2",
+        "action": "increment",
+        "amount": 2,
+        "direct_transition": "ECOG_0-2_Year_3"
+      },
+      "ECOG_0-2_Year_1": {
+        "type": "Counter",
+        "attribute": "survivale_factor_1",
+        "action": "increment",
+        "amount": 4,
+        "direct_transition": "ECOG_0-2_Year_2"
+      },
+      "ECOG_0-2_Year_3": {
+        "type": "Counter",
+        "attribute": "survivale_factor_3",
+        "action": "increment",
+        "amount": 4,
+        "direct_transition": "ECOG_0-2_Year_4"
+      },
+      "ECOG_0-2_Year_4": {
+        "type": "Counter",
+        "attribute": "survivale_factor_4",
+        "action": "increment",
+        "amount": 3,
+        "direct_transition": "ECOG_0-2_Year_5"
+      },
+      "ECOG_0-2_Year_5": {
+        "type": "Counter",
+        "attribute": "survivale_factor_5",
+        "action": "increment",
+        "amount": 3,
+        "direct_transition": "Nicotine_Consumption"
+      },
+      "ECOG_3_Year_1": {
+        "type": "Counter",
+        "attribute": "survivale_factor_1",
+        "action": "decrement",
+        "amount": 0,
+        "direct_transition": "ECOG_3_Year_2"
+      },
+      "ECOG_3_Year_2": {
+        "type": "Counter",
+        "attribute": "survivale_factor_2",
+        "action": "decrement",
+        "amount": 1,
+        "direct_transition": "ECOG_3_Year_3"
+      },
+      "ECOG_3_Year_3": {
+        "type": "Counter",
+        "attribute": "survivale_factor_3",
+        "action": "decrement",
+        "amount": 2,
+        "direct_transition": "ECOG_3_Year_4"
+      },
+      "ECOG_3_Year_4": {
+        "type": "Counter",
+        "attribute": "survivale_factor_4",
+        "action": "decrement",
+        "amount": 3,
+        "direct_transition": "ECOG_3_Year_5"
+      },
+      "ECOG_3_Year_5": {
+        "type": "Counter",
+        "attribute": "survivale_factor_5",
+        "action": "decrement",
+        "amount": 2,
+        "direct_transition": "Nicotine_Consumption"
+      },
+      "ECOG_4_Year_1": {
+        "type": "Counter",
+        "attribute": "survivale_factor_1",
+        "action": "decrement",
+        "amount": 5,
+        "direct_transition": "ECOG_4_Year_2"
+      },
+      "ECOG_4_Year_2": {
+        "type": "Counter",
+        "attribute": "survivale_factor_2",
+        "action": "decrement",
+        "amount": 6,
+        "direct_transition": "ECOG_4_Year_3"
+      },
+      "ECOG_4_Year_3": {
+        "type": "Counter",
+        "attribute": "survivale_factor_3",
+        "action": "decrement",
+        "amount": 6,
+        "direct_transition": "ECOG_4_Year_4"
+      },
+      "ECOG_4_Year_4": {
+        "type": "Counter",
+        "attribute": "survivale_factor_4",
+        "action": "decrement",
+        "amount": 4,
+        "direct_transition": "ECOG_4_Year_5"
+      },
+      "ECOG_4_Year_5": {
+        "type": "Counter",
+        "attribute": "survivale_factor_5",
+        "action": "decrement",
+        "amount": 5,
+        "direct_transition": "Nicotine_Consumption"
+      },
+      "Non_Smoker": {
+        "type": "Simple",
+        "direct_transition": "Non_Year_1"
+      },
+      "Former_Smoker": {
+        "type": "Simple",
+        "direct_transition": "Former_Year_1"
+      },
+      "Active_Smoker": {
+        "type": "Simple",
+        "direct_transition": "Active_Year_1"
+      },
+      "Non_Year_1": {
+        "type": "Counter",
+        "attribute": "survivale_factor_1",
+        "action": "increment",
+        "amount": 5,
+        "direct_transition": "Non_Year_2"
+      },
+      "Non_Year_2": {
+        "type": "Counter",
+        "attribute": "survivale_factor_2",
+        "action": "increment",
+        "amount": 5,
+        "direct_transition": "Non_Year_3"
+      },
+      "Non_Year_3": {
+        "type": "Counter",
+        "attribute": "survivale_factor_3",
+        "action": "increment",
+        "amount": 3,
+        "direct_transition": "Non_Year_4"
+      },
+      "Non_Year_4": {
+        "type": "Counter",
+        "attribute": "survivale_factor_4",
+        "action": "increment",
+        "amount": 4,
+        "direct_transition": "Non_Year_5"
+      },
+      "Non_Year_5": {
+        "type": "Counter",
+        "attribute": "survivale_factor_5",
+        "action": "increment",
+        "amount": 3,
+        "direct_transition": "Alcohol_Consumption"
+      },
+      "Former_Year_1": {
+        "type": "Counter",
+        "attribute": "survivale_factor_1",
+        "action": "increment",
+        "amount": 1,
+        "direct_transition": "Former_Year_2"
+      },
+      "Former_Year_2": {
+        "type": "Counter",
+        "attribute": "survivale_factor_2",
+        "action": "increment",
+        "amount": 2,
+        "direct_transition": "Former_Year_3"
+      },
+      "Former_Year_3": {
+        "type": "Counter",
+        "attribute": "survivale_factor_3",
+        "action": "increment",
+        "amount": 3,
+        "direct_transition": "Former_Year_4"
+      },
+      "Former_Year_4": {
+        "type": "Counter",
+        "attribute": "survivale_factor_4",
+        "action": "increment",
+        "amount": 2,
+        "direct_transition": "Former_Year_5"
+      },
+      "Former_Year_5": {
+        "type": "Counter",
+        "attribute": "survivale_factor_5",
+        "action": "increment",
+        "amount": 1,
+        "direct_transition": "Alcohol_Consumption"
+      },
+      "Active_Year_1": {
+        "type": "Counter",
+        "attribute": "survivale_factor_1",
+        "action": "decrement",
+        "amount": 5,
+        "direct_transition": "Active_Year_2"
+      },
+      "Active_Year_2": {
+        "type": "Counter",
+        "attribute": "survivale_factor_2",
+        "action": "decrement",
+        "amount": 4,
+        "direct_transition": "Active_Year_3"
+      },
+      "Active_Year_3": {
+        "type": "Counter",
+        "attribute": "survivale_factor_3",
+        "action": "decrement",
+        "amount": 3,
+        "direct_transition": "Active_Year_4"
+      },
+      "Active_Year_4": {
+        "type": "Counter",
+        "attribute": "survivale_factor_4",
+        "action": "decrement",
+        "amount": 4,
+        "direct_transition": "Active_Year_5"
+      },
+      "Active_Year_5": {
+        "type": "Counter",
+        "attribute": "survivale_factor_5",
+        "action": "decrement",
+        "amount": 5,
+        "direct_transition": "Alcohol_Consumption"
+      },
+      "No_And_Occasionally_A": {
+        "type": "Simple",
+        "direct_transition": "No_Year_1"
+      },
+      "Regular_A": {
+        "type": "Simple",
+        "direct_transition": "Regular_Year_1"
+      },
+      "Excessive_A": {
+        "type": "Simple",
+        "direct_transition": "Excessive_Year_1"
+      },
+      "Former_Excessive_A": {
+        "type": "Simple",
+        "direct_transition": "Former_Excessive_Year_1"
+      },
+      "No_Year_1": {
+        "type": "Counter",
+        "attribute": "survivale_factor_1",
+        "action": "increment",
+        "amount": 4,
+        "direct_transition": "No_Year_2"
+      },
+      "No_Year_2": {
+        "type": "Counter",
+        "attribute": "survivale_factor_2",
+        "action": "increment",
+        "amount": 5,
+        "direct_transition": "No_Year_3"
+      },
+      "No_Year_3": {
+        "type": "Counter",
+        "attribute": "survivale_factor_3",
+        "action": "increment",
+        "amount": 3,
+        "direct_transition": "No_Year_4"
+      },
+      "No_Year_4": {
+        "type": "Counter",
+        "attribute": "survivale_factor_4",
+        "action": "increment",
+        "amount": 4,
+        "direct_transition": "No_Year_5"
+      },
+      "No_Year_5": {
+        "type": "Counter",
+        "attribute": "survivale_factor_5",
+        "action": "increment",
+        "amount": 3,
+        "direct_transition": "Terminal"
+      },
+      "Regular_Year_1": {
+        "type": "Counter",
+        "attribute": "survivale_factor_1",
+        "action": "decrement",
+        "amount": 1,
+        "direct_transition": "Regular_Year_2"
+      },
+      "Regular_Year_2": {
+        "type": "Counter",
+        "attribute": "survivale_factor_2",
+        "action": "decrement",
+        "amount": 2,
+        "direct_transition": "Regular_Year_3"
+      },
+      "Regular_Year_3": {
+        "type": "Counter",
+        "attribute": "survivale_factor_3",
+        "action": "decrement",
+        "amount": 1,
+        "direct_transition": "Regular_Year_4"
+      },
+      "Regular_Year_4": {
+        "type": "Counter",
+        "attribute": "survivale_factor_4",
+        "action": "decrement",
+        "amount": 2,
+        "direct_transition": "Regular_Year_5"
+      },
+      "Regular_Year_5": {
+        "type": "Counter",
+        "attribute": "survivale_factor_5",
+        "action": "decrement",
+        "amount": 1,
+        "direct_transition": "Terminal"
+      },
+      "Excessive_Year_1": {
+        "type": "Counter",
+        "attribute": "survivale_factor_1",
+        "action": "decrement",
+        "amount": 2,
+        "direct_transition": "Excessive_Year_2"
+      },
+      "Excessive_Year_2": {
+        "type": "Counter",
+        "attribute": "survivale_factor_2",
+        "action": "decrement",
+        "amount": 3,
+        "direct_transition": "Excessive_Year_3"
+      },
+      "Excessive_Year_3": {
+        "type": "Counter",
+        "attribute": "survivale_factor_3",
+        "action": "decrement",
+        "amount": 3,
+        "direct_transition": "Excessive_Year_4"
+      },
+      "Excessive_Year_4": {
+        "type": "Counter",
+        "attribute": "survivale_factor_4",
+        "action": "decrement",
+        "amount": 2,
+        "direct_transition": "Excessive_Year_5"
+      },
+      "Excessive_Year_5": {
+        "type": "Counter",
+        "attribute": "survivale_factor_5",
+        "action": "decrement",
+        "amount": 3,
+        "direct_transition": "Terminal"
+      },
+      "Former_Excessive_Year_1": {
+        "type": "Counter",
+        "attribute": "survivale_factor_1",
+        "action": "decrement",
+        "amount": 1,
+        "direct_transition": "Former_Excessive_Year_2"
+      },
+      "Former_Excessive_Year_2": {
+        "type": "Counter",
+        "attribute": "survivale_factor_2",
+        "action": "increment",
+        "amount": 2,
+        "direct_transition": "Former_Excessive_Year_3"
+      },
+      "Former_Excessive_Year_3": {
+        "type": "Counter",
+        "attribute": "survivale_factor_3",
+        "action": "increment",
+        "amount": 2,
+        "direct_transition": "Former_Excessive_Year_4"
+      },
+      "Former_Excessive_Year_4": {
+        "type": "Counter",
+        "attribute": "survivale_factor_4",
+        "action": "increment",
+        "amount": 2,
+        "direct_transition": "Former_Excessive_Year_5"
+      },
+      "Former_Excessive_Year_5": {
+        "type": "Counter",
+        "attribute": "survivale_factor_5",
+        "action": "increment",
+        "amount": 1,
+        "direct_transition": "Terminal"
+      },
+      "Treatment": {
+        "type": "Simple",
+        "conditional_transition": [
+          {
+            "transition": "Treatment_Radiochemo",
+            "condition": {
+              "condition_type": "Attribute",
+              "attribute": "primaryTreatment",
+              "operator": "==",
+              "value": "radiochemo"
+            }
+          },
+          {
+            "transition": "Treatment_Radio",
+            "condition": {
+              "condition_type": "Attribute",
+              "attribute": "primaryTreatment",
+              "operator": "==",
+              "value": "radio"
+            }
+          },
+          {
+            "transition": "Treatment_Chemo",
+            "condition": {
+              "condition_type": "Attribute",
+              "attribute": "primaryTreatment",
+              "operator": "==",
+              "value": "chemo"
+            }
+          },
+          {
+            "transition": "Treatment_Laryngectomy",
+            "condition": {
+              "condition_type": "Attribute",
+              "attribute": "primaryTreatment",
+              "operator": "==",
+              "value": "laryngectomy"
+            }
+          },
+          {
+            "transition": "Treatment_Laser",
+            "condition": {
+              "condition_type": "Attribute",
+              "attribute": "primaryTreatment",
+              "operator": "==",
+              "value": "laser"
+            }
+          },
+          {
+            "transition": "Treatment_Partial",
+            "condition": {
+              "condition_type": "Attribute",
+              "attribute": "primaryTreatment",
+              "operator": "==",
+              "value": "partial"
+            }
+          }
+        ]
+      },
+      "Neck_Dissection": {
+        "type": "Simple",
+        "conditional_transition": [
+          {
+            "transition": "Elective_Neck_Dissection",
+            "condition": {
+              "condition_type": "Attribute",
+              "attribute": "neck_d",
+              "operator": "==",
+              "value": "elective"
+            }
+          },
+          {
+            "transition": "Curative_Neck_Dissection",
+            "condition": {
+              "condition_type": "Attribute",
+              "attribute": "neck_d",
+              "operator": "==",
+              "value": "curative"
+            }
+          },
+          {
+            "transition": "No_Neck_Dissection"
+          }
+        ]
+      },
+      "Elective_Neck_Dissection": {
+        "type": "Simple",
+        "direct_transition": "Elective_Neck_Dissection_Year_1"
+      },
+      "Curative_Neck_Dissection": {
+        "type": "Simple",
+        "direct_transition": "Curative_Neck_Dissection_Year_1"
+      },
+      "No_Neck_Dissection": {
+        "type": "Simple",
+        "direct_transition": "No_Neck_Dissection_Year_1"
+      },
+      "Elective_Neck_Dissection_Year_1": {
+        "type": "Counter",
+        "attribute": "survivale_factor_1",
+        "action": "increment",
+        "amount": 1,
+        "direct_transition": "Elective_Neck_Dissection_Year_2"
+      },
+      "Elective_Neck_Dissection_Year_2": {
+        "type": "Counter",
+        "attribute": "survivale_factor_2",
+        "action": "increment",
+        "amount": 1,
+        "direct_transition": "Elective_Neck_Dissection_Year_3"
+      },
+      "Elective_Neck_Dissection_Year_3": {
+        "type": "Counter",
+        "attribute": "survivale_factor_3",
+        "action": "increment",
+        "amount": 1,
+        "direct_transition": "Elective_Neck_Dissection_Year_4"
+      },
+      "Elective_Neck_Dissection_Year_4": {
+        "type": "Counter",
+        "attribute": "survivale_factor_4",
+        "action": "increment",
+        "amount": 1,
+        "direct_transition": "Elective_Neck_Dissection_Year_5"
+      },
+      "Elective_Neck_Dissection_Year_5": {
+        "type": "Counter",
+        "attribute": "survivale_factor_5",
+        "action": "increment",
+        "amount": 1,
+        "direct_transition": "Adjuvant_Therapy"
+      },
+      "Curative_Neck_Dissection_Year_1": {
+        "type": "Counter",
+        "attribute": "survivale_factor_1",
+        "action": "increment",
+        "amount": 1,
+        "direct_transition": "Curative_Neck_Dissection_Year_2"
+      },
+      "Curative_Neck_Dissection_Year_2": {
+        "type": "Counter",
+        "attribute": "survivale_factor_2",
+        "action": "increment",
+        "amount": 1,
+        "direct_transition": "Curative_Neck_Dissection_Year_3"
+      },
+      "Curative_Neck_Dissection_Year_3": {
+        "type": "Counter",
+        "attribute": "survivale_factor_3",
+        "action": "increment",
+        "amount": 1,
+        "direct_transition": "Curative_Neck_Dissection_Year_4"
+      },
+      "Curative_Neck_Dissection_Year_4": {
+        "type": "Counter",
+        "attribute": "survivale_factor_4",
+        "action": "increment",
+        "amount": 1,
+        "direct_transition": "Curative_Neck_Dissection_Year_5"
+      },
+      "Curative_Neck_Dissection_Year_5": {
+        "type": "Counter",
+        "attribute": "survivale_factor_5",
+        "action": "increment",
+        "amount": 1,
+        "direct_transition": "Adjuvant_Therapy"
+      },
+      "No_Neck_Dissection_Year_1": {
+        "type": "Counter",
+        "attribute": "survivale_factor_1",
+        "action": "increment",
+        "amount": 1,
+        "direct_transition": "No_Neck_Dissection_Year_2"
+      },
+      "No_Neck_Dissection_Year_2": {
+        "type": "Counter",
+        "attribute": "survivale_factor_2",
+        "action": "increment",
+        "amount": 1,
+        "direct_transition": "No_Neck_Dissection_Year_3"
+      },
+      "No_Neck_Dissection_Year_3": {
+        "type": "Counter",
+        "attribute": "survivale_factor_3",
+        "action": "increment",
+        "amount": 1,
+        "direct_transition": "No_Neck_Dissection_Year_4"
+      },
+      "No_Neck_Dissection_Year_4": {
+        "type": "Counter",
+        "attribute": "survivale_factor_4",
+        "action": "increment",
+        "amount": 1,
+        "direct_transition": "No_Neck_Dissection_Year_5"
+      },
+      "No_Neck_Dissection_Year_5": {
+        "type": "Counter",
+        "attribute": "survivale_factor_5",
+        "action": "increment",
+        "amount": 1,
+        "direct_transition": "Adjuvant_Therapy"
+      },
+      "Adjuvant_Therapy": {
+        "type": "Simple",
+        "conditional_transition": [
+          {
+            "transition": "A_Radio",
+            "condition": {
+              "condition_type": "Attribute",
+              "attribute": "adjuvantTherapy",
+              "operator": "==",
+              "value": "radio"
+            }
+          },
+          {
+            "transition": "A_Radiochemo",
+            "condition": {
+              "condition_type": "Attribute",
+              "attribute": "adjuvantTherapy",
+              "operator": "==",
+              "value": "radiochemo"
+            }
+          },
+          {
+            "transition": "No_Adjuvant_Therapy"
+          }
+        ]
+      },
+      "A_Radiochemo": {
+        "type": "Simple",
+        "direct_transition": "A_Radiochemo_Year_1"
+      },
+      "No_Adjuvant_Therapy": {
+        "type": "Simple",
+        "direct_transition": "No_Adjuvant_Therapy_Year_1"
+      },
+      "A_Radio": {
+        "type": "Simple",
+        "direct_transition": "A_Radio_Year_1"
+      },
+      "A_Radio_Year_1": {
+        "type": "Counter",
+        "attribute": "survivale_factor_1",
+        "action": "decrement",
+        "amount": 2,
+        "direct_transition": "A_Radio_Year_2"
+      },
+      "A_Radio_Year_2": {
+        "type": "Counter",
+        "attribute": "survivale_factor_2",
+        "action": "increment",
+        "amount": 3,
+        "direct_transition": "A_Radio_Year_3"
+      },
+      "A_Radio_Year_3": {
+        "type": "Counter",
+        "attribute": "survivale_factor_3",
+        "action": "increment",
+        "amount": 1,
+        "direct_transition": "A_Radio_Year_4"
+      },
+      "A_Radio_Year_4": {
+        "type": "Counter",
+        "attribute": "survivale_factor_4",
+        "action": "increment",
+        "amount": 2,
+        "direct_transition": "A_Radio_Year_5"
+      },
+      "A_Radio_Year_5": {
+        "type": "Counter",
+        "attribute": "survivale_factor_5",
+        "action": "increment",
+        "amount": 1,
+        "direct_transition": "Grading"
+      },
+      "A_Radiochemo_Year_1": {
+        "type": "Counter",
+        "attribute": "survivale_factor_1",
+        "action": "increment",
+        "amount": 2,
+        "direct_transition": "A_Radiochemo_Year_2"
+      },
+      "A_Radiochemo_Year_2": {
+        "type": "Counter",
+        "attribute": "survivale_factor_2",
+        "action": "increment",
+        "amount": 3,
+        "direct_transition": "A_Radiochemo_Year_3"
+      },
+      "A_Radiochemo_Year_3": {
+        "type": "Counter",
+        "attribute": "survivale_factor_3",
+        "action": "increment",
+        "amount": 3,
+        "direct_transition": "A_Radiochemo_Year_4"
+      },
+      "A_Radiochemo_Year_4": {
+        "type": "Counter",
+        "attribute": "survivale_factor_4",
+        "action": "increment",
+        "amount": 2,
+        "direct_transition": "A_Radiochemo_Year_5"
+      },
+      "A_Radiochemo_Year_5": {
+        "type": "Counter",
+        "attribute": "survivale_factor_5",
+        "action": "increment",
+        "amount": 1,
+        "direct_transition": "Grading"
+      },
+      "G1_Year_1": {
+        "type": "Counter",
+        "attribute": "survivale_factor_1",
+        "action": "increment",
+        "amount": 4,
+        "direct_transition": "G1_Year_2"
+      },
+      "No_Adjuvant_Therapy_Year_1": {
+        "type": "Counter",
+        "attribute": "survivale_factor_1",
+        "action": "increment",
+        "amount": 1,
+        "direct_transition": "No_Adjuvant_Therapy_Year_2"
+      },
+      "No_Adjuvant_Therapy_Year_2": {
+        "type": "Counter",
+        "attribute": "survivale_factor_2",
+        "action": "increment",
+        "amount": 1,
+        "direct_transition": "No_Adjuvant_Therapy_Year_3"
+      },
+      "No_Adjuvant_Therapy_Year_3": {
+        "type": "Counter",
+        "attribute": "survivale_factor_3",
+        "action": "increment",
+        "amount": 1,
+        "direct_transition": "No_Adjuvant_Therapy_Year_4"
+      },
+      "No_Adjuvant_Therapy_Year_4": {
+        "type": "Counter",
+        "attribute": "survivale_factor_4",
+        "action": "increment",
+        "amount": 1,
+        "direct_transition": "No_Adjuvant_Therapy_Year_5"
+      },
+      "No_Adjuvant_Therapy_Year_5": {
+        "type": "Counter",
+        "attribute": "survivale_factor_5",
+        "action": "increment",
+        "amount": 1,
+        "direct_transition": "Grading"
+      },
+      "Active_Somker_And_Exsessive_Alcohol": {
+        "type": "Simple",
+        "direct_transition": "Active_Exsessive_Year_1"
+      },
+      "Active_Exsessive_Year_1": {
+        "type": "Counter",
+        "attribute": "survivale_factor_1",
+        "action": "decrement",
+        "amount": 9,
+        "direct_transition": "Active_Exsessive_Year_2"
+      },
+      "Active_Exsessive_Year_2": {
+        "type": "Counter",
+        "attribute": "survivale_factor_2",
+        "action": "decrement",
+        "amount": 8,
+        "direct_transition": "Active_Exsessive_Year_3"
+      },
+      "Active_Exsessive_Year_3": {
+        "type": "Counter",
+        "attribute": "survivale_factor_3",
+        "action": "decrement",
+        "amount": 8,
+        "direct_transition": "Active_Exsessive_Year_4"
+      },
+      "Active_Exsessive_Year_4": {
+        "type": "Counter",
+        "attribute": "survivale_factor_4",
+        "action": "decrement",
+        "amount": 9,
+        "direct_transition": "Active_Exsessive_Year_5"
+      },
+      "Active_Exsessive_Year_5": {
+        "type": "Counter",
+        "attribute": "survivale_factor_5",
+        "action": "decrement",
+        "amount": 7,
+        "direct_transition": "Terminal"
+      },
+      "ECOG_4_And_Chemo": {
+        "type": "Simple",
+        "direct_transition": "ECOG_4_Chemo_Year_1"
+      },
+      "ECOG_4_Chemo_Year_1": {
+        "type": "Counter",
+        "attribute": "survivale_factor_1",
+        "action": "decrement",
+        "amount": 7,
+        "direct_transition": "ECOG_4_Chemo_Year_2"
+      },
+      "ECOG_4_Chemo_Year_2": {
+        "type": "Counter",
+        "attribute": "survivale_factor_2",
+        "action": "decrement",
+        "amount": 7,
+        "direct_transition": "ECOG_4_Chemo_Year_3"
+      },
+      "ECOG_4_Chemo_Year_3": {
+        "type": "Counter",
+        "attribute": "survivale_factor_2",
+        "action": "decrement",
+        "amount": 8,
+        "direct_transition": "ECOG_4_Chemo_Year_4"
+      },
+      "ECOG_4_Chemo_Year_4": {
+        "type": "Counter",
+        "attribute": "survivale_factor_4",
+        "action": "decrement",
+        "amount": 5,
+        "direct_transition": "ECOG_4_Chemo_Year_5"
+      },
+      "ECOG_4_Chemo_Year_5": {
+        "type": "Counter",
+        "attribute": "survivale_factor_5",
+        "action": "decrement",
+        "amount": 7,
+        "direct_transition": "Nicotine_Consumption"
+      }
+    },
+    "gmf_version": 2
+  }
