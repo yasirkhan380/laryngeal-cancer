@@ -10,7 +10,9 @@ In the 'datasets' ditionary we give you accesses to the datasets we generated an
 
 Dataset C32-1 (Prevalence approach): This dataset contains 2,061,998 patients and simulates a realistic prevalence of laryngeal cancer(1,394 with 
 laryngeal cancer).
+
 Dataset C32-2 (Enriched approach): The second dataset was designed to let as many patients as possible suffer from laryngeal cancer and contains 366,429 patients (227,643 with laryngeal caner).
+
 Dataset C32-3 (Cohort approach): This data set was intended to generate a cohort representative for laryngeal cancer in the German population (in terms of gender and age at diagnosis). With stratified (by age and gender) random drawing of cases from dataset C32-2, 7,354 females (14.7%) and 42,653 males (85.3%) were selected (total 50.007 cases).
 
 
